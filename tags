@@ -1,0 +1,799 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+BackendProcess	.\xrt\multipro.py	/^class BackendProcess(GenericProcessOrThread, Process):$/;"	c
+BackendThread	.\xrt\multipro.py	/^class BackendThread(GenericProcessOrThread, Thread):$/;"	c
+Beam	.\xrt\backends\raycing\sources.py	/^class Beam(object):$/;"	c
+BeamLine	.\xrt\backends\raycing\__init__.py	/^class BeamLine(object):$/;"	c
+BendingMagnet	.\xrt\backends\raycing\sources.py	/^class BendingMagnet(object):$/;"	c
+BendingMagnetWS	.\xrt\backends\raycing\sources.py	/^class BendingMagnetWS(WigglerWS):$/;"	c
+BentFlatMirror	.\xrt\backends\raycing\oes.py	/^class BentFlatMirror(OE):$/;"	c
+BentLaueCylinder	.\xrt\backends\raycing\oes.py	/^class BentLaueCylinder(OE):$/;"	c
+BentLaueSphere	.\xrt\backends\raycing\oes.py	/^class BentLaueSphere(BentLaueCylinder):$/;"	c
+BlazedGrating	.\xrt\backends\raycing\oes.py	/^class BlazedGrating(OE):$/;"	c
+C	.\xrt\backends\raycing\sources.py	/^C = 2.99792458e10          # [cm\/sec]$/;"	v
+CollimatedMeshSource	.\xrt\backends\raycing\sources.py	/^class CollimatedMeshSource(object):$/;"	c
+ConvexHull	.\xrt\backends\raycing\screens.py	/^from scipy.spatial import ConvexHull$/;"	i
+Crystal	.\xrt\backends\raycing\materials.py	/^class Crystal(Material):$/;"	c
+CrystalDiamond	.\xrt\backends\raycing\materials.py	/^class CrystalDiamond(CrystalFcc):$/;"	c
+CrystalFcc	.\xrt\backends\raycing\materials.py	/^class CrystalFcc(Crystal):$/;"	c
+CrystalFromCell	.\xrt\backends\raycing\materials.py	/^class CrystalFromCell(Crystal):$/;"	c
+CrystalHarmonics	.\xrt\backends\raycing\materials.py	/^class CrystalHarmonics(CrystalFromCell):$/;"	c
+CrystalSi	.\xrt\backends\raycing\materials.py	/^class CrystalSi(CrystalDiamond):$/;"	c
+DCM	.\xrt\backends\raycing\oes.py	/^class DCM(OE):$/;"	c
+DCMOnTripodWithOneXStage	.\xrt\backends\raycing\oes.py	/^class DCMOnTripodWithOneXStage(DCM, rst.Tripod, rst.OneXStage):$/;"	c
+DicedJohannToroid	.\xrt\backends\raycing\oes.py	/^class DicedJohannToroid(DicedOE, JohannToroid):$/;"	c
+DicedJohanssonToroid	.\xrt\backends\raycing\oes.py	/^class DicedJohanssonToroid(DicedJohannToroid, JohanssonToroid):$/;"	c
+DicedOE	.\xrt\backends\raycing\oes.py	/^class DicedOE(OE):$/;"	c
+DoubleParaboloidLens	.\xrt\backends\raycing\oes.py	/^class DoubleParaboloidLens(ParaboloidFlatLens):$/;"	c
+DoubleSlit	.\xrt\backends\raycing\apertures.py	/^class DoubleSlit(RectangularAperture):$/;"	c
+DualVFM	.\xrt\backends\raycing\oes.py	/^class DualVFM(MirrorOnTripodWithTwoXStages):$/;"	c
+E0	.\xrt\backends\raycing\sources.py	/^E0 = 4.803e-10             # [esu]$/;"	v
+E2W	.\xrt\backends\raycing\sources.py	/^E2W = 1519267514747457.9195337718065469$/;"	v
+EV2ERG	.\xrt\backends\raycing\sources.py	/^EV2ERG = 1.602176565e-12   # Energy conversion from [eV] to [erg]$/;"	v
+Element	.\xrt\backends\raycing\materials.py	/^class Element(object):$/;"	c
+EllipticalMirror	.\xrt\backends\raycing\oes.py	/^class EllipticalMirror(OE):$/;"	c
+EllipticalMirrorParam	.\xrt\backends\raycing\oes.py	/^class EllipticalMirrorParam(OE):$/;"	c
+EmptyMaterial	.\xrt\backends\raycing\materials.py	/^class EmptyMaterial(object):$/;"	c
+FINE_STR	.\xrt\backends\raycing\sources.py	/^FINE_STR = 1 \/ 137.03599976$/;"	v
+GeneralBraggToroid	.\xrt\backends\raycing\oes.py	/^class GeneralBraggToroid(JohannToroid):$/;"	c
+GeneralFZPin0YZ	.\xrt\backends\raycing\oes.py	/^class GeneralFZPin0YZ(OE):$/;"	c
+GenericProcessOrThread	.\xrt\multipro.py	/^class GenericProcessOrThread(object):$/;"	c
+GeometricSource	.\xrt\backends\raycing\sources.py	/^class GeometricSource(object):$/;"	c
+GeometricSourceTest	.\elements\source.py	/^class GeometricSourceTest(object):$/;"	c
+GlobalTotal	.\elements\source.py	/^    GlobalTotal = create_geometric()$/;"	v
+GroundBentLaueCylinder	.\xrt\backends\raycing\oes.py	/^class GroundBentLaueCylinder(BentLaueCylinder):$/;"	c
+HPLANCK	.\xrt\backends\raycing\sources.py	/^HPLANCK = 6.626069573e-27  # [erg*sec]$/;"	v
+HemisphericScreen	.\xrt\backends\raycing\screens.py	/^class HemisphericScreen(Screen):$/;"	c
+JohannCylinder	.\xrt\backends\raycing\oes.py	/^class JohannCylinder(OE):$/;"	c
+JohannToroid	.\xrt\backends\raycing\oes.py	/^class JohannToroid(OE):$/;"	c
+JohanssonCylinder	.\xrt\backends\raycing\oes.py	/^class JohanssonCylinder(JohannCylinder):$/;"	c
+JohanssonToroid	.\xrt\backends\raycing\oes.py	/^class JohanssonToroid(JohannToroid):$/;"	c
+K2B	.\xrt\backends\raycing\sources.py	/^K2B = 2 * np.pi * M0 * C**2 * 0.001 \/ E0$/;"	v
+LauePlate	.\xrt\backends\raycing\oes.py	/^class LauePlate(OE):$/;"	c
+M0	.\xrt\backends\raycing\sources.py	/^M0 = 9.10938291e-28        # [g]$/;"	v
+Material	.\xrt\backends\raycing\materials.py	/^class Material(object):$/;"	c
+MaxNLocator	.\xrt\plotter.py	/^from matplotlib.ticker import MaxNLocator$/;"	i
+MeshSource	.\xrt\backends\raycing\sources.py	/^class MeshSource(object):$/;"	c
+MirrorOnTripodWithTwoXStages	.\xrt\backends\raycing\oes.py	/^class MirrorOnTripodWithTwoXStages(OE, rst.Tripod, rst.TwoXStages):$/;"	c
+MonitorPoints	.\xrt\backends\raycing\screens.py	/^class MonitorPoints(object):$/;"	c
+Multilayer	.\xrt\backends\raycing\materials.py	/^class Multilayer(object):$/;"	c
+NESWSource	.\xrt\backends\raycing\sources.py	/^class NESWSource(MeshSource):$/;"	c
+NormalFZP	.\xrt\backends\raycing\oes.py	/^class NormalFZP(OE):$/;"	c
+OE	.\xrt\backends\raycing\oes.py	/^class OE(object):$/;"	c
+OffsetFormatter	.\xrt\plotter.py	/^class OffsetFormatter(mpl.ticker.ScalarFormatter):$/;"	c
+OneXStage	.\xrt\backends\raycing\stages.py	/^class OneXStage(object):$/;"	c
+PI	.\xrt\backends\raycing\sources.py	/^PI = 3.1415926535897932384626433832795$/;"	v
+PI2	.\xrt\backends\raycing\sources.py	/^PI2 = 6.283185307179586476925286766559$/;"	v
+PIPE	.\xrt\backends\raycing\sources.py	/^from subprocess import Popen, PIPE$/;"	i
+ParabolicCylinderFlatLens	.\xrt\backends\raycing\oes.py	/^class ParabolicCylinderFlatLens(ParaboloidFlatLens):$/;"	c
+ParabolicMirror	.\xrt\backends\raycing\oes.py	/^class ParabolicMirror(OE):$/;"	c
+ParaboloidFlatLens	.\xrt\backends\raycing\oes.py	/^class ParaboloidFlatLens(Plate):$/;"	c
+Plate	.\xrt\backends\raycing\oes.py	/^class Plate(DCM):$/;"	c
+PlotCard2Pickle	.\xrt\plotter.py	/^class PlotCard2Pickle(object):$/;"	c
+Pool	.\xrt\backends\raycing\sources.py	/^from multiprocessing import Pool, cpu_count$/;"	i
+Popen	.\xrt\backends\raycing\sources.py	/^from subprocess import Popen, PIPE$/;"	i
+Powder	.\xrt\backends\raycing\materials.py	/^class Powder(CrystalFromCell):$/;"	c
+Process	.\xrt\multipro.py	/^from multiprocessing import Process$/;"	i
+Queue	.\xrt\runner.py	/^import Queue$/;"	i
+RectangularAperture	.\xrt\backends\raycing\apertures.py	/^class RectangularAperture(object):$/;"	c
+RoundAperture	.\xrt\backends\raycing\apertures.py	/^class RoundAperture(object):$/;"	c
+RoundBeamStop	.\xrt\backends\raycing\apertures.py	/^class RoundBeamStop(RoundAperture):$/;"	c
+RunCardProcs	.\xrt\runner.py	/^class RunCardProcs(object):$/;"	c
+RunCardVals	.\xrt\runner.py	/^class RunCardVals(object):$/;"	c
+SIc	.\xrt\backends\raycing\sources.py	/^SIc = 2.99792458e8$/;"	v
+SIe0	.\xrt\backends\raycing\sources.py	/^SIe0 = 1.602176565e-19$/;"	v
+SIhplank	.\xrt\backends\raycing\sources.py	/^SIhplank = 6.626069573e-34$/;"	v
+SIme	.\xrt\backends\raycing\sources.py	/^SIme = 9.10938291e-31$/;"	v
+SQ3	.\xrt\backends\raycing\sources.py	/^SQ3 = 1.7320508075688772935274463415059$/;"	v
+SaveResults	.\xrt\plotter.py	/^class SaveResults(object):$/;"	c
+Screen	.\xrt\backends\raycing\screens.py	/^class Screen(MonitorPoints):$/;"	c
+SetOfRectangularAperturesOnZActuator	.\xrt\backends\raycing\apertures.py	/^class SetOfRectangularAperturesOnZActuator(RectangularAperture):$/;"	c
+SimpleVCM	.\xrt\backends\raycing\oes.py	/^SimpleVCM = BentFlatMirror$/;"	v
+SimpleVFM	.\xrt\backends\raycing\oes.py	/^SimpleVFM = ToroidMirror$/;"	v
+SurfaceOfRevolution	.\xrt\backends\raycing\oes.py	/^class SurfaceOfRevolution(OE):$/;"	c
+Thread	.\xrt\multipro.py	/^from threading import Thread$/;"	i
+ToroidMirror	.\xrt\backends\raycing\oes.py	/^class ToroidMirror(OE):$/;"	c
+Tripod	.\xrt\backends\raycing\stages.py	/^class Tripod(object):$/;"	c
+TwoXStages	.\xrt\backends\raycing\stages.py	/^class TwoXStages(OneXStage):$/;"	c
+Undulator	.\xrt\backends\raycing\sources.py	/^class Undulator(object):$/;"	c
+UndulatorUrgent	.\xrt\backends\raycing\sources.py	/^class UndulatorUrgent(object):$/;"	c
+VCM	.\xrt\backends\raycing\oes.py	/^class VCM(SimpleVCM, MirrorOnTripodWithTwoXStages):$/;"	c
+VFM	.\xrt\backends\raycing\oes.py	/^class VFM(SimpleVFM, MirrorOnTripodWithTwoXStages):$/;"	c
+Wiggler	.\xrt\backends\raycing\sources.py	/^class Wiggler(BendingMagnet):$/;"	c
+WigglerWS	.\xrt\backends\raycing\sources.py	/^class WigglerWS(UndulatorUrgent):$/;"	c
+XYCAxis	.\xrt\plotter.py	/^class XYCAxis(object):$/;"	c
+XYCPlot	.\xrt\plotter.py	/^class XYCPlot(object):$/;"	c
+XYCPlotWithNumerOfReflections	.\xrt\plotter.py	/^class XYCPlotWithNumerOfReflections(XYCPlot):$/;"	c
+_DEBUG	.\xrt\backends\raycing\oes.py	/^_DEBUG = False$/;"	v
+_DEBUG	.\xrt\backends\raycing\screens.py	/^_DEBUG = 20$/;"	v
+_DEBUG	.\xrt\backends\raycing\sources.py	/^_DEBUG = 20  # if non-zero, some diagnostics is printed out$/;"	v
+_DEBUG	.\xrt\multipro.py	/^_DEBUG = 1$/;"	v
+__author__	.\xrt\__init__.py	/^    "Roman Chernikov (DESY Photon Science)"$/;"	v
+__author__	.\xrt\backends\raycing\__init__.py	/^__author__ = "Konstantin Klementiev, Roman Chernikov"$/;"	v
+__author__	.\xrt\backends\raycing\apertures.py	/^__author__ = "Konstantin Klementiev, Roman Chernikov"$/;"	v
+__author__	.\xrt\backends\raycing\materials.py	/^__author__ = "Konstantin Klementiev, Roman Chernikov"$/;"	v
+__author__	.\xrt\backends\raycing\oes.py	/^__author__ = "Konstantin Klementiev, Roman Chernikov"$/;"	v
+__author__	.\xrt\backends\raycing\screens.py	/^__author__ = "Konstantin Klementiev, Roman Chernikov"$/;"	v
+__author__	.\xrt\backends\raycing\sources.py	/^__author__ = "Konstantin Klementiev", "Roman Chernikov"$/;"	v
+__author__	.\xrt\backends\raycing\stages.py	/^__author__ = "Konstantin Klementiev, Roman Chernikov"$/;"	v
+__author__	.\xrt\backends\shadow.py	/^__author__ = "Konstantin Klementiev, Roman Chernikov"$/;"	v
+__author__	.\xrt\multipro.py	/^__author__ = "Konstantin Klementiev, Roman Chernikov"$/;"	v
+__author__	.\xrt\plotter.py	/^__author__ = "Konstantin Klementiev, Roman Chernikov"$/;"	v
+__author__	.\xrt\runner.py	/^__author__ = "Konstantin Klementiev, Roman Chernikov"$/;"	v
+__date__	.\xrt\__init__.py	/^__date__ = "12 Apr 2015"$/;"	v
+__date__	.\xrt\backends\raycing\__init__.py	/^__date__ = "10 Apr 2015"$/;"	v
+__date__	.\xrt\backends\raycing\apertures.py	/^__date__ = "10 Apr 2015"$/;"	v
+__date__	.\xrt\backends\raycing\materials.py	/^__date__ = "10 Apr 2015"$/;"	v
+__date__	.\xrt\backends\raycing\oes.py	/^__date__ = "10 Apr 2015"$/;"	v
+__date__	.\xrt\backends\raycing\screens.py	/^__date__ = "10 Apr 2015"$/;"	v
+__date__	.\xrt\backends\raycing\sources.py	/^__date__ = "29 Oct 2014"$/;"	v
+__date__	.\xrt\backends\raycing\stages.py	/^__date__ = "10 Apr 2015"$/;"	v
+__date__	.\xrt\backends\shadow.py	/^__date__ = "10 Apr 2015"$/;"	v
+__date__	.\xrt\multipro.py	/^__date__ = "10 Apr 2015"$/;"	v
+__date__	.\xrt\plotter.py	/^__date__ = "10 Apr 2015"$/;"	v
+__date__	.\xrt\runner.py	/^__date__ = "10 Apr 2015"$/;"	v
+__dir__	.\xrt\backends\raycing\oes.py	/^__dir__ = os.path.dirname(__file__)$/;"	v
+__dir__	.\xrt\multipro.py	/^__dir__ = os.path.dirname(__file__)$/;"	v
+__email__	.\xrt\__init__.py	/^__email__ = "first dot last at gmail dot com"$/;"	v
+__init__	.\elements\source.py	/^    def __init__(self):$/;"	m	class:GeometricSourceTest
+__init__	.\xrt\backends\raycing\__init__.py	/^    def __init__(self, azimuth=0., height=0.):$/;"	m	class:BeamLine
+__init__	.\xrt\backends\raycing\apertures.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:DoubleSlit
+__init__	.\xrt\backends\raycing\apertures.py	/^    def __init__(self, bl, name, center, apertures, centerZs, dXs, dZs,$/;"	m	class:SetOfRectangularAperturesOnZActuator
+__init__	.\xrt\backends\raycing\apertures.py	/^    def __init__(self, bl, name, center, kind, opening, alarmLevel=None):$/;"	m	class:RectangularAperture
+__init__	.\xrt\backends\raycing\apertures.py	/^    def __init__(self, bl, name, center, r, alarmLevel=None):$/;"	m	class:RoundAperture
+__init__	.\xrt\backends\raycing\materials.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:CrystalHarmonics
+__init__	.\xrt\backends\raycing\materials.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:CrystalSi
+__init__	.\xrt\backends\raycing\materials.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:Powder
+__init__	.\xrt\backends\raycing\materials.py	/^    def __init__(self, elem, table='Chantler'):$/;"	m	class:Element
+__init__	.\xrt\backends\raycing\materials.py	/^    def __init__(self, elements, quantities=None, kind='mirror', rho=0, t=None,$/;"	m	class:Material
+__init__	.\xrt\backends\raycing\materials.py	/^    def __init__(self, hkl, d, V=None, elements='Si', quantities=None, rho=0,$/;"	m	class:Crystal
+__init__	.\xrt\backends\raycing\materials.py	/^    def __init__(self, kind='grating'):$/;"	m	class:EmptyMaterial
+__init__	.\xrt\backends\raycing\materials.py	/^    def __init__(self, name, hkl,$/;"	m	class:CrystalFromCell
+__init__	.\xrt\backends\raycing\materials.py	/^    def __init__(self, tLayer, tThickness, bLayer, bThickness, nPairs,$/;"	m	class:Multilayer
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__($/;"	m	class:OE
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:BentFlatMirror
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:BentLaueCylinder
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:BlazedGrating
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:DCM
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:DCMOnTripodWithOneXStage
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:DicedJohannToroid
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:DicedOE
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:DualVFM
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:EllipticalMirror
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:EllipticalMirrorParam
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:GeneralFZPin0YZ
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:JohannCylinder
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:JohannToroid
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:MirrorOnTripodWithTwoXStages
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:NormalFZP
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:ParabolicMirror
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:ParaboloidFlatLens
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:Plate
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:ToroidMirror
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:VCM
+__init__	.\xrt\backends\raycing\oes.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:VFM
+__init__	.\xrt\backends\raycing\screens.py	/^    def __init__(self, bl, name, center, R, x='auto', z='auto',$/;"	m	class:HemisphericScreen
+__init__	.\xrt\backends\raycing\screens.py	/^    def __init__(self, bl, name, center=[0, 0, 0], x='auto', z='auto',$/;"	m	class:Screen
+__init__	.\xrt\backends\raycing\screens.py	/^    def __init__(self, name='', targetOpenCL=None):$/;"	m	class:MonitorPoints
+__init__	.\xrt\backends\raycing\sources.py	/^    def __init__($/;"	m	class:CollimatedMeshSource
+__init__	.\xrt\backends\raycing\sources.py	/^    def __init__($/;"	m	class:GeometricSource
+__init__	.\xrt\backends\raycing\sources.py	/^    def __init__($/;"	m	class:MeshSource
+__init__	.\xrt\backends\raycing\sources.py	/^    def __init__($/;"	m	class:UndulatorUrgent
+__init__	.\xrt\backends\raycing\sources.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:BendingMagnetWS
+__init__	.\xrt\backends\raycing\sources.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:Wiggler
+__init__	.\xrt\backends\raycing\sources.py	/^    def __init__(self, *args, **kwargs):$/;"	m	class:WigglerWS
+__init__	.\xrt\backends\raycing\sources.py	/^    def __init__(self, bl, name='BM', center=(0, 0, 0), nrays=raycing.nrays,$/;"	m	class:BendingMagnet
+__init__	.\xrt\backends\raycing\sources.py	/^    def __init__(self, bl, name='und', center=(0, 0, 0), nrays=raycing.nrays,$/;"	m	class:Undulator
+__init__	.\xrt\backends\raycing\sources.py	/^    def __init__(self, nrays=raycing.nrays, copyFrom=None, forceState=False,$/;"	m	class:Beam
+__init__	.\xrt\backends\raycing\stages.py	/^    def __init__(self, dx=0):$/;"	m	class:OneXStage
+__init__	.\xrt\backends\raycing\stages.py	/^    def __init__(self, jack1, jack2, jack3):$/;"	m	class:Tripod
+__init__	.\xrt\backends\raycing\stages.py	/^    def __init__(self, tx1, tx2, dx=0):$/;"	m	class:TwoXStages
+__init__	.\xrt\multipro.py	/^    def __init__(self, locCard, plots, outPlotQueues, alarmQueue, idLoc):$/;"	m	class:BackendProcess
+__init__	.\xrt\multipro.py	/^    def __init__(self, locCard, plots, outPlotQueues, alarmQueue, idLoc):$/;"	m	class:BackendThread
+__init__	.\xrt\multipro.py	/^    def __init__(self, locCard, plots, outPlotQueues, alarmQueue, idLoc):$/;"	m	class:GenericProcessOrThread
+__init__	.\xrt\plotter.py	/^    def __init__($/;"	m	class:XYCAxis
+__init__	.\xrt\plotter.py	/^    def __init__($/;"	m	class:XYCPlot
+__init__	.\xrt\plotter.py	/^    def __init__(self, plot):$/;"	m	class:PlotCard2Pickle
+__init__	.\xrt\plotter.py	/^    def __init__(self, plot):$/;"	m	class:SaveResults
+__init__	.\xrt\runner.py	/^    def __init__(self, afterScript, afterScriptArgs, afterScriptKWargs):$/;"	m	class:RunCardProcs
+__init__	.\xrt\runner.py	/^    def __init__(self, threads, processes, repeats, updateEvery, backend,$/;"	m	class:RunCardVals
+__license__	.\xrt\__init__.py	/^__license__ = "MIT license"$/;"	v
+__module__	.\xrt\__init__.py	/^__module__ = "xrt"$/;"	v
+__module__	.\xrt\backends\raycing\__init__.py	/^__module__ = "raycing"$/;"	v
+__pop_kwargs	.\xrt\backends\raycing\materials.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:CrystalHarmonics	file:
+__pop_kwargs	.\xrt\backends\raycing\materials.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:Powder	file:
+__pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:BentFlatMirror	file:
+__pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:BentLaueCylinder	file:
+__pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:BlazedGrating	file:
+__pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:DCM	file:
+__pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:DicedOE	file:
+__pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:DualVFM	file:
+__pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:EllipticalMirror	file:
+__pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:EllipticalMirrorParam	file:
+__pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:GeneralFZPin0YZ	file:
+__pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:JohannCylinder	file:
+__pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:NormalFZP	file:
+__pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:ParabolicMirror	file:
+__pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:ParaboloidFlatLens	file:
+__pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:Plate	file:
+__pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def __pop_kwargs(self, **kwargs):$/;"	m	class:ToroidMirror	file:
+__version__	.\xrt\__init__.py	/^__version__ = '.'.join(map(str, __versioninfo__))$/;"	v
+__versioninfo__	.\xrt\__init__.py	/^__versioninfo__ = (0, 9, 99)$/;"	v
+_apply_distribution	.\xrt\backends\raycing\sources.py	/^    def _apply_distribution(self, axis, distaxis, daxis):$/;"	m	class:GeometricSource
+_bracketing	.\xrt\backends\raycing\oes.py	/^    def _bracketing(self, local_n, x, y, z, a, b, c, invertNormal,$/;"	m	class:OE
+_build_I_map_CL	.\xrt\backends\raycing\sources.py	/^    def _build_I_map_CL(self, w, ddtheta, ddpsi):$/;"	m	class:Undulator
+_build_I_map_conv	.\xrt\backends\raycing\sources.py	/^    def _build_I_map_conv(self, w, ddtheta, ddpsi):$/;"	m	class:Undulator
+_diffraction_integral_CL	.\xrt\backends\raycing\screens.py	/^    def _diffraction_integral_CL(self, oe, oeGlo, nglo, nl, good,$/;"	m	class:MonitorPoints
+_diffraction_integral_conv	.\xrt\backends\raycing\screens.py	/^    def _diffraction_integral_conv(self, oe, oeGlobal, nglo, nl, good,$/;"	m	class:MonitorPoints
+_fill_beam	.\xrt\backends\raycing\sources.py	/^    def _fill_beam(Jss, Jpp, Jsp, Es, Ep):$/;"	f	function:make_polarization
+_grating_deflection	.\xrt\backends\raycing\oes.py	/^    def _grating_deflection($/;"	m	class:OE
+_h	.\xrt\backends\raycing\oes.py	/^    _h = 20.$/;"	v	class:OE
+_plots	.\xrt\runner.py	/^_plots = []$/;"	v
+_pow10	.\xrt\plotter.py	/^    def _pow10(self, x, digits=1):$/;"	m	class:XYCPlot
+_processes	.\elements\source.py	/^_processes = 1$/;"	v
+_propagate_wave_CL	.\xrt\backends\raycing\oes.py	/^    def _propagate_wave_CL($/;"	m	class:OE
+_reflect_crystal_cl	.\xrt\backends\raycing\oes.py	/^    def _reflect_crystal_cl(self, goodN, lb, matcr, oeNormal):$/;"	m	class:OE
+_reflect_local	.\xrt\backends\raycing\oes.py	/^    def _reflect_local($/;"	m	class:OE
+_reflect_wave_local	.\xrt\backends\raycing\oes.py	/^    def _reflect_wave_local($/;"	m	class:OE
+_reportNaN	.\xrt\backends\raycing\oes.py	/^    def _reportNaN(self, x, strName):$/;"	m	class:OE
+_set_annulus	.\xrt\backends\raycing\sources.py	/^    def _set_annulus(self, axis1, axis2, rMin, rMax, phiMin, phiMax):$/;"	m	class:GeometricSource
+_set_t	.\xrt\backends\raycing\oes.py	/^    def _set_t(self, xyz=None, abc=None, surfPhys=None,$/;"	m	class:OE
+_simple_generator	.\xrt\runner.py	/^def _simple_generator():$/;"	f
+_sourceAsciiFile	.\xrt\backends\shadow.py	/^_sourceAsciiFile = 'start.00'$/;"	v
+_sp	.\xrt\backends\raycing\sources.py	/^    def _sp(self, dim, x, ww1, w, wu, gamma, ddphi, ddpsi):$/;"	m	class:Undulator
+_use_Brent_method	.\xrt\backends\raycing\oes.py	/^    def _use_Brent_method(self, local_f, t1, t2, x, y, z, a, b, c,$/;"	m	class:OE
+_use_my_method	.\xrt\backends\raycing\oes.py	/^    def _use_my_method($/;"	m	class:OE
+absorb_intensity	.\xrt\backends\raycing\sources.py	/^    def absorb_intensity(self, inBeam):$/;"	m	class:Beam
+accuracyInPosition	.\xrt\backends\raycing\__init__.py	/^accuracyInPosition = 0.1  # accuracy for positioning of oe$/;"	v
+apparently	.\xrt\runner.py	/^import uuid  # apparently is needed on some platforms with pyopencl$/;"	i
+auto_assign_data	.\xrt\plotter.py	/^    def auto_assign_data(self, backend):$/;"	m	class:XYCAxis
+auto_assign_factor	.\xrt\plotter.py	/^    def auto_assign_factor(self, backend):$/;"	m	class:XYCAxis
+avogadro	.\xrt\backends\raycing\materials.py	/^avogadro = 6.02214199e23  # atoms\/mol$/;"	v
+axisLabelFontSize	.\xrt\plotter.py	/^axisLabelFontSize = 10$/;"	v
+backends	.\elements\source.py	/^import xrt.backends.raycing as raycing$/;"	i
+backends	.\elements\source.py	/^import xrt.backends.raycing.run as rr$/;"	i
+backends	.\elements\source.py	/^import xrt.backends.raycing.screens as rsc$/;"	i
+backends	.\elements\source.py	/^import xrt.backends.raycing.sources as rs$/;"	i
+beamGlobalTotal	.\main.py	/^beamGlobalTotal = source.create_geometric()$/;"	v
+build_I_map	.\xrt\backends\raycing\sources.py	/^    def build_I_map(self, dde, ddtheta, ddpsi):$/;"	m	class:BendingMagnet
+build_I_map	.\xrt\backends\raycing\sources.py	/^    def build_I_map(self, w, ddtheta, ddpsi):$/;"	m	class:Undulator
+c108	.\xrt\backends\raycing\sources.py	/^c108 = 2.99792458  # 10^8 m\/c$/;"	v
+card_copy	.\xrt\plotter.py	/^    def card_copy(self):$/;"	m	class:XYCPlot
+ch	.\xrt\backends\raycing\materials.py	/^ch = 12398.4186  # {5}   {c*h[eV*A]}$/;"	v
+chbar	.\xrt\backends\raycing\materials.py	/^chbar = ch \/ twoPi  # {c*hbar[eV*A]}$/;"	v
+checkCenter	.\xrt\backends\raycing\oes.py	/^    def checkCenter(self, misalignmentTolerated=raycing.misalignmentTolerated):$/;"	m	class:OE
+check_alarm	.\xrt\backends\raycing\__init__.py	/^def check_alarm(self, incoming, beam):$/;"	f
+check_shadow_dirs	.\xrt\backends\shadow.py	/^def check_shadow_dirs(processes, cwd):$/;"	f
+cl	.\xrt\backends\raycing\materials.py	/^    import pyopencl as cl$/;"	i
+cl	.\xrt\backends\raycing\oes.py	/^    import pyopencl as cl$/;"	i
+cl	.\xrt\backends\raycing\screens.py	/^    import pyopencl as cl$/;"	i
+cl	.\xrt\backends\raycing\sources.py	/^    import pyopencl as cl$/;"	i
+cl	.\xrt\multipro.py	/^    import pyopencl as cl$/;"	i
+cl_plist	.\xrt\backends\raycing\oes.py	/^    cl_plist = ("R", "limPhysY")$/;"	v	class:BentFlatMirror
+cl_plist	.\xrt\backends\raycing\oes.py	/^    cl_plist = ("R", "r")$/;"	v	class:ToroidMirror
+cl_plist	.\xrt\backends\raycing\oes.py	/^    cl_plist = ("R", "r", "limPhysY", "limOptX")$/;"	v	class:VFM
+cl_plist	.\xrt\backends\raycing\oes.py	/^    cl_plist = ("Rm", "Rs")$/;"	v	class:JohannToroid
+cl_plist	.\xrt\backends\raycing\oes.py	/^    cl_plist = ("crossSectionInt", "R")$/;"	v	class:BentLaueCylinder
+cl_plist	.\xrt\backends\raycing\oes.py	/^    cl_plist = ("crossSectionInt", "R")$/;"	v	class:BentLaueSphere
+cl_plist	.\xrt\backends\raycing\oes.py	/^    cl_plist = ("crossSectionInt", "Rm", "alpha")$/;"	v	class:JohannCylinder
+cl_plist	.\xrt\backends\raycing\oes.py	/^    cl_plist = ("ellipseA", "ellipseB", "y0", "z0",$/;"	v	class:EllipticalMirrorParam
+cl_plist	.\xrt\backends\raycing\oes.py	/^    cl_plist = ("p", "alpha", "ae", "be", "ce")$/;"	v	class:EllipticalMirror
+cl_plist	.\xrt\backends\raycing\oes.py	/^    cl_plist = ("p", "pp", "delta_y", "delta_z")$/;"	v	class:ParabolicMirror
+cl_plist	.\xrt\backends\raycing\oes.py	/^    cl_plist = ("r1", "r2", "xCylinder1", "hCylinder1",$/;"	v	class:DualVFM
+cl_plist	.\xrt\backends\raycing\oes.py	/^    cl_plist = ("zmax", "focus")$/;"	v	class:ParabolicCylinderFlatLens
+cl_plist	.\xrt\backends\raycing\oes.py	/^    cl_plist = ("zmax", "focus")$/;"	v	class:ParaboloidFlatLens
+cl_plist	.\xrt\backends\raycing\oes.py	/^    cl_plist = ["center"]$/;"	v	class:OE
+clean_plots	.\xrt\plotter.py	/^    def clean_plots(self):$/;"	m	class:XYCPlot
+clean_user_elements	.\xrt\plotter.py	/^    def clean_user_elements(self):$/;"	m	class:XYCPlot
+clean_user_elements	.\xrt\plotter.py	/^    def clean_user_elements(self):$/;"	m	class:XYCPlotWithNumerOfReflections
+code_name	.\xrt\backends\raycing\sources.py	/^    def code_name(self):$/;"	m	class:UndulatorUrgent
+code_name	.\xrt\backends\raycing\sources.py	/^    def code_name(self):$/;"	m	class:WigglerWS
+colorFactor	.\xrt\plotter.py	/^colorFactor = 0.85  # 2.\/3 for red-to-blue$/;"	v
+colorSaturation	.\xrt\plotter.py	/^colorSaturation = 0.85$/;"	v
+comment_strings	.\xrt\backends\raycing\sources.py	/^    def comment_strings(self):$/;"	m	class:UndulatorUrgent
+comment_strings	.\xrt\backends\raycing\sources.py	/^    def comment_strings(self):$/;"	m	class:WigglerWS
+concatenate	.\xrt\backends\raycing\sources.py	/^    def concatenate(self, beam):$/;"	m	class:Beam
+copy	.\xrt\plotter.py	/^import copy$/;"	i
+copy_beam	.\xrt\backends\raycing\sources.py	/^def copy_beam($/;"	f
+cpu_count	.\xrt\backends\raycing\sources.py	/^from multiprocessing import Pool, cpu_count$/;"	i
+create_geometric	.\elements\source.py	/^def create_geometric():$/;"	f
+defaultBins	.\xrt\plotter.py	/^defaultBins = 128$/;"	v
+defaultCTitle	.\xrt\plotter.py	/^defaultCTitle = 'energy'$/;"	v
+defaultCUnit	.\xrt\plotter.py	/^defaultCUnit = 'eV'$/;"	v
+defaultEnergy	.\xrt\backends\raycing\sources.py	/^defaultEnergy = 9.0e3$/;"	v
+defaultFwhmFormatStrForCAxis	.\xrt\plotter.py	/^defaultFwhmFormatStrForCAxis = '%.2f'$/;"	v
+defaultFwhmFormatStrForXYAxes	.\xrt\plotter.py	/^defaultFwhmFormatStrForXYAxes = '%.1f'$/;"	v
+defaultPixelPerBin	.\xrt\plotter.py	/^defaultPixelPerBin = 2$/;"	v
+defaultXTitle	.\xrt\plotter.py	/^defaultXTitle = '$x$'$/;"	v
+defaultXUnit	.\xrt\plotter.py	/^defaultXUnit = 'mm'$/;"	v
+defaultYTitle	.\xrt\plotter.py	/^defaultYTitle = '$z$'$/;"	v
+defaultYUnit	.\xrt\plotter.py	/^defaultYUnit = 'mm'$/;"	v
+dispatch_jobs	.\xrt\runner.py	/^def dispatch_jobs():$/;"	f
+distance_xy	.\xrt\backends\raycing\__init__.py	/^def distance_xy(p1, p2):$/;"	f
+distance_xyz	.\xrt\backends\raycing\__init__.py	/^def distance_xyz(p1, p2):$/;"	f
+dl_l	.\xrt\backends\raycing\materials.py	/^    def dl_l(self, t=None):$/;"	m	class:CrystalSi
+do_hist1d	.\xrt\multipro.py	/^    def do_hist1d(self, x, intensity, cDataRGB, axis):$/;"	m	class:GenericProcessOrThread
+do_hist2d	.\xrt\multipro.py	/^    def do_hist2d(self, x, y, intensity, cDataRGB, plot):$/;"	m	class:GenericProcessOrThread
+double_reflect	.\xrt\backends\raycing\oes.py	/^    def double_reflect(self, beam, needLocal=True,$/;"	m	class:DCM
+double_refract	.\xrt\backends\raycing\oes.py	/^    def double_refract(self, beam, needLocal=True):$/;"	m	class:Plate
+dpi	.\xrt\plotter.py	/^dpi = 100$/;"	v
+draw_footprint_area	.\xrt\plotter.py	/^    def draw_footprint_area(self):$/;"	m	class:XYCPlot
+ds	.\xrt\backends\raycing\__init__.py	/^ds = 0.  # mm: margin used in multiple reflections$/;"	v
+dt	.\xrt\backends\raycing\__init__.py	/^dt = 1e-3  # mm: margin around OE within which the intersection is searched$/;"	v
+dummy	.\xrt\multipro.py	/^from .backends import dummy$/;"	i
+elec_e	.\xrt\backends\raycing\__init__.py	/^elec_e = 1.602176462e-19$/;"	v
+elementsList	.\xrt\backends\raycing\materials.py	/^elementsList = ($/;"	v
+equalize_xy	.\xrt\multipro.py	/^    def equalize_xy(self, plot, leadingLimits):$/;"	m	class:GenericProcessOrThread
+errno	.\xrt\runner.py	/^import errno$/;"	i
+expose	.\xrt\backends\raycing\screens.py	/^    def expose(self, beam):$/;"	m	class:HemisphericScreen
+expose	.\xrt\backends\raycing\screens.py	/^    def expose(self, beam):$/;"	m	class:Screen
+expose_wave	.\xrt\backends\raycing\screens.py	/^    def expose_wave(self, beam):$/;"	m	class:MonitorPoints
+expose_wave	.\xrt\backends\raycing\screens.py	/^    def expose_wave(self, beam):$/;"	m	class:Screen
+expose_wave_prepare	.\xrt\backends\raycing\screens.py	/^    def expose_wave_prepare(self, oe, dim1, dim2, oeArea='auto'):$/;"	m	class:Screen
+expose_wave_prepare	.\xrt\backends\raycing\screens.py	/^    def expose_wave_prepare(self, oe, xglo, yglo, zglo, oeArea='auto'):$/;"	m	class:MonitorPoints
+extraMargin	.\xrt\plotter.py	/^extraMargin = 4  # bins. Extra margins to histograms when limits are not given.$/;"	v
+facet_center_n	.\xrt\backends\raycing\oes.py	/^    def facet_center_n(self, x, y):$/;"	m	class:DicedJohannToroid
+facet_center_n	.\xrt\backends\raycing\oes.py	/^    def facet_center_n(self, x, y):$/;"	m	class:DicedJohanssonToroid
+facet_center_n	.\xrt\backends\raycing\oes.py	/^    def facet_center_n(self, x, y):$/;"	m	class:DicedOE
+facet_center_z	.\xrt\backends\raycing\oes.py	/^    def facet_center_z(self, x, y):$/;"	m	class:DicedJohannToroid
+facet_center_z	.\xrt\backends\raycing\oes.py	/^    def facet_center_z(self, x, y):$/;"	m	class:DicedOE
+facet_delta_n	.\xrt\backends\raycing\oes.py	/^    def facet_delta_n(self, u, v):$/;"	m	class:DicedJohanssonToroid
+facet_delta_n	.\xrt\backends\raycing\oes.py	/^    def facet_delta_n(self, u, v):$/;"	m	class:DicedOE
+facet_delta_z	.\xrt\backends\raycing\oes.py	/^    def facet_delta_z(self, u, v):$/;"	m	class:DicedJohanssonToroid
+facet_delta_z	.\xrt\backends\raycing\oes.py	/^    def facet_delta_z(self, u, v):$/;"	m	class:DicedOE
+files_in_tmp_subdirs	.\xrt\backends\shadow.py	/^def files_in_tmp_subdirs(fileName, processes=1):$/;"	f
+filter_by_index	.\xrt\backends\raycing\sources.py	/^    def filter_by_index(self, indarr):$/;"	m	class:Beam
+filter_good	.\xrt\backends\raycing\sources.py	/^    def filter_good(self):$/;"	m	class:Beam
+find_dz	.\xrt\backends\raycing\oes.py	/^    def find_dz($/;"	m	class:OE
+find_electron_path	.\xrt\backends\raycing\sources.py	/^    def find_electron_path(self, vec, K, npassed):$/;"	m	class:UndulatorUrgent
+find_intersection	.\xrt\backends\raycing\oes.py	/^    def find_intersection(self, local_f, t1, t2, x, y, z, a, b, c,$/;"	m	class:BlazedGrating
+find_intersection	.\xrt\backends\raycing\oes.py	/^    def find_intersection(self, local_f, t1, t2, x, y, z, a, b, c,$/;"	m	class:OE
+find_intersection_CL	.\xrt\backends\raycing\oes.py	/^    def find_intersection_CL(self, local_f, t1, t2, x, y, z, a, b, c,$/;"	m	class:OE
+flatten	.\xrt\backends\raycing\oes.py	/^def flatten(x):$/;"	f
+for_one_polarization	.\xrt\backends\raycing\materials.py	/^        def for_one_polarization(polFactor):$/;"	f	function:Crystal.get_amplitude
+get_Bragg_angle	.\xrt\backends\raycing\materials.py	/^    def get_Bragg_angle(self, E):$/;"	m	class:Crystal
+get_Bragg_angle	.\xrt\backends\raycing\materials.py	/^    def get_Bragg_angle(self, E, order=1):$/;"	m	class:Multilayer
+get_Bragg_offset	.\xrt\backends\raycing\materials.py	/^    def get_Bragg_offset(self, E, Eref):$/;"	m	class:CrystalSi
+get_Darwin_width	.\xrt\backends\raycing\materials.py	/^    def get_Darwin_width(self, E, b=1., polarization='s'):$/;"	m	class:Crystal
+get_Ep_amp	.\xrt\backends\raycing\__init__.py	/^def get_Ep_amp(beam):$/;"	f
+get_Ep_phase	.\xrt\backends\raycing\__init__.py	/^def get_Ep_phase(beam):$/;"	f
+get_Es_amp	.\xrt\backends\raycing\__init__.py	/^def get_Es_amp(beam):$/;"	f
+get_Es_phase	.\xrt\backends\raycing\__init__.py	/^def get_Es_phase(beam):$/;"	f
+get_a	.\xrt\backends\raycing\materials.py	/^    def get_a(self):$/;"	m	class:CrystalSi
+get_absorption_coefficient	.\xrt\backends\raycing\materials.py	/^    def get_absorption_coefficient(self, E):  # mu0$/;"	m	class:Material
+get_amplitude	.\xrt\backends\raycing\materials.py	/^    def get_amplitude(self, E, beamInDotNormal, beamOutDotNormal,$/;"	m	class:Crystal
+get_amplitude	.\xrt\backends\raycing\materials.py	/^    def get_amplitude(self, E, beamInDotNormal, fromVacuum=True):$/;"	m	class:Material
+get_amplitude	.\xrt\backends\raycing\materials.py	/^    def get_amplitude(self, E, beamInDotNormal, x=None, y=None, cl_list=None):$/;"	m	class:Multilayer
+get_b_thickness	.\xrt\backends\raycing\materials.py	/^    def get_b_thickness(self, x, y):$/;"	m	class:Multilayer
+get_beam	.\elements\source.py	/^    def get_beam(self):$/;"	m	class:GeometricSourceTest
+get_circular_polarization_rate	.\xrt\backends\raycing\__init__.py	/^def get_circular_polarization_rate(beam):$/;"	f
+get_divergence	.\xrt\backends\raycing\apertures.py	/^    def get_divergence(self, source):$/;"	m	class:RectangularAperture
+get_divergence	.\xrt\backends\raycing\apertures.py	/^    def get_divergence(self, source):$/;"	m	class:RoundAperture
+get_dtheta_symmetric_Bragg	.\xrt\backends\raycing\materials.py	/^    def get_dtheta_symmetric_Bragg(self, E):$/;"	m	class:Crystal
+get_dtheta_symmetric_Bragg	.\xrt\backends\raycing\materials.py	/^    def get_dtheta_symmetric_Bragg(self, E, order=1):$/;"	m	class:Multilayer
+get_elevation_d	.\xrt\backends\raycing\__init__.py	/^def get_elevation_d(beam):$/;"	f
+get_elevation_x	.\xrt\backends\raycing\__init__.py	/^def get_elevation_x(beam):$/;"	f
+get_elevation_y	.\xrt\backends\raycing\__init__.py	/^def get_elevation_y(beam):$/;"	f
+get_elevation_z	.\xrt\backends\raycing\__init__.py	/^def get_elevation_z(beam):$/;"	f
+get_energy	.\xrt\backends\raycing\__init__.py	/^def get_energy(beam):$/;"	f
+get_extinction_depth	.\xrt\backends\raycing\materials.py	/^    def get_extinction_depth(self, E, polarization='s'):  # in microns$/;"	m	class:Crystal
+get_f0	.\xrt\backends\raycing\materials.py	/^    def get_f0(self, qOver4pi=0):  # qOver4pi = sin(theta) \/ lambda$/;"	m	class:Element
+get_f1f2	.\xrt\backends\raycing\materials.py	/^    def get_f1f2(self, E):$/;"	m	class:Element
+get_grating_area_fraction	.\xrt\backends\raycing\oes.py	/^    def get_grating_area_fraction(self):$/;"	m	class:BlazedGrating
+get_grating_efficiency	.\xrt\backends\raycing\materials.py	/^    def get_grating_efficiency(self, beam, good):$/;"	m	class:Material
+get_incidence_angle	.\xrt\backends\raycing\__init__.py	/^def get_incidence_angle(beam):$/;"	f
+get_offset	.\xrt\plotter.py	/^    def get_offset(self):$/;"	m	class:OffsetFormatter
+get_order	.\xrt\backends\raycing\__init__.py	/^def get_order(beam):$/;"	f
+get_orientation	.\xrt\backends\raycing\oes.py	/^    def get_orientation(self):$/;"	m	class:DCMOnTripodWithOneXStage
+get_orientation	.\xrt\backends\raycing\oes.py	/^    def get_orientation(self):$/;"	m	class:EllipticalMirror
+get_orientation	.\xrt\backends\raycing\oes.py	/^    def get_orientation(self):$/;"	m	class:MirrorOnTripodWithTwoXStages
+get_orientation	.\xrt\backends\raycing\oes.py	/^    def get_orientation(self):$/;"	m	class:OE
+get_orientation	.\xrt\backends\raycing\oes.py	/^    def get_orientation(self):$/;"	m	class:ParabolicMirror
+get_orientation	.\xrt\backends\raycing\stages.py	/^    def get_orientation(self):$/;"	m	class:Tripod
+get_orientation	.\xrt\backends\raycing\stages.py	/^    def get_orientation(self):$/;"	m	class:TwoXStages
+get_output	.\xrt\backends\raycing\__init__.py	/^def get_output(plot, beamsReturnedBy_run_process):$/;"	f
+get_output	.\xrt\backends\shadow.py	/^def get_output(plot, _fPolar, _blockNRays, dir=None):$/;"	f
+get_path	.\xrt\backends\raycing\__init__.py	/^def get_path(beam):$/;"	f
+get_phase_shift	.\xrt\backends\raycing\__init__.py	/^def get_phase_shift(beam):  # in units of pi!$/;"	f
+get_phi	.\xrt\backends\raycing\__init__.py	/^def get_phi(beam):$/;"	f
+get_polarization_degree	.\xrt\backends\raycing\__init__.py	/^def get_polarization_degree(beam):$/;"	f
+get_polarization_psi	.\xrt\backends\raycing\__init__.py	/^def get_polarization_psi(beam):$/;"	f
+get_r	.\xrt\backends\raycing\__init__.py	/^def get_r(beam):$/;"	f
+get_ratio_ellipse_axes	.\xrt\backends\raycing\__init__.py	/^def get_ratio_ellipse_axes(beam):$/;"	f
+get_reflection_number	.\xrt\backends\raycing\__init__.py	/^def get_reflection_number(beam):$/;"	f
+get_refractive_index	.\xrt\backends\raycing\materials.py	/^    def get_refractive_index(self, E):$/;"	m	class:Material
+get_s	.\xrt\backends\raycing\__init__.py	/^def get_s(beam):$/;"	f
+get_structure_factor	.\xrt\backends\raycing\materials.py	/^    def get_structure_factor(self, E, sinThetaOverLambda):$/;"	m	class:CrystalDiamond
+get_structure_factor	.\xrt\backends\raycing\materials.py	/^    def get_structure_factor(self, E, sinThetaOverLambda):$/;"	m	class:CrystalFcc
+get_structure_factor	.\xrt\backends\raycing\materials.py	/^    def get_structure_factor(self, E, sinThetaOverLambda):$/;"	m	class:CrystalFromCell
+get_surface_limits	.\xrt\backends\raycing\oes.py	/^    def get_surface_limits(self):$/;"	m	class:DCM
+get_surface_limits	.\xrt\backends\raycing\oes.py	/^    def get_surface_limits(self):$/;"	m	class:OE
+get_surface_limits	.\xrt\backends\raycing\oes.py	/^    def get_surface_limits(self):$/;"	m	class:SurfaceOfRevolution
+get_t_thickness	.\xrt\backends\raycing\materials.py	/^    def get_t_thickness(self, x, y):$/;"	m	class:Multilayer
+get_theta	.\xrt\backends\raycing\__init__.py	/^get_theta = get_incidence_angle$/;"	v
+get_x	.\xrt\backends\raycing\__init__.py	/^def get_x(beam):$/;"	f
+get_xprime	.\xrt\backends\raycing\__init__.py	/^def get_xprime(beam):$/;"	f
+get_y	.\xrt\backends\raycing\__init__.py	/^def get_y(beam):$/;"	f
+get_z	.\xrt\backends\raycing\__init__.py	/^def get_z(beam):$/;"	f
+get_zprime	.\xrt\backends\raycing\__init__.py	/^def get_zprime(beam):$/;"	f
+global_to_virgin_local	.\xrt\backends\raycing\__init__.py	/^def global_to_virgin_local(bl, beam, lo, center=None, part=None):$/;"	f
+gzip	.\utils\beam.py	/^import gzip$/;"	i
+gzip	.\xrt\backends\raycing\sources.py	/^import gzip$/;"	i
+gzip_output	.\xrt\backends\raycing\sources.py	/^def gzip_output(tmpwd, outName, msg=None):$/;"	f
+height1d	.\xrt\plotter.py	/^height1d = 84$/;"	v
+heightE1d	.\xrt\plotter.py	/^heightE1d = 84$/;"	v
+heightE1dbar	.\xrt\plotter.py	/^heightE1dbar = 10$/;"	v
+hist1d_cl	.\xrt\multipro.py	/^    def hist1d_cl(self, x, bins, range, weights):$/;"	m	class:GenericProcessOrThread
+hist2d_cl	.\xrt\multipro.py	/^    def hist2d_cl(self, y, x, bins, range, weights):$/;"	m	class:GenericProcessOrThread
+howmany	.\main.py	/^howmany = 1000$/;"	v
+hueDead	.\xrt\backends\raycing\__init__.py	/^hueDead = 0.2$/;"	v
+hueGood	.\xrt\backends\raycing\__init__.py	/^hueGood = 3.$/;"	v
+hueMax	.\xrt\backends\raycing\__init__.py	/^hueMax = 10.$/;"	v
+hueMin	.\xrt\backends\raycing\__init__.py	/^hueMin = 0.$/;"	v
+hueOut	.\xrt\backends\raycing\__init__.py	/^hueOut = 8.$/;"	v
+hueOver	.\xrt\backends\raycing\__init__.py	/^hueOver = 1.6$/;"	v
+init_jacks_local	.\xrt\backends\raycing\stages.py	/^    def init_jacks_local(self):$/;"	m	class:Tripod
+init_process	.\xrt\backends\shadow.py	/^def init_process(runDir, energyRange, _fWiggler):$/;"	f
+init_shadow	.\xrt\backends\shadow.py	/^def init_shadow(processes, cwd, energyRange):$/;"	f
+int_fun	.\xrt\backends\raycing\sources.py	/^        def int_fun(x):$/;"	f	function:BendingMagnet.__init__
+intensities_on_mesh	.\xrt\backends\raycing\sources.py	/^    def intensities_on_mesh(self):$/;"	m	class:BendingMagnet
+intensities_on_mesh	.\xrt\backends\raycing\sources.py	/^    def intensities_on_mesh(self):$/;"	m	class:Undulator
+intensities_on_mesh	.\xrt\backends\raycing\sources.py	/^    def intensities_on_mesh(self):$/;"	m	class:UndulatorUrgent
+interpolate	.\xrt\backends\raycing\oes.py	/^from scipy import interpolate$/;"	i
+io	.\xrt\plotter.py	/^                    import scipy.io as io$/;"	i
+io	.\xrt\plotter.py	/^                import scipy.io as io$/;"	i
+is	.\xrt\runner.py	/^import uuid  # apparently is needed on some platforms with pyopencl$/;"	i
+isOpenCL	.\xrt\backends\raycing\materials.py	/^    isOpenCL = False$/;"	v
+isOpenCL	.\xrt\backends\raycing\materials.py	/^    isOpenCL = True$/;"	v
+isOpenCL	.\xrt\backends\raycing\oes.py	/^    isOpenCL = False$/;"	v
+isOpenCL	.\xrt\backends\raycing\oes.py	/^    isOpenCL = True$/;"	v
+isOpenCL	.\xrt\backends\raycing\screens.py	/^    isOpenCL = False$/;"	v
+isOpenCL	.\xrt\backends\raycing\screens.py	/^    isOpenCL = True$/;"	v
+isOpenCL	.\xrt\backends\raycing\sources.py	/^    isOpenCL = False$/;"	v
+isOpenCL	.\xrt\backends\raycing\sources.py	/^    isOpenCL = True$/;"	v
+isOpenCL	.\xrt\multipro.py	/^    isOpenCL = False$/;"	v
+isOpenCL	.\xrt\multipro.py	/^    isOpenCL = True$/;"	v
+is_sequence	.\xrt\backends\raycing\__init__.py	/^def is_sequence(arg):$/;"	f
+load_beam	.\utils\beam.py	/^def load_beam(filename):$/;"	f
+load_beamc	.\utils\beam.py	/^def load_beamc(filename):$/;"	f
+loaded_beam	.\main.py	/^loaded_beam = ub.load_beam_compressed('global_total.beamc')$/;"	v
+local_g	.\xrt\backends\raycing\oes.py	/^    def local_g(self, x, y, rho=-100.):$/;"	m	class:OE
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, s, phi):$/;"	m	class:EllipticalMirrorParam
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:BentFlatMirror
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:BentLaueCylinder
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:BentLaueSphere
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:BlazedGrating
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:DicedOE
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:DualVFM
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:EllipticalMirror
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:GeneralBraggToroid
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:GroundBentLaueCylinder
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:JohannCylinder
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:JohannToroid
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:JohanssonCylinder
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:JohanssonToroid
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:LauePlate
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:OE
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:ParabolicMirror
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:ToroidMirror
+local_n	.\xrt\backends\raycing\oes.py	/^    def local_n(self, x, y):$/;"	m	class:VFM
+local_n1	.\xrt\backends\raycing\oes.py	/^    def local_n1(self, x, y):$/;"	m	class:DCM
+local_n1	.\xrt\backends\raycing\oes.py	/^    def local_n1(self, x, y):$/;"	m	class:ParabolicCylinderFlatLens
+local_n1	.\xrt\backends\raycing\oes.py	/^    def local_n1(self, x, y):$/;"	m	class:ParaboloidFlatLens
+local_n2	.\xrt\backends\raycing\oes.py	/^    def local_n2(self, x, y):$/;"	m	class:DCM
+local_n2	.\xrt\backends\raycing\oes.py	/^    def local_n2(self, x, y):$/;"	m	class:DoubleParaboloidLens
+local_n2	.\xrt\backends\raycing\oes.py	/^    def local_n2(self, x, y):$/;"	m	class:ParaboloidFlatLens
+local_n_cylinder	.\xrt\backends\raycing\oes.py	/^    def local_n_cylinder(self, x, y, R, alpha):$/;"	m	class:BentLaueCylinder
+local_n_cylinder	.\xrt\backends\raycing\oes.py	/^    def local_n_cylinder(self, x, y, R, alpha):$/;"	m	class:JohannCylinder
+local_n_distorted	.\xrt\backends\raycing\oes.py	/^    def local_n_distorted(self, x, y):$/;"	m	class:OE
+local_n_random	.\xrt\backends\raycing\oes.py	/^    def local_n_random(self, bLength, chi):$/;"	m	class:OE
+local_n_toroid	.\xrt\backends\raycing\oes.py	/^    def local_n_toroid(self, x, y, Rm, Rs, alpha):$/;"	m	class:JohannToroid
+local_process	.\elements\source.py	/^        def local_process(beamLine, shineOnly1stSource=False):$/;"	f	function:GeometricSourceTest.make_run_process
+local_r	.\xrt\backends\raycing\oes.py	/^    def local_r(self, s, phi):  # for flat mirror as example$/;"	m	class:OE
+local_r	.\xrt\backends\raycing\oes.py	/^    def local_r(self, s, phi):$/;"	m	class:EllipticalMirrorParam
+local_r_distorted	.\xrt\backends\raycing\oes.py	/^    def local_r_distorted(self, x, y):$/;"	m	class:OE
+local_to_global	.\xrt\backends\raycing\screens.py	/^    def local_to_global(self, phi, theta):$/;"	m	class:HemisphericScreen
+local_to_global	.\xrt\backends\raycing\screens.py	/^    def local_to_global(self, x=0, y=0, z=0):$/;"	m	class:Screen
+local_z	.\xrt\backends\raycing\oes.py	/^    def local_z(self, x, y):$/;"	m	class:BentFlatMirror
+local_z	.\xrt\backends\raycing\oes.py	/^    def local_z(self, x, y):$/;"	m	class:BentLaueCylinder
+local_z	.\xrt\backends\raycing\oes.py	/^    def local_z(self, x, y):$/;"	m	class:BentLaueSphere
+local_z	.\xrt\backends\raycing\oes.py	/^    def local_z(self, x, y):$/;"	m	class:BlazedGrating
+local_z	.\xrt\backends\raycing\oes.py	/^    def local_z(self, x, y):$/;"	m	class:DualVFM
+local_z	.\xrt\backends\raycing\oes.py	/^    def local_z(self, x, y):$/;"	m	class:EllipticalMirror
+local_z	.\xrt\backends\raycing\oes.py	/^    def local_z(self, x, y):$/;"	m	class:JohannCylinder
+local_z	.\xrt\backends\raycing\oes.py	/^    def local_z(self, x, y):$/;"	m	class:JohannToroid
+local_z	.\xrt\backends\raycing\oes.py	/^    def local_z(self, x, y):$/;"	m	class:OE
+local_z	.\xrt\backends\raycing\oes.py	/^    def local_z(self, x, y):$/;"	m	class:ParabolicMirror
+local_z	.\xrt\backends\raycing\oes.py	/^    def local_z(self, x, y):$/;"	m	class:ToroidMirror
+local_z	.\xrt\backends\raycing\oes.py	/^    def local_z(self, x, y):$/;"	m	class:VFM
+local_z	.\xrt\backends\raycing\oes.py	/^    def local_z(self, x, y, skipReturnZ=False):$/;"	m	class:DicedOE
+local_z1	.\xrt\backends\raycing\oes.py	/^    def local_z1(self, x, y):$/;"	m	class:DCM
+local_z1	.\xrt\backends\raycing\oes.py	/^    def local_z1(self, x, y):$/;"	m	class:ParabolicCylinderFlatLens
+local_z1	.\xrt\backends\raycing\oes.py	/^    def local_z1(self, x, y):$/;"	m	class:ParaboloidFlatLens
+local_z2	.\xrt\backends\raycing\oes.py	/^    def local_z2(self, x, y):$/;"	m	class:DCM
+local_z2	.\xrt\backends\raycing\oes.py	/^    def local_z2(self, x, y):$/;"	m	class:DoubleParaboloidLens
+local_z2	.\xrt\backends\raycing\oes.py	/^    def local_z2(self, x, y):$/;"	m	class:ParaboloidFlatLens
+local_z_distorted	.\xrt\backends\raycing\oes.py	/^    def local_z_distorted(self, x, y):$/;"	m	class:OE
+make_energy	.\xrt\backends\raycing\sources.py	/^def make_energy(distE, energies, nrays, filamentBeam=False):$/;"	f
+make_input	.\xrt\backends\raycing\sources.py	/^    def make_input(self, x, z, E):$/;"	m	class:BendingMagnetWS
+make_input	.\xrt\backends\raycing\sources.py	/^    def make_input(self, x, z, E):$/;"	m	class:UndulatorUrgent
+make_input	.\xrt\backends\raycing\sources.py	/^    def make_input(self, x, z, E, isBM=False):$/;"	m	class:WigglerWS
+make_it	.\elements\source.py	/^    def make_it(self):$/;"	m	class:GeometricSourceTest
+make_plots	.\elements\source.py	/^    def make_plots(self):$/;"	m	class:GeometricSourceTest
+make_polarization	.\xrt\backends\raycing\sources.py	/^def make_polarization(polarization, bo, nrays=raycing.nrays):$/;"	f
+make_run_process	.\elements\source.py	/^    def make_run_process(self):$/;"	m	class:GeometricSourceTest
+make_screens	.\elements\source.py	/^    def make_screens(self):$/;"	m	class:GeometricSourceTest
+make_source	.\elements\source.py	/^    def make_source(self):$/;"	m	class:GeometricSourceTest
+make_spline_arrays	.\xrt\backends\raycing\sources.py	/^    def make_spline_arrays(self, skiprows, cols1, cols2):$/;"	m	class:UndulatorUrgent
+make_uniform_energy_band	.\xrt\backends\raycing\sources.py	/^    def make_uniform_energy_band(self, EnewMin, EnewMax):$/;"	m	class:Beam
+maketrans	.\xrt\backends\raycing\sources.py	/^    from string import maketrans$/;"	i
+math	.\xrt\backends\raycing\materials.py	/^import math$/;"	i
+math	.\xrt\backends\raycing\stages.py	/^import math$/;"	i
+matplotlib	.\main.py	/^import matplotlib.pyplot as plt$/;"	i
+matplotlib	.\xrt\plotter.py	/^import matplotlib.pyplot as plt$/;"	i
+matplotlib	.\xrt\runner.py	/^import matplotlib.pyplot as plt$/;"	i
+maxDepthOfOE	.\xrt\backends\raycing\__init__.py	/^maxDepthOfOE = 100.$/;"	v
+maxHalfSizeOfOE	.\xrt\backends\raycing\__init__.py	/^maxHalfSizeOfOE = 1000.$/;"	v
+maxIteration	.\xrt\backends\raycing\__init__.py	/^maxIteration = 100  # max number of iterations while searching for intersection$/;"	v
+mc2	.\xrt\backends\raycing\sources.py	/^mc2 = 0.510998928  # MeV$/;"	v
+misalignmentTolerated	.\xrt\backends\raycing\__init__.py	/^misalignmentTolerated = 0.1  # for automatic checking of oe center position$/;"	v
+modify_input	.\xrt\backends\shadow.py	/^def modify_input(fileNameList, *editlines):$/;"	f
+modify_xsh_input	.\xrt\backends\shadow.py	/^def modify_xsh_input(fileNameList, *editlines):$/;"	f
+mpl	.\elements\source.py	/^import matplotlib as mpl$/;"	i
+mpl	.\xrt\backends\raycing\oes.py	/^import matplotlib as mpl$/;"	i
+mpl	.\xrt\multipro.py	/^import matplotlib as mpl$/;"	i
+mpl	.\xrt\plotter.py	/^import matplotlib as mpl$/;"	i
+mpl	.\xrt\runner.py	/^import matplotlib as mpl$/;"	i
+msg_E	.\xrt\backends\raycing\sources.py	/^    def msg_E(self, iE):$/;"	m	class:UndulatorUrgent
+msg_xz	.\xrt\backends\raycing\sources.py	/^    def msg_xz(self, ix, iz):$/;"	m	class:UndulatorUrgent
+multiple_reflect	.\xrt\backends\raycing\oes.py	/^    def multiple_reflect($/;"	m	class:OE
+multipro	.\xrt\runner.py	/^from . import multipro$/;"	i
+multiprocessing	.\xrt\runner.py	/^import multiprocessing$/;"	i
+ndimage	.\xrt\backends\raycing\sources.py	/^from scipy import ndimage$/;"	i
+needLimits	.\xrt\runner.py	/^needLimits = False$/;"	v
+needed	.\xrt\runner.py	/^import uuid  # apparently is needed on some platforms with pyopencl$/;"	i
+normalize_sibling_plots	.\xrt\runner.py	/^def normalize_sibling_plots(plots):$/;"	f
+np	.\elements\source.py	/^import numpy as np$/;"	i
+np	.\xrt\backends\dummy.py	/^import numpy as np$/;"	i
+np	.\xrt\backends\raycing\__init__.py	/^import numpy as np$/;"	i
+np	.\xrt\backends\raycing\apertures.py	/^import numpy as np$/;"	i
+np	.\xrt\backends\raycing\materials.py	/^import numpy as np$/;"	i
+np	.\xrt\backends\raycing\oes.py	/^import numpy as np$/;"	i
+np	.\xrt\backends\raycing\screens.py	/^import numpy as np$/;"	i
+np	.\xrt\backends\raycing\sources.py	/^import numpy as np$/;"	i
+np	.\xrt\backends\shadow.py	/^import numpy as np$/;"	i
+np	.\xrt\multipro.py	/^import numpy as np$/;"	i
+np	.\xrt\plotter.py	/^import numpy as np$/;"	i
+nrays	.\xrt\backends\dummy.py	/^nrays = 25000$/;"	v
+nrays	.\xrt\backends\raycing\__init__.py	/^nrays = 100000$/;"	v
+on	.\xrt\runner.py	/^import uuid  # apparently is needed on some platforms with pyopencl$/;"	i
+on_finish	.\xrt\runner.py	/^def on_finish():$/;"	f
+on_press	.\xrt\plotter.py	/^    def on_press(self, event):$/;"	m	class:XYCPlot
+one_iteration	.\xrt\runner.py	/^def one_iteration():$/;"	f
+optimize	.\xrt\backends\raycing\sources.py	/^from scipy import optimize$/;"	i
+os	.\xrt\backends\raycing\materials.py	/^import os$/;"	i
+os	.\xrt\backends\raycing\oes.py	/^import os$/;"	i
+os	.\xrt\backends\raycing\screens.py	/^import os$/;"	i
+os	.\xrt\backends\raycing\sources.py	/^import os$/;"	i
+os	.\xrt\backends\shadow.py	/^import os$/;"	i
+os	.\xrt\multipro.py	/^import os$/;"	i
+os	.\xrt\plotter.py	/^import os$/;"	i
+os	.\xrt\runner.py	/^import os$/;"	i
+param_to_xyz	.\xrt\backends\raycing\oes.py	/^    def param_to_xyz(self, s, phi, r):  # for flat mirror as example$/;"	m	class:OE
+param_to_xyz	.\xrt\backends\raycing\oes.py	/^    def param_to_xyz(self, s, phi, r):$/;"	m	class:EllipticalMirrorParam
+param_to_xyz	.\xrt\backends\raycing\oes.py	/^    def param_to_xyz(self, s, phi, r):$/;"	m	class:SurfaceOfRevolution
+pickle	.\utils\beam.py	/^import pickle$/;"	i
+pickle	.\xrt\backends\raycing\materials.py	/^import pickle$/;"	i
+pickle	.\xrt\backends\raycing\sources.py	/^import pickle$/;"	i
+pickle	.\xrt\plotter.py	/^import pickle$/;"	i
+platforms	.\xrt\runner.py	/^import uuid  # apparently is needed on some platforms with pyopencl$/;"	i
+plot_colorbar	.\xrt\plotter.py	/^    def plot_colorbar(self):$/;"	m	class:XYCPlot
+plot_hist1d	.\xrt\plotter.py	/^    def plot_hist1d(self, what_axis_char):$/;"	m	class:XYCPlot
+plot_hist2d	.\xrt\plotter.py	/^    def plot_hist2d(self):$/;"	m	class:XYCPlot
+plot_plots	.\xrt\plotter.py	/^    def plot_plots(self):$/;"	m	class:XYCPlot
+plt	.\main.py	/^import matplotlib.pyplot as plt$/;"	i
+plt	.\xrt\plotter.py	/^import matplotlib.pyplot as plt$/;"	i
+plt	.\xrt\runner.py	/^import matplotlib.pyplot as plt$/;"	i
+pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def pop_kwargs(self, **kwargs):$/;"	m	class:DicedJohannToroid
+pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def pop_kwargs(self, **kwargs):$/;"	m	class:GeneralBraggToroid
+pop_kwargs	.\xrt\backends\raycing\oes.py	/^    def pop_kwargs(self, **kwargs):$/;"	m	class:JohannToroid
+pop_kwargs	.\xrt\backends\raycing\stages.py	/^    def pop_kwargs(self, **kwargs):$/;"	m	class:OneXStage
+pop_kwargs	.\xrt\backends\raycing\stages.py	/^    def pop_kwargs(self, **kwargs):$/;"	m	class:Tripod
+pop_kwargs	.\xrt\backends\raycing\stages.py	/^    def pop_kwargs(self, **kwargs):$/;"	m	class:TwoXStages
+prefix_save_name	.\xrt\backends\raycing\sources.py	/^    def prefix_save_name(self):$/;"	m	class:BendingMagnet
+prefix_save_name	.\xrt\backends\raycing\sources.py	/^    def prefix_save_name(self):$/;"	m	class:BendingMagnetWS
+prefix_save_name	.\xrt\backends\raycing\sources.py	/^    def prefix_save_name(self):$/;"	m	class:Undulator
+prefix_save_name	.\xrt\backends\raycing\sources.py	/^    def prefix_save_name(self):$/;"	m	class:UndulatorUrgent
+prefix_save_name	.\xrt\backends\raycing\sources.py	/^    def prefix_save_name(self):$/;"	m	class:Wiggler
+prefix_save_name	.\xrt\backends\raycing\sources.py	/^    def prefix_save_name(self):$/;"	m	class:WigglerWS
+project_energy_to_band	.\xrt\backends\raycing\sources.py	/^    def project_energy_to_band(self, EnewMin, EnewMax):$/;"	m	class:Beam
+propagate	.\xrt\backends\raycing\apertures.py	/^    def propagate(self, beam, needNewGlobal=False):$/;"	m	class:DoubleSlit
+propagate	.\xrt\backends\raycing\apertures.py	/^    def propagate(self, beam, needNewGlobal=False):$/;"	m	class:RectangularAperture
+propagate	.\xrt\backends\raycing\apertures.py	/^    def propagate(self, beam, needNewGlobal=False):$/;"	m	class:RoundAperture
+propagate	.\xrt\backends\raycing\apertures.py	/^    def propagate(self, beam, needNewGlobal=False):$/;"	m	class:RoundBeamStop
+pyopencl	.\xrt\runner.py	/^import uuid  # apparently is needed on some platforms with pyopencl$/;"	i
+r0	.\xrt\backends\raycing\materials.py	/^r0 = 2.817940285e-5  # A$/;"	v
+ra	.\xrt\backends\raycing\screens.py	/^from . import apertures as ra$/;"	i
+raycing	.\elements\source.py	/^import xrt.backends.raycing as raycing$/;"	i
+raycing	.\elements\source.py	/^import xrt.backends.raycing.run as rr$/;"	i
+raycing	.\elements\source.py	/^import xrt.backends.raycing.screens as rsc$/;"	i
+raycing	.\elements\source.py	/^import xrt.backends.raycing.sources as rs$/;"	i
+raycing	.\xrt\backends\raycing\apertures.py	/^from .. import raycing$/;"	i
+raycing	.\xrt\backends\raycing\oes.py	/^from .. import raycing$/;"	i
+raycing	.\xrt\backends\raycing\screens.py	/^from .. import raycing$/;"	i
+raycing	.\xrt\backends\raycing\sources.py	/^from .. import raycing$/;"	i
+raycing	.\xrt\backends\raycing\stages.py	/^from .. import raycing$/;"	i
+raycing	.\xrt\multipro.py	/^from .backends import raycing$/;"	i
+raycing	.\xrt\plotter.py	/^from .backends import raycing$/;"	i
+raycing	.\xrt\runner.py	/^from .backends import raycing$/;"	i
+rays_good	.\xrt\backends\raycing\oes.py	/^    def rays_good(self, x, y, is2ndXtal=False):$/;"	m	class:DicedOE
+rays_good	.\xrt\backends\raycing\oes.py	/^    def rays_good(self, x, y, is2ndXtal=False):$/;"	m	class:GeneralFZPin0YZ
+rays_good	.\xrt\backends\raycing\oes.py	/^    def rays_good(self, x, y, is2ndXtal=False):$/;"	m	class:NormalFZP
+rays_good	.\xrt\backends\raycing\oes.py	/^    def rays_good(self, x, y, is2ndXtal=False):$/;"	m	class:OE
+read_atomic_data	.\xrt\backends\raycing\materials.py	/^    def read_atomic_data(self):$/;"	m	class:Element
+read_bin_file	.\xrt\backends\shadow.py	/^def read_bin_file(binFileName, _f_polar, _blockNRays, lostRayFlag=1):$/;"	f
+read_efficiency_file	.\xrt\backends\raycing\materials.py	/^    def read_efficiency_file(self):$/;"	m	class:Material
+read_f0_Kissel	.\xrt\backends\raycing\materials.py	/^    def read_f0_Kissel(self):$/;"	m	class:Element
+read_f1f2_vs_E	.\xrt\backends\raycing\materials.py	/^    def read_f1f2_vs_E(self, table):$/;"	m	class:Element
+read_input	.\xrt\backends\shadow.py	/^def read_input(fileName, vtype, *getlines):$/;"	f
+read_output	.\xrt\backends\raycing\sources.py	/^def read_output(tmpwd, outName, skiprows, usecols, comments, useZip, msg=None):$/;"	f
+reflect	.\xrt\backends\raycing\oes.py	/^    def reflect(self, beam, needLocal=True):$/;"	m	class:OE
+reflect_wave	.\xrt\backends\raycing\oes.py	/^    def reflect_wave(self, beam, needLocal=True):$/;"	m	class:OE
+replace_by_index	.\xrt\backends\raycing\sources.py	/^    def replace_by_index(self, indarr, beam):$/;"	m	class:Beam
+reset	.\xrt\backends\raycing\oes.py	/^    def reset(self):$/;"	m	class:GeneralFZPin0YZ
+reset	.\xrt\backends\raycing\oes.py	/^    def reset(self):$/;"	m	class:NormalFZP
+reset	.\xrt\backends\raycing\sources.py	/^    def reset(self):$/;"	m	class:Undulator
+reset_bins	.\xrt\plotter.py	/^    def reset_bins(self, bins):$/;"	m	class:XYCAxis
+reset_bins2D	.\xrt\plotter.py	/^    def reset_bins2D(self):$/;"	m	class:XYCPlot
+reset_pqpitch	.\xrt\backends\raycing\oes.py	/^    def reset_pqpitch(self, p=None, q=None, pitch=None):$/;"	m	class:EllipticalMirrorParam
+restore	.\xrt\plotter.py	/^    def restore(self, plot):$/;"	m	class:SaveResults
+restore_plots	.\xrt\plotter.py	/^    def restore_plots(self):$/;"	m	class:XYCPlot
+restore_spline_arrays	.\xrt\backends\raycing\sources.py	/^    def restore_spline_arrays($/;"	m	class:UndulatorUrgent
+retry_on_eintr	.\xrt\runner.py	/^def retry_on_eintr(function, *args, **kw):$/;"	f
+rm	.\xrt\backends\raycing\oes.py	/^from . import materials as rm$/;"	i
+rm	.\xrt\backends\raycing\screens.py	/^from . import materials as rm$/;"	i
+roe	.\xrt\backends\raycing\screens.py	/^from . import oes as roe$/;"	i
+rotate_beam	.\xrt\backends\raycing\__init__.py	/^def rotate_beam(beam, indarr=None, rotationSequence='RzRyRx',$/;"	f
+rotate_coherency_matrix	.\xrt\backends\raycing\sources.py	/^def rotate_coherency_matrix(beam, indarr, roll):$/;"	f
+rotate_point	.\xrt\backends\raycing\__init__.py	/^def rotate_point(point, rotationSequence='RzRyRx', pitch=0, roll=0, yaw=0):$/;"	f
+rotate_x	.\xrt\backends\raycing\__init__.py	/^def rotate_x(y, z, cosangle, sinangle):$/;"	f
+rotate_y	.\xrt\backends\raycing\__init__.py	/^def rotate_y(x, z, cosangle, sinangle):$/;"	f
+rotate_z	.\xrt\backends\raycing\__init__.py	/^def rotate_z(x, y, cosangle, sinangle):$/;"	f
+rr	.\elements\source.py	/^import xrt.backends.raycing.run as rr$/;"	i
+rr	.\xrt\backends\raycing\sources.py	/^from . import run as rr$/;"	i
+rs	.\elements\source.py	/^import xrt.backends.raycing.sources as rs$/;"	i
+rs	.\xrt\backends\raycing\apertures.py	/^from . import sources as rs$/;"	i
+rs	.\xrt\backends\raycing\oes.py	/^from . import sources as rs$/;"	i
+rs	.\xrt\backends\raycing\screens.py	/^from . import sources as rs$/;"	i
+rsc	.\elements\source.py	/^import xrt.backends.raycing.screens as rsc$/;"	i
+rst	.\xrt\backends\raycing\oes.py	/^from . import stages as rst$/;"	i
+run	.\xrt\backends\raycing\sources.py	/^    def run(self, forceRecalculate=False, iniFileForEachDirectory=False):$/;"	m	class:UndulatorUrgent
+run	.\xrt\multipro.py	/^    def run(self):$/;"	m	class:GenericProcessOrThread
+runCardProcs	.\xrt\runner.py	/^runCardProcs = None$/;"	v
+runCardVals	.\xrt\runner.py	/^runCardVals = None$/;"	v
+run_and_save	.\xrt\backends\raycing\sources.py	/^    def run_and_save(self, pp):$/;"	m	class:UndulatorUrgent
+run_and_save	.\xrt\backends\raycing\sources.py	/^    def run_and_save(self, pp):$/;"	m	class:WigglerWS
+run_it	.\elements\source.py	/^    def run_it(self):$/;"	m	class:GeometricSourceTest
+run_one	.\xrt\backends\raycing\sources.py	/^def run_one(path, tmpwd, infile, msg=None):$/;"	f
+run_process	.\xrt\backends\dummy.py	/^def run_process(nrays=nrays):$/;"	f
+run_process	.\xrt\backends\raycing\run.py	/^def run_process(beamline, shineOnly1stSource=False):$/;"	f
+run_process	.\xrt\backends\shadow.py	/^def run_process(args, _fWiggler, runDir):$/;"	f
+run_ray_tracing	.\xrt\runner.py	/^def run_ray_tracing($/;"	f
+runner	.\xrt\plotter.py	/^from . import runner$/;"	i
+save	.\xrt\plotter.py	/^    def save(self, suffix=''):$/;"	m	class:XYCPlot
+save_beam	.\utils\beam.py	/^def save_beam(beam, filename = 'global_total.beam'):$/;"	f
+save_beam_compressed	.\utils\beam.py	/^def save_beam_compressed(beam, filename = 'global_total.beam'):$/;"	f
+save_spline_arrays	.\xrt\backends\raycing\sources.py	/^    def save_spline_arrays(self, pickleName, what):$/;"	m	class:UndulatorUrgent
+scipy	.\xrt\plotter.py	/^                    import scipy.io as io$/;"	i
+scipy	.\xrt\plotter.py	/^                import scipy.io as io$/;"	i
+select_aperture	.\xrt\backends\raycing\apertures.py	/^    def select_aperture(self, apertureName, targetZ):$/;"	m	class:SetOfRectangularAperturesOnZActuator
+select_surface	.\xrt\backends\raycing\oes.py	/^    def select_surface(self, surfaceName):$/;"	m	class:DualVFM
+select_surface	.\xrt\backends\raycing\stages.py	/^    def select_surface(self, surfaceName):$/;"	m	class:OneXStage
+select_surface	.\xrt\backends\raycing\stages.py	/^    def select_surface(self, surfaceName):$/;"	m	class:TwoXStages
+set_alpha	.\xrt\backends\raycing\oes.py	/^    def set_alpha(self, alpha):$/;"	m	class:OE
+set_axes_limits	.\xrt\plotter.py	/^    def set_axes_limits(self, xmin, xmax, ymin, ymax, emin, emax):$/;"	m	class:XYCPlot
+set_cl	.\xrt\backends\raycing\screens.py	/^    def set_cl(self, targetOpenCL):$/;"	m	class:MonitorPoints
+set_divergence	.\xrt\backends\raycing\apertures.py	/^    def set_divergence(self, source, divergence):$/;"	m	class:RectangularAperture
+set_energies	.\elements\source.py	/^    def set_energies(self, E0, sigma):$/;"	m	class:GeometricSourceTest
+set_invert_colors	.\xrt\plotter.py	/^    def set_invert_colors(self):$/;"	m	class:XYCPlot
+set_jacks	.\xrt\backends\raycing\stages.py	/^    def set_jacks(self):$/;"	m	class:Tripod
+set_negative	.\xrt\plotter.py	/^    def set_negative(self):$/;"	m	class:XYCPlot
+set_optical_limits	.\xrt\backends\raycing\apertures.py	/^    def set_optical_limits(self):$/;"	m	class:RectangularAperture
+set_optical_limits	.\xrt\backends\raycing\apertures.py	/^    def set_optical_limits(self):$/;"	m	class:SetOfRectangularAperturesOnZActuator
+set_orientation	.\xrt\backends\raycing\screens.py	/^    def set_orientation(self, x=None, z=None):$/;"	m	class:HemisphericScreen
+set_orientation	.\xrt\backends\raycing\screens.py	/^    def set_orientation(self, x=None, z=None):$/;"	m	class:Screen
+set_phase_shift	.\xrt\backends\raycing\oes.py	/^    def set_phase_shift(self, phaseShift):$/;"	m	class:GeneralFZPin0YZ
+set_prefix	.\elements\source.py	/^    def set_prefix(self, fix):$/;"	m	class:GeometricSourceTest
+set_total_number_of_photons	.\elements\source.py	/^    def set_total_number_of_photons(self, tnop):$/;"	m	class:GeometricSourceTest
+set_x_stages	.\xrt\backends\raycing\stages.py	/^    def set_x_stages(self):$/;"	m	class:TwoXStages
+set_xz_divergence	.\elements\source.py	/^    def set_xz_divergence(self, divx, divz):$/;"	m	class:GeometricSourceTest
+set_xz_size	.\elements\source.py	/^    def set_xz_size(self, sizex, sizez):$/;"	m	class:GeometricSourceTest
+set_z	.\xrt\backends\raycing\apertures.py	/^    def set_z(self, z):$/;"	m	class:RoundAperture
+shadow	.\xrt\multipro.py	/^from .backends import shadow$/;"	i
+shadow	.\xrt\runner.py	/^        from .backends import shadow$/;"	i
+shine	.\xrt\backends\raycing\sources.py	/^    def shine(self, toGlobal=True):$/;"	m	class:CollimatedMeshSource
+shine	.\xrt\backends\raycing\sources.py	/^    def shine(self, toGlobal=True):$/;"	m	class:MeshSource
+shine	.\xrt\backends\raycing\sources.py	/^    def shine(self, toGlobal=True):$/;"	m	class:NESWSource
+shine	.\xrt\backends\raycing\sources.py	/^    def shine(self, toGlobal=True):$/;"	m	class:UndulatorUrgent
+shine	.\xrt\backends\raycing\sources.py	/^    def shine(self, toGlobal=True, withAmplitudes=False, accuBeam=None):$/;"	m	class:BendingMagnet
+shine	.\xrt\backends\raycing\sources.py	/^    def shine(self, toGlobal=True, withAmplitudes=False, accuBeam=None):$/;"	m	class:GeometricSource
+shine	.\xrt\backends\raycing\sources.py	/^    def shine(self, toGlobal=True, withAmplitudes=True, accuBeam=None,$/;"	m	class:Undulator
+shrink_source	.\xrt\backends\raycing\sources.py	/^def shrink_source(beamLine, beams, minxprime, maxxprime, minzprime, maxzprime,$/;"	f
+some	.\xrt\runner.py	/^import uuid  # apparently is needed on some platforms with pyopencl$/;"	i
+source	.\main.py	/^from elements import source$/;"	i
+sp	.\xrt\plotter.py	/^import scipy as sp$/;"	i
+space2dto1d	.\xrt\plotter.py	/^space2dto1d = 4$/;"	v
+special	.\xrt\backends\raycing\sources.py	/^from scipy import special$/;"	i
+start_jobs	.\xrt\runner.py	/^def start_jobs():$/;"	f
+store_plots	.\xrt\plotter.py	/^    def store_plots(self):$/;"	m	class:XYCPlot
+struct	.\xrt\backends\raycing\materials.py	/^import struct$/;"	i
+subprocess	.\xrt\backends\shadow.py	/^import subprocess$/;"	i
+sys	.\xrt\backends\raycing\sources.py	/^import sys$/;"	i
+sys	.\xrt\runner.py	/^import sys$/;"	i
+test_geometric	.\elements\source.py	/^def test_geometric():$/;"	f
+textFWHM	.\xrt\plotter.py	/^    def textFWHM(self, axis, textD, average, hwhm):$/;"	m	class:XYCPlot
+threading	.\xrt\runner.py	/^import threading$/;"	i
+time	.\xrt\backends\raycing\oes.py	/^import time$/;"	i
+time	.\xrt\backends\raycing\screens.py	/^import time$/;"	i
+time	.\xrt\backends\raycing\sources.py	/^import time$/;"	i
+time	.\xrt\backends\shadow.py	/^import time$/;"	i
+time	.\xrt\multipro.py	/^import time$/;"	i
+time	.\xrt\runner.py	/^import time$/;"	i
+timer_callback	.\xrt\plotter.py	/^    def timer_callback(self, evt=None):$/;"	m	class:XYCPlot
+tmp_wd_E	.\xrt\backends\raycing\sources.py	/^    def tmp_wd_E(self, cwd, iE):$/;"	m	class:UndulatorUrgent
+tmp_wd_xz	.\xrt\backends\raycing\sources.py	/^    def tmp_wd_xz(self, cwd, ix, iz):$/;"	m	class:UndulatorUrgent
+touch_beam	.\xrt\backends\raycing\apertures.py	/^    def touch_beam(self, beam):$/;"	m	class:RectangularAperture
+transFortranD	.\xrt\backends\raycing\sources.py	/^    transFortranD = ''.maketrans('dD', 'ee')$/;"	v
+transFortranD	.\xrt\backends\raycing\sources.py	/^    transFortranD = maketrans('dD', 'ee')$/;"	v
+twoPi	.\xrt\backends\raycing\materials.py	/^twoPi = math.pi * 2.$/;"	v
+types	.\xrt\backends\raycing\__init__.py	/^import types$/;"	i
+ub	.\main.py	/^from utils import beam as ub$/;"	i
+update_limits	.\xrt\multipro.py	/^    def update_limits(self, axis, x):$/;"	m	class:GenericProcessOrThread
+update_user_elements	.\xrt\plotter.py	/^    def update_user_elements(self):$/;"	m	class:XYCPlot
+update_user_elements	.\xrt\plotter.py	/^    def update_user_elements(self):$/;"	m	class:XYCPlotWithNumerOfReflections
+uuid	.\xrt\runner.py	/^import uuid  # apparently is needed on some platforms with pyopencl$/;"	i
+virgin_local_to_global	.\xrt\backends\raycing\__init__.py	/^def virgin_local_to_global(bl, vlb, center=None, part=None):$/;"	f
+with	.\xrt\runner.py	/^import uuid  # apparently is needed on some platforms with pyopencl$/;"	i
+xOrigin2d	.\xrt\plotter.py	/^xOrigin2d = 80  # all sizes are in pixels$/;"	v
+xSpaceExtra	.\xrt\plotter.py	/^xSpaceExtra = 22$/;"	v
+xSpaceExtraWhenNoEHistogram	.\xrt\plotter.py	/^xSpaceExtraWhenNoEHistogram = 42$/;"	v
+xTextPos	.\xrt\plotter.py	/^xTextPos = 1.02  # 0 to 1 relative to the figure size$/;"	v
+xTextPosDx	.\xrt\plotter.py	/^xTextPosDx = 0.5$/;"	v
+xTextPosDy	.\xrt\plotter.py	/^xTextPosDy = 1.05$/;"	v
+xTextPosStatus	.\xrt\plotter.py	/^xTextPosStatus = 0.999$/;"	v
+xlabelpad	.\xrt\plotter.py	/^xlabelpad = 4  # x-axis label to axis$/;"	v
+xopBinDir	.\xrt\backends\raycing\sources.py	/^    xopBinDir = r'\/home\/konkle\/xop2.3\/bin.linux'$/;"	v
+xopBinDir	.\xrt\backends\raycing\sources.py	/^    xopBinDir = r'c:\\Program Files\\xop2.3\\bin.x86'$/;"	v
+xrt	.\elements\source.py	/^import xrt.backends.raycing as raycing$/;"	i
+xrt	.\elements\source.py	/^import xrt.backends.raycing.run as rr$/;"	i
+xrt	.\elements\source.py	/^import xrt.backends.raycing.screens as rsc$/;"	i
+xrt	.\elements\source.py	/^import xrt.backends.raycing.sources as rs$/;"	i
+xrt	.\elements\source.py	/^import xrt.plotter as xrtp$/;"	i
+xrt	.\elements\source.py	/^import xrt.runner as xrtr$/;"	i
+xrtp	.\elements\source.py	/^import xrt.plotter as xrtp$/;"	i
+xrtr	.\elements\source.py	/^import xrt.runner as xrtr$/;"	i
+xspace1dtoE1d	.\xrt\plotter.py	/^xspace1dtoE1d = 112$/;"	v
+xyz_to_param	.\xrt\backends\raycing\oes.py	/^    def xyz_to_param(self, x, y, z):  # for flat mirror as example$/;"	m	class:OE
+xyz_to_param	.\xrt\backends\raycing\oes.py	/^    def xyz_to_param(self, x, y, z):$/;"	m	class:EllipticalMirrorParam
+xyz_to_param	.\xrt\backends\raycing\oes.py	/^    def xyz_to_param(self, x, y, z):$/;"	m	class:SurfaceOfRevolution
+yOrigin2d	.\xrt\plotter.py	/^yOrigin2d = 48$/;"	v
+ySpaceExtra	.\xrt\plotter.py	/^ySpaceExtra = 28$/;"	v
+yTextPosDx	.\xrt\plotter.py	/^yTextPosDx = 1.02$/;"	v
+yTextPosDy	.\xrt\plotter.py	/^yTextPosDy = 0.5$/;"	v
+yTextPosGoodrays	.\xrt\plotter.py	/^yTextPosGoodrays = 0.8$/;"	v
+yTextPosGoodraysR	.\xrt\plotter.py	/^yTextPosGoodraysR = 1.1$/;"	v
+yTextPosI	.\xrt\plotter.py	/^yTextPosI = 0.58$/;"	v
+yTextPosNrays	.\xrt\plotter.py	/^yTextPosNrays = 1.0$/;"	v
+yTextPosNrays1	.\xrt\plotter.py	/^yTextPosNrays1 = 0.88$/;"	v
+yTextPosNrays2	.\xrt\plotter.py	/^yTextPosNrays2 = 0.66$/;"	v
+yTextPosNrays3	.\xrt\plotter.py	/^yTextPosNrays3 = 0.44$/;"	v
+yTextPosNrays4	.\xrt\plotter.py	/^yTextPosNrays4 = 0.22$/;"	v
+yTextPosNraysR	.\xrt\plotter.py	/^yTextPosNraysR = 1.32$/;"	v
+yTextPosStatus	.\xrt\plotter.py	/^yTextPosStatus = 0.001$/;"	v
+ylabelpad	.\xrt\plotter.py	/^ylabelpad = 4  # y-axis label to axis$/;"	v
+yspace1dtoE1d	.\xrt\plotter.py	/^yspace1dtoE1d = 76$/;"	v
+zEps	.\xrt\backends\raycing\__init__.py	/^zEps = 1e-12  # mm: target accuracy in z while searching for intersection$/;"	v
