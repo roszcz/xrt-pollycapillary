@@ -2,14 +2,13 @@ import pickle
 import gzip
 
 def save_beam(beam, filename = 'global_total.beam'):
-    """ Simply pickle the beam """
+    """ OBSOLETE Simply pickle the beam """
     file = open(filename, 'wb')
     pickle.dump(beam, file)
     file.close()
 
 def save_beam_compressed(beam, filename = 'global_total.beam'):
     """ Add letter c at the end of filename to indicate compression """
-    filename += 'c'
     file = gzip.open(filename, 'wb')
     pickle.dump(beam, file)
     file.close()

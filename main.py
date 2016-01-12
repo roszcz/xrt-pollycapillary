@@ -9,10 +9,10 @@ def create_source():
     beamGlobalTotal = source.create_geometric()
 
     # And it only needs to be done once, after that ...
-    ub.save_beam_compressed(beamGlobalTotal, 'global_total.beam')
+    ub.save_beam_compressed(beamGlobalTotal, 'basic_source.beam')
 
 def load_source():
-    """ Load beam from file saved with the above """
+    """ Load beam from file saved with the above function """
     # ... we can operate on photons loaded from the hard drive
     loaded_beam = ub.load_beam_compressed('global_total.beamc')
 
@@ -20,11 +20,11 @@ def load_source():
 
 if __name__ == '__main__':
     """ python main.py """
-    # For example show first 1000 of photons' positions
-    howmany = 1000
-
     # Read from file, see above
     photons = load_source()
+
+    # For example show first 1000 of photons' positions
+    howmany = 1000
 
     # Plot
     plt.scatter(photons.x[:howmany], photons.z[:howmany])
