@@ -301,7 +301,7 @@ def create_geometric():
     source.set_visible(False)
     source.set_xz_size(0.1, 0.1)
     source.set_xz_divergence(0.1, 0.1)
-    source.set_total_number_of_photons(1e6)
+    source.set_total_number_of_photons(1e2)
     # Plotting is only useful when testing
     # source.set_visible(False)
     source.run_it()

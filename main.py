@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 from elements import source
+from elements import capillary as ec
 from utils import beam as ub
 
 def create_source():
@@ -14,18 +15,21 @@ def create_source():
 def load_source():
     """ Load beam from file saved with the above function """
     # ... we can operate on photons loaded from the hard drive
-    loaded_beam = ub.load_beam_compressed('global_total.beamc')
+    loaded_beam = ub.load_beam_compressed('basic_source.beamc')
 
     return loaded_beam
 
 if __name__ == '__main__':
     """ python main.py """
     # Read from file, see above
-    photons = load_source()
+    # photons = load_source()
+
+    # raytrayce through a capillary
+    after_capillary = ec.create_straight_capillary('basic_source.beamc')
 
     # For example show first 1000 of photons' positions
     howmany = 1000
 
     # Plot
-    plt.scatter(photons.x[:howmany], photons.z[:howmany])
+    plt.scatter(after_capillary.x[:howmany], after_capillary.z[:howmany])
     plt.show()

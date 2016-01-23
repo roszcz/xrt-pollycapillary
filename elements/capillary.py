@@ -1,8 +1,10 @@
 import matplotlib as mpl
 # mpl.use('Agg')
-_processes = 1
+_processes = 2
 
 import numpy as np
+import itertools
+
 import xrt.runner as xrtr
 import xrt.backends.raycing.screens as rsc
 import xrt.plotter as xrtp
@@ -30,12 +32,17 @@ class StraightCapillaryTest(object):
     """ Implement shining through a single pipe-like object """
     def __init__(self):
         """ Tania przestrzen reklamowa """
+        self.iterator = 0
         # This is neccessary
         self.beamLine = raycing.BeamLine()
         self.beamTotal = None
 
         # Beam file with photons to be tested
         self.beamfile = 'basic_source.beamc'
+        # This is supposed to be an atomic iterator
+        self.beam_iterator = itertools.count()
+        # Process that many photons in one raytraycing_run
+        self.beam_chunk_size = 1000
 
         # Default capillary position and radius
         # must be held by the test-object
@@ -56,6 +63,7 @@ class StraightCapillaryTest(object):
     def set_beamfile(self, path):
         """ Provide path to saved photons """
         self.beamfile = path
+        self.beam_iterator = itertools.count()
 
     def set_far_screen_distance(self, dist):
         """ Away from outrance """
@@ -122,7 +130,6 @@ class StraightCapillaryTest(object):
 
     def make_source(self):
         """ Source photons are loaded here """
-
         # Simply load beam object 
         self.source_beam = ub.load_beam_compressed(self.beamfile)
 
@@ -130,9 +137,21 @@ class StraightCapillaryTest(object):
         """ Overloads xrt method for photon generation """
         def local_process(beamLine, shineOnly1stSource=False):
 
+            # This has to conserve the atomicity of the operation!
+            local_it = self.beam_iterator.next()
+            rnga = local_it * self.beam_chunk_size
+            rngb = (local_it + 1) * self.beam_chunk_size
+
+            beam = ub.copy_by_index(self.source_beam, range(rnga, rngb))
+
+            # TODO We need an equivalent of original xrt::Beam
+            # shine() method, loading photons from the source
+            # part by part allowing run_process() to work in
+            # it's original design
+
             # Propagate photons through the capillary
             beamTotal, _ =\
-            self.capillary.multiple_reflect(self.source_beam,\
+            self.capillary.multiple_reflect(beam,\
                                             maxReflections=50)
 
             # Hold photons for export
@@ -231,6 +250,10 @@ class StraightCapillaryTest(object):
 
         self.make_it()
 
+        # We want to go through the whole beam
+        # Provide shorter beam if You fancy otherwise
+        _repeats = np.ceil(self.source_beam.x.size / self.beam_chunk_size)
+
         xrtr.run_ray_tracing(self.plots,
                             repeats=_repeats,\
                             beamLine=self.beamLine,\
@@ -278,10 +301,11 @@ def test_straight():
 
     return test.get_beam()
 
-def create_straight_capillary():
+def create_straight_capillary(photons):
     """ Creates a beam after tunneling through a straight pipe """
     test = StraightCapillaryTest()
-    test.set_capillary_radius(1.0)
+    test.set_beamfile(photons)
+    test.set_capillary_radius(0.101)
     test.set_capillary_entrance(0.5, -0.1)
     test.set_capillary_length(100)
     test.set_visible(False)
