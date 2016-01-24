@@ -1,6 +1,30 @@
 import pickle
 import gzip
+import matplotlib.pyplot as plt
 import xrt.backends.raycing.sources as rs
+
+def move_beam_to(beam, where):
+    """ Propagates the beam in vacum to *where* position """
+    beam.path += where
+    beam.x[:] += beam.a * beam.path
+    beam.z[:] += beam.c * beam.path
+
+def show_beam_part(beam, idarr):
+    """ Shows photons within an array of ids """
+    xx = beam.x[idarr]
+    zz = beam.z[idarr]
+    plt.scatter(xx, zz)
+    plt.show()
+
+def show_beam(beam):
+    """ Shows a reasonable part of the beam """
+    # Just take first 2000 photons and plot.scatter them
+    limit = 2000 if beam.x.size > 2000 else beam.x.size
+    rng = range(limit)
+    xx = beam.x[rng]
+    zz = beam.z[rng]
+    plt.scatter(xx, zz)
+    plt.show()
 
 def copy_by_index(beam, indarr):
     """ Copies a part of beam """

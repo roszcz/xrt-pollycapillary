@@ -297,13 +297,11 @@ def create_geometric():
         and returns a beam object, use this to create beam files
         with desired photons """
     source = GeometricSourceTest()
-    # TODO implement this
+    # Plotting is only useful when testing
     source.set_visible(False)
     source.set_xz_size(0.1, 0.1)
     source.set_xz_divergence(0.1, 0.1)
-    source.set_total_number_of_photons(1e2)
-    # Plotting is only useful when testing
-    # source.set_visible(False)
+    source.set_total_number_of_photons(1e5)
     source.run_it()
 
     return source.get_beam()

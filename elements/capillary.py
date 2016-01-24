@@ -1,6 +1,6 @@
 import matplotlib as mpl
 # mpl.use('Agg')
-_processes = 2
+_processes = 1
 
 import numpy as np
 import itertools
@@ -55,6 +55,9 @@ class StraightCapillaryTest(object):
         self.y_entrance = 40
         self.y_outrance = 140
 
+        # We also need to control materials
+        self.material = None
+
         # Far screen distance from the end of capillary
         self.far_screen_dist = 20
         # Savename prefix (colon helps with vim-folding)
@@ -64,6 +67,10 @@ class StraightCapillaryTest(object):
         """ Provide path to saved photons """
         self.beamfile = path
         self.beam_iterator = itertools.count()
+
+    def set_beam(self, photons):
+        """ This actually makes the source """
+        self.source_beam = photons
 
     def set_far_screen_distance(self, dist):
         """ Away from outrance """
@@ -85,6 +92,10 @@ class StraightCapillaryTest(object):
             return
         self.y_outrance = self.y_entrance + val
 
+    def set_material(self, mat):
+        """ Sets the material """
+        self.material = mat
+
     def set_prefix(self, fix):
         """ Tania przestrzen reklamowa """
         self.prefix = str(fix)
@@ -97,7 +108,6 @@ class StraightCapillaryTest(object):
 
     def make_it(self):
         """ Run this everytime any of the parameters are re-set """
-        self.make_source()
         self.make_capillary()
         self.make_screens()
         self.make_run_process()
@@ -126,12 +136,8 @@ class StraightCapillaryTest(object):
                                       z_entrance = self.z_entrance,
                                       y_entrance = self.y_entrance,
                                       y_outrance = self.y_outrance,
-                                      R_in = self.R_in)
-
-    def make_source(self):
-        """ Source photons are loaded here """
-        # Simply load beam object 
-        self.source_beam = ub.load_beam_compressed(self.beamfile)
+                                      R_in = self.R_in,
+                                      material = self.material)
 
     def make_run_process(self):
         """ Overloads xrt method for photon generation """
@@ -142,12 +148,10 @@ class StraightCapillaryTest(object):
             rnga = local_it * self.beam_chunk_size
             rngb = (local_it + 1) * self.beam_chunk_size
 
-            beam = ub.copy_by_index(self.source_beam, range(rnga, rngb))
+            print 'Taking beam from', rnga, 'to', rngb
 
-            # TODO We need an equivalent of original xrt::Beam
-            # shine() method, loading photons from the source
-            # part by part allowing run_process() to work in
-            # it's original design
+            # This acts as xrt::shine()
+            beam = ub.copy_by_index(self.source_beam, range(rnga, rngb))
 
             # Propagate photons through the capillary
             beamTotal, _ =\
@@ -304,10 +308,11 @@ def test_straight():
 def create_straight_capillary(photons):
     """ Creates a beam after tunneling through a straight pipe """
     test = StraightCapillaryTest()
-    test.set_beamfile(photons)
-    test.set_capillary_radius(0.101)
-    test.set_capillary_entrance(0.5, -0.1)
+    test.set_beam(photons)
+    test.set_capillary_radius(2.01)
+    test.set_capillary_entrance(3.0, 0.0)
     test.set_capillary_length(100)
+    test.set_material(mGlass)
     test.set_visible(False)
     test.run_it()
 
