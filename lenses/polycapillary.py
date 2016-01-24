@@ -1,7 +1,8 @@
 import xrt.backends.raycing.oes as roe
+import xrt.backends.raycing as raycing
 import numpy as np
 import matplotlib.pyplot as plt
-
+import bendshapes as bs
 
 class Capillary(roe.OE):
     """ Single light transmitting pipe """
@@ -105,7 +106,7 @@ class Capillary(roe.OE):
 class StraightCapillary(Capillary):
     """ Implements straight capillary parallel to the beam """
     def __init__(self, *args, **kwargs):
-
+        """ Constructor """
         # Init parent capillary class
         Capillary.__init__(self, *args, **kwargs)
 
@@ -143,6 +144,29 @@ class LinearlyTapered(StraightCapillary):
         b = self.R_out - self.outrance_y() * a;
         self.pr = [b, a, 0]
 
+class BentCapillary(Capillary):
+    def __init__(self, *args, **kwargs):
+        """ """
+        # Prepare z direction polynomial of focusing capillary
+        y = kwargs.pop('y')
+        D = kwargs.pop('D')
+        r_in = kwargs.pop('r_in')
+        self.p = bs.capillary_curvature(r_in, y, D)
+
+        # FIXME - this is probably no longer necessary
+        # Save cartesian coordinates of capillary entrance
+        # (used for directed source)
+        phi = - kwargs['roll']
+        self.xx = r_in * np.cos(phi)
+        self.zz = r_in * np.sin(phi)
+
+        # Prepare variable radius
+        r = kwargs.pop('radius')
+        self.pr = bs.radius_curvature(y, r)
+
+        # Init parent capillary class
+        Capillary.__init__(self, *args, **kwargs)
+
 def plot_capillary(capillary):
     """ Rather simplistic single capillary plotter """
 
@@ -169,3 +193,76 @@ def plot_capillary(capillary):
     plt.xlim(0, 1.1 * y1)
     plt.show()
 
+class PolyCapillaryLens(object):
+    def __init__(self, **kwargs):
+        """ Constructor """
+        # Elements' positions in y direction
+        self.y          = kwargs.pop('y_settings')
+        # Lens defining diameters (in, out, max)
+        self.D          = kwargs.pop('D_settings')
+        # Material of capillaries
+        self.material   = kwargs.pop('material', None)
+        # TODO not sure if beamline has any usage
+        self.beamLine = raycing.BeamLine()
+
+    def set_structure(self, structure):
+        """ Structure setter """
+        self.structure = structure
+
+    def capillary_parameters(self, r_in, roll):
+        """ Prepares arguments for shape defining functions """
+        # Default 'positional' parameters
+        args = [self.beamLine, 'bent', [0,0,0]]
+
+        # Named parameters (dict of them)
+        # Position of capillary in polar coordinates
+        kwargs = {'roll' : roll, 'r_in' : r_in}
+
+        # Physical limit in y direction
+        limPhysY = [self.y['y1'], self.y['y2'] ]
+        kwargs.update({'limPhysY' : limPhysY})
+
+        # Radius settings
+        rIn = self.structure.capillary_radius()
+        rOut = rIn * self.D['Dout'] / self.D['Din']
+        rMax = rIn * self.D['Dmax'] / self.D['Din']
+        radius = {'rIn' : rIn, 'rOut' : rOut, 'rMax' : rMax}
+        kwargs.update({'radius' : radius})
+
+        # Parameters needed for capillary shape in z direction
+        kwargs.update({'y' : self.y})
+        kwargs.update({'D' : self.D})
+
+        # Material of capillary
+        kwargs.update({'material' : self.material})
+
+        return args, kwargs
+
+    def get_capillaries(self):
+        """ Create a list of xrt::OE objects """
+        # Prepare containers
+        capillaries = []
+        toPlot = []
+
+        # Generate capillaries with positions given
+        # by the lens structure
+        for r, phi in self.structure.polar_coordinates():
+            roll = phi
+            r_in = r
+
+            # Capillary should care only about r_in and phi variable
+            args, kwargs = self.capillary_parameters(r_in, roll)
+            capillary = BentCapillary(*args, **kwargs)
+            capillaries.append(capillary)
+
+            # Save capillaries shown on z=0 coss-section ? 
+            # Z = 0 is no longer special
+            # and as it is clear neither is phi = pi/3,
+            # so some other idea for crosssection plot
+            # is needed TODO
+            # DEBUG quick polar to cartesian re-transformation
+            x_cap = r * np.cos(phi)
+            if abs(x_cap) < 0.005:
+                toPlot.append(len(capillaries))
+
+        return capillaries

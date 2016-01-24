@@ -1,13 +1,15 @@
 import matplotlib.pyplot as plt
-from elements import source
+from elements import source as es
 from elements import capillary as ec
+from elements import structures as st
+from lenses import polycapillary as lp
 from utils import beam as ub
 
 def create_source():
     """ Generate photons with xrt and save resulting beam """
     # Every source detail is set and tested within it's module
     # so here we can just create the desired object 
-    beamGlobalTotal = source.create_geometric()
+    beamGlobalTotal = es.create_geometric()
 
     # And it only needs to be done once, after that ...
     ub.save_beam_compressed(beamGlobalTotal, 'basic_source.beam')
@@ -21,15 +23,17 @@ def load_source():
 
 if __name__ == '__main__':
     """ python main.py """
-    # Read from file, see above
-    # photons = load_source()
+    # Create 100000 photons
+    beam = es.create_geometric(1e5)
 
-    # raytrayce through a capillary
-    after_capillary = ec.create_straight_capillary('basic_source.beamc')
+    # Lens parameters needed for capillary shape calculations
+    y_settings = {'y0': 0.0, 'y1': 40.0,\
+                  'y2': 140.0, 'yf': 155.0,\
+                  'ym': 88.0}
+    D_settings = {'Din': 4.5, 'Dmax': 8.0, 'Dout': 2.4}
 
-    # For example show first 1000 of photons' positions
-    howmany = 1000
+    lens = lp.PolyCapillaryLens(y_settings=y_settings,\
+                                D_settings=D_settings)
 
-    # Plot
-    plt.scatter(after_capillary.x[:howmany], after_capillary.z[:howmany])
-    plt.show()
+    hexs = st.HexStructure()
+    lens.set_structure(hexs)

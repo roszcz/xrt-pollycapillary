@@ -6,8 +6,8 @@ class HexStructure(object):
     def __init__(self, capillary_diameter = 0.01,\
                 rIn = 0.005,\
                 wall= 0.005,\
-                nx_capillary = 9,\
-                ny_bundle = 7):
+                nx_capillary = 5,\
+                ny_bundle = 3):
         """ Class encapsulating hexagonal structure of capillaries """
         # Outer diameter (touching)
         self.rIn = rIn
@@ -126,8 +126,9 @@ class HexStructure(object):
 
         return war1 and war2 and war3
 
-    def genPolars(self):
-        """ Generator to iterate over the whole structure """
+    def polar_coordinates(self):
+        """ Generator to iterate over the whole structure
+        >>> for r, phi in structure.polar_cooridnates():"""
         for x, y in zip(self.xci, self.yci):
             r = np.sqrt(x**2 + y**2)
             phi = np.arctan2(y,x)
