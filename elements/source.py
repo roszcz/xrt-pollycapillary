@@ -140,10 +140,6 @@ class GeometricSourceTest(object):
     def make_plots(self):
         """ tania przestrzen reklamowa """
 
-        # FIXME lol quick hack
-        self.plots = []
-        return
-
         # Plots' resolution
         bins = 256
 
@@ -202,29 +198,6 @@ class GeometricSourceTest(object):
         # Invisible
         else:
             plot_creation = []
-
-            # This is basically far screen plot without save
-            plot = xrtp.XYCPlot(
-                'TotalScreen', (1, 3,),
-                xaxis=xrtp.XYCAxis(r'$x$', 'mm',
-                                   bins=bins,
-                                   ppb=2,
-                                   limits=None),
-                yaxis=xrtp.XYCAxis(r'$z$', 'mm',
-                                   bins=bins,
-                                   ppb=2,
-                                   limits=None),
-                beamState='TotalScreen',
-                # Colorbar and sidebar histogram
-                caxis=xrtp.XYCAxis('Energy',
-                                   '[eV]',
-                                   data=raycing.get_energy,
-                                   bins=bins,
-                                   ppb=2,
-                                   limits=None)
-                ) # different plot ends here
-            plot.title = 'global total visualization (saved beam)'
-            plot_creation.append(plot)
             self.plots = plot_creation
 
     def make_screens(self):
@@ -252,12 +225,12 @@ class GeometricSourceTest(object):
         # x-direction
         distx       = 'flat'
         dx          = self.x_size
-        distxprime  = 'normal'
+        distxprime  = 'flat'
         dxprime     = self.x_divergence
         # z-direction
         distz       = 'flat'
         dz          = self.z_size
-        distzprime  = 'normal'
+        distzprime  = 'flat'
         dzprime     = self.z_divergence
 
         self.polarization = None
@@ -292,16 +265,16 @@ def test_geometric():
             test.set_prefix(fix)
             test.run_it()
 
-def create_geometric():
+def create_geometric(howmany):
     """ Create photons from a Geometric Source
-        and returns a beam object, use this to create beam files
-        with desired photons """
+    and returns a beam object, use this to create beam files
+    with desired photons """
     source = GeometricSourceTest()
     # Plotting is only useful when testing
     source.set_visible(False)
     source.set_xz_size(0.1, 0.1)
     source.set_xz_divergence(0.1, 0.1)
-    source.set_total_number_of_photons(1e5)
+    source.set_total_number_of_photons(howmany)
     source.run_it()
 
     return source.get_beam()

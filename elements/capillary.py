@@ -20,10 +20,6 @@ from utils import beam as ub
 # show on screen
 # done!
 
-# TODO - for low number of photons they can be easily processed
-# within one xrt::run_process iteration
-_repeats = 1
-
 # Constant materials FIXME - wrap this up
 mGold   = rm.Material('Au', rho=19.3)
 mGlass  = rm.Material(('Si', 'O'), quantities=(1, 2), rho=2.2)
@@ -309,9 +305,9 @@ def create_straight_capillary(photons):
     """ Creates a beam after tunneling through a straight pipe """
     test = StraightCapillaryTest()
     test.set_beam(photons)
-    test.set_capillary_radius(2.01)
-    test.set_capillary_entrance(3.0, 0.0)
-    test.set_capillary_length(100)
+    test.set_capillary_radius(1.0)
+    test.set_capillary_entrance(-1.0, -1.0)
+    test.set_capillary_length(500)
     test.set_material(mGlass)
     test.set_visible(False)
     test.run_it()
