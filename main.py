@@ -23,8 +23,8 @@ def load_source():
 
 if __name__ == '__main__':
     """ python main.py """
-    # Create 100000 photons
-    beam = es.create_geometric(1e5)
+    # Create 10000 photons
+    beam = es.create_geometric(1e4)
 
     # Lens parameters needed for capillary shape calculations
     y_settings = {'y0': 0.0, 'y1': 40.0,\
@@ -34,6 +34,7 @@ if __name__ == '__main__':
 
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
+    lens.set_structure(st.HexStructure())
 
-    hexs = st.HexStructure()
-    lens.set_structure(hexs)
+    # This is it
+    caps = lens.get_capillaries()

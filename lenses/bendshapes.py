@@ -93,7 +93,7 @@ if __name__ == '__main__':
     x = np.linspace(y['y1'],y['y2'],1000)
     yfin = p[0] + p[1]*x + p[2]*x**2 + p[3]*x**3 + p[4]*x**4 + p[5]*x**5
     fig1 = plt.figure(1,figsize=(10,4))
-    ax1 = plt.subplot(111, label='dupa')
+    ax1 = plt.subplot(111, label='capillary')
     ax1.set_xlim([y['y0'],y['yf']])
     ax1.set_ylim([-4, 4])
     ax1.plot(x,yfin,'r-', lw=2)

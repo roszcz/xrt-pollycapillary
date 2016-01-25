@@ -41,25 +41,31 @@ class Capillary(roe.OE):
         self.isParametric = True
 
     def local_x0(self, s):
+        """ Center of the capillary """
         return self.p[0] + self.p[1]*s + self.p[2]*s**2\
                 + self.p[3]*s**3 + self.p[4]*s**4 + self.p[5]*s**5
 
     def local_x0Prime(self, s):
+        """ Derivative of x0 """
         return self.p[1] + 2*self.p[2]*s + 3*self.p[3]*s**2\
                 + 4*self.p[4]*s**3 + 5*self.p[5]*s**4
 
     def local_r0(self, s):
+        """ Radius of the capillary (wall - x0 distance) """
         return self.pr[0] + self.pr[1]*s + self.pr[2]*s**2
 
     def local_r0Prime(self,s):
+        """ Derivative of radius """
         return self.pr[1] + 2*self.pr[2]*s
 
     def local_r(self, s, phi):
+        """ ? """
         # FIXME - i still am not sure what is all of this doing
         den = np.cos(np.arctan(self.local_x0Prime(s)))**2
         return self.local_r0(s) / (np.cos(phi)**2/den + np.sin(phi)**2)
 
     def local_n(self, s, phi):
+        """ normal to the surface """
         a = -np.sin(phi)
         b = -np.sin(phi)*self.local_x0Prime(s) - self.local_r0Prime(s)
         c = -np.cos(phi)
@@ -77,6 +83,7 @@ class Capillary(roe.OE):
         return s, phi, r
 
     def param_to_xyz(self, s, phi, r):
+        """ coordinate transformation """
         x = self.local_x0(s) + r*np.sin(phi)
         y = s
         z = r * np.cos(phi)
@@ -102,6 +109,31 @@ class Capillary(roe.OE):
     def outrance_y(self):
         """ Returns y-distance from the origin to the finish """
         return self.y_outrance
+
+    def plot(self):
+        """ Rather simplistic single capillary plotter """
+        # Get positions
+        y0 = self.entrance_y()
+        y1 = self.outrance_y()
+        y = np.linspace(y0, y1, 200)
+
+        # Capillary curvature
+        x0 = self.local_x0(y)
+        # And radius
+        r0 = self.local_r0(y)
+
+        # Plot curvature
+        plt.plot(y, x0, 'k--', lw = 0.5)
+        # add visibile width
+        plt.plot(y, x0+r0, 'r-', lw = 1)
+        plt.plot(y, x0-r0, 'r-', lw = 1)
+
+        # Y / X confusion is at height here
+        y_min = x0.min() - 1.3 * r0.max()
+        y_max = x0.max() + 1.3 * r0.max()
+        plt.ylim(y_min, y_max)
+        plt.xlim(0, 1.1 * y1)
+        plt.show()
 
 class StraightCapillary(Capillary):
     """ Implements straight capillary parallel to the beam """
@@ -150,6 +182,7 @@ class BentCapillary(Capillary):
         # Prepare z direction polynomial of focusing capillary
         y = kwargs.pop('y')
         D = kwargs.pop('D')
+        # FIXME r_in is poorly named
         r_in = kwargs.pop('r_in')
         self.p = bs.capillary_curvature(r_in, y, D)
 
@@ -157,8 +190,6 @@ class BentCapillary(Capillary):
         # Save cartesian coordinates of capillary entrance
         # (used for directed source)
         phi = - kwargs['roll']
-        self.xx = r_in * np.cos(phi)
-        self.zz = r_in * np.sin(phi)
 
         # Prepare variable radius
         r = kwargs.pop('radius')
@@ -167,31 +198,11 @@ class BentCapillary(Capillary):
         # Init parent capillary class
         Capillary.__init__(self, *args, **kwargs)
 
-def plot_capillary(capillary):
-    """ Rather simplistic single capillary plotter """
-
-    # Get positions
-    y0 = capillary.entrance_y()
-    y1 = capillary.outrance_y()
-    y = np.linspace(y0, y1, 200)
-
-    # Capillary curvature
-    x0 = capillary.local_x0(y)
-    # And radius
-    r0 = capillary.local_r0(y)
-
-    # Plot curvature
-    plt.plot(y, x0, 'k--', lw = 0.5)
-    # add visibile width
-    plt.plot(y, x0+r0, 'r-', lw = 1)
-    plt.plot(y, x0-r0, 'r-', lw = 1)
-
-    # Y / X confusion is at height here
-    y_min = x0.min() - 1.3 * r0.max()
-    y_max = x0.max() + 1.3 * r0.max()
-    plt.ylim(y_min, y_max)
-    plt.xlim(0, 1.1 * y1)
-    plt.show()
+        # Those should've been appended to the kwargs probably TODO
+        self.x_entrance = r_in * np.cos(phi)
+        self.z_entrance = r_in * np.sin(phi)
+        self.y_entrance = y['y1']
+        self.y_outrance = y['y2']
 
 class PolyCapillaryLens(object):
     def __init__(self, **kwargs):

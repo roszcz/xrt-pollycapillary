@@ -139,7 +139,6 @@ class GeometricSourceTest(object):
 
     def make_plots(self):
         """ tania przestrzen reklamowa """
-
         # Plots' resolution
         bins = 256
 
@@ -287,4 +286,3 @@ if __name__ == '__main__':
 
     # test_geometric()
     GlobalTotal = create_geometric()
-

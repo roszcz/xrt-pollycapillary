@@ -138,16 +138,17 @@ class HexStructure(object):
         """ Entrance radius getter """
         return self.rIn
 
-    def test(self):
+    def plot(self, save = False):
         """ Check the structure as separated from the capillaries """
         print 'Number of entrance channels:', len(self.xci)
         plt.plot(self.xci, self.yci,'ko')
         #plt.xlim(-.1,.1)
         #plt.ylim(-.1,.1)
-        plt.savefig('entrance_stucture_pointplot.png')
+        if save:
+            plt.savefig('entrance_stucture_pointplot.png')
         plt.show()
 
 if __name__ == '__main__':
     """ python elements/structures.py """
     hello = HexStructure(nx_capillary=5, ny_bundle=3)
-    hello.test()
+    hello.plot()

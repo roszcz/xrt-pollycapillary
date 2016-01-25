@@ -15,11 +15,6 @@ import xrt.backends.raycing as raycing
 from lenses import polycapillary as pl
 from utils import beam as ub
 
-# Create source
-# Shine on a capillary
-# show on screen
-# done!
-
 # Constant materials FIXME - wrap this up
 mGold   = rm.Material('Au', rho=19.3)
 mGlass  = rm.Material(('Si', 'O'), quantities=(1, 2), rho=2.2)
@@ -28,13 +23,10 @@ class StraightCapillaryTest(object):
     """ Implement shining through a single pipe-like object """
     def __init__(self):
         """ Tania przestrzen reklamowa """
-        self.iterator = 0
         # This is neccessary
         self.beamLine = raycing.BeamLine()
         self.beamTotal = None
 
-        # Beam file with photons to be tested
-        self.beamfile = 'basic_source.beamc'
         # This is supposed to be an atomic iterator
         self.beam_iterator = itertools.count()
         # Process that many photons in one raytraycing_run
@@ -59,14 +51,10 @@ class StraightCapillaryTest(object):
         # Savename prefix (colon helps with vim-folding)
         self.prefix = 'dupa';
 
-    def set_beamfile(self, path):
-        """ Provide path to saved photons """
-        self.beamfile = path
-        self.beam_iterator = itertools.count()
-
     def set_beam(self, photons):
         """ This actually makes the source """
         self.source_beam = photons
+        self.beam_iterator = itertools.count()
 
     def set_far_screen_distance(self, dist):
         """ Away from outrance """
