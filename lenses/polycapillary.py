@@ -106,6 +106,10 @@ class Capillary(roe.OE):
         """ Returns y-distance from the origin to the beginning """
         return self.y_entrance
 
+    def entrance_radius(self):
+        """ return it """
+        return self.R_in
+
     def outrance_y(self):
         """ Returns y-distance from the origin to the finish """
         return self.y_outrance
@@ -153,7 +157,7 @@ class StraightCapillary(Capillary):
 class LinearlyTapered(StraightCapillary):
     """ You have to set the radius coefficients yourself """
     def __init__(self, *args, **kwargs):
-
+        """ Constructor """
         self.R_out = kwargs.pop('R_out', 0.5)
 
         # Init parent capillary class
@@ -162,7 +166,6 @@ class LinearlyTapered(StraightCapillary):
         # As a default set capillary with outrance radius
         # half of the entrance radius
         self.set_rin_rout(self.R_in, self.R_out)
-
 
     def set_rin_rout(self, rin, rout):
         """ Set gradient to the radius """
@@ -192,13 +195,14 @@ class BentCapillary(Capillary):
         phi = - kwargs['roll']
 
         # Prepare variable radius
-        r = kwargs.pop('radius')
-        self.pr = bs.radius_curvature(y, r)
+        r_settings = kwargs.pop('radius')
+        self.pr = bs.radius_curvature(y, r_settings)
 
         # Init parent capillary class
         Capillary.__init__(self, *args, **kwargs)
 
         # Those should've been appended to the kwargs probably TODO
+        self.R_in = r_settings['rIn']
         self.x_entrance = r_in * np.cos(phi)
         self.z_entrance = r_in * np.sin(phi)
         self.y_entrance = y['y1']

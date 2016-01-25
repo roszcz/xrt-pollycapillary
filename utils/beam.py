@@ -3,6 +3,18 @@ import gzip
 import matplotlib.pyplot as plt
 import xrt.backends.raycing.sources as rs
 
+def get_beam_part(beam, hitpoint, radius):
+    """ Copies a square part of beam hitting the point around radius """
+    x, z = hitpoint
+    ids = (beam.x < x + radius) &\
+          (beam.x > x - radius) &\
+          (beam.z < z + radius) &\
+          (beam.z > z - radius)
+    out = copy_by_index(beam, ids)
+
+    return out
+
+
 def move_beam_to(beam, where):
     """ Propagates the beam in vacum to *where* position """
     beam.path += where

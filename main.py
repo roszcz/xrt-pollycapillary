@@ -34,7 +34,8 @@ if __name__ == '__main__':
 
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
-    lens.set_structure(st.HexStructure())
+    structure = st.HexStructure(capillary_diameter = 1.0)
+    lens.set_structure(structure)
 
     # This is it
     caps = lens.get_capillaries()
