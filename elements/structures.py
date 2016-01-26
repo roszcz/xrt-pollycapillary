@@ -3,11 +3,11 @@ import matplotlib.pyplot as plt
 from random import random as rand
 
 class HexStructure(object):
-    def __init__(self, capillary_diameter = 0.01,\
-                rIn = 0.005,\
-                wall= 0.005,\
-                nx_capillary = 5,\
-                ny_bundle = 3):
+    def __init__(self,\
+                 rIn = 0.005,\
+                 wall= 0.005,\
+                 nx_capillary = 5,\
+                 ny_bundle = 3):
         """ Class encapsulating hexagonal structure of capillaries """
         # Outer diameter (touching)
         self.rIn = rIn

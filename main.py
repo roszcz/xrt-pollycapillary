@@ -4,6 +4,7 @@ from elements import capillary as ec
 from elements import structures as st
 from lenses import polycapillary as lp
 from utils import beam as ub
+from examples import basic as eb
 
 def create_source():
     """ Generate photons with xrt and save resulting beam """
@@ -34,8 +35,12 @@ if __name__ == '__main__':
 
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
-    structure = st.HexStructure(capillary_diameter = 1.0)
+    structure = st.HexStructure(rIn= 1.0)
     lens.set_structure(structure)
 
     # This is it
     caps = lens.get_capillaries()
+    ub.move_beam_to(beam, 39.99)
+
+    # FIXME nRefl somehow doesn't work!
+    ceam = eb.test_lens(beam, caps)

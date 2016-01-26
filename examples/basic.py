@@ -1,3 +1,4 @@
+
 # TODO this should be in some kind of settings.py
 _processes = 1
 
@@ -31,6 +32,15 @@ class MultipleCapillariesTest(object):
         # Capillaries might easily be created within this test ???
         self.capillaries = []
 
+        # No plots by default
+        self.plots = []
+
+    def set_beam(self, photons):
+        """ Load previously generated photons """
+        self.source_beam = photons
+        # Reset counter
+        self.beam_iterator = itertools.count()
+
     def set_capillaries(self, caps):
         """ simple """
         self.capillaries = caps
@@ -53,19 +63,50 @@ class MultipleCapillariesTest(object):
             for cap in self.capillaries:
                 # Get a part of beam hitting this capillary
                 hitpoint = [cap.entrance_x(), cap.entrance_z()]
-                beam_part = ub.get_beam_part(hitpoint,\
-                                             beam,\
+                beam_part = ub.get_beam_part(beam,\
+                                             hitpoint,\
                                              cap.entrance_radius())
                 # Multiple reflect
-                beamTotal, _ =\ cap.multiple_reflect(beam_part,\
-                                             maxReflections=50)
+                beamLocal, _ = cap.multiple_reflect(beam_part,\
+                                            maxReflections=50)
 
-            # Hold photons for export
-            if self.beamTotal is None:
-                self.beamTotal = beamTotal
-            else:
-                self.beamTotal.concatenate(beamTotal)
+                print "good: ", (beamLocal.state==1).sum()
+
+                # Hold photons for export
+                if self.beamTotal is None:
+                    self.beamTotal = beamLocal
+                else:
+                    self.beamTotal.concatenate(beamLocal)
 
             # Return a empty dictionary for xrt 
             out =  {}
             return out
+
+        # XRT internals
+        rr.run_process = local_process
+
+    def run_it(self):
+        """ """
+        self.make_run_process()
+
+        # We want to go through the whole beam
+        # Provide shorter beam if You fancy otherwise
+        _repeats = np.ceil(self.source_beam.x.size / self.beam_chunk_size)
+
+        xrtr.run_ray_tracing(self.plots,
+                            repeats=_repeats,\
+                            beamLine=self.beamLine,\
+                            processes=_processes)
+
+    def get_beam(self):
+        """ Results """
+        return self.beamTotal
+
+def test_lens(photons, capillaries):
+    """ Perform ray traycing """
+    test = MultipleCapillariesTest()
+    test.set_beam(photons)
+    test.set_capillaries(capillaries)
+    test.run_it()
+
+    return test.get_beam()
