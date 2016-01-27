@@ -70,7 +70,8 @@ class MultipleCapillariesTest(object):
                 beamLocal, _ = cap.multiple_reflect(beam_part,\
                                             maxReflections=50)
 
-                print "good: ", (beamLocal.state==1).sum()
+                print "good: ", (beamLocal.state==1).sum(),\
+                      "from: ", beam_part.x.size
 
                 # Hold photons for export
                 if self.beamTotal is None:

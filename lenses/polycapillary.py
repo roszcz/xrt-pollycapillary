@@ -234,8 +234,12 @@ class PolyCapillaryLens(object):
         kwargs = {'roll' : roll, 'r_in' : r_in}
 
         # Physical limit in y direction
-        limPhysY = [self.y['y1'], self.y['y2'] ]
-        kwargs.update({'limPhysY' : limPhysY})
+        # limPhysY = [self.y['y1'], self.y['y2'] ]
+        # kwargs.update({'limPhysY' : limPhysY})
+        y_entrance = self.y['y1']
+        y_outrance = self.y['y2']
+        kwargs.update({'y_entrance' : y_entrance})
+        kwargs.update({'y_outrance' : y_outrance})
 
         # Radius settings
         rIn = self.structure.capillary_radius()
