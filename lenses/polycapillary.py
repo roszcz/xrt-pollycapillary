@@ -28,7 +28,6 @@ class Capillary(roe.OE):
         # FIXME some seriuos foobar ove rhere
         self.phi_entrance =\
         np.arctan2(self.x_entrance, self.z_entrance) - np.pi/2
-        print self.x_entrance, self.z_entrance, self.phi_entrance
         self.r_entrance = np.sqrt(self.x_entrance**2 + self.z_entrance**2)
 
         # In xrt phi_entrance is equal to the roll

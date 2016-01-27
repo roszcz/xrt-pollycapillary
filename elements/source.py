@@ -280,9 +280,9 @@ def create_geometric(howmany):
 
 if __name__ == '__main__':
     """ Example IPyton usage:
-        In [1]: %run elements/source.py
-        In [2]: GlobalTotal.x.mean()
-        will give You mean value of x-position """
+    In [1]: %run elements/source.py
+    In [2]: GlobalTotal.x.mean()
+    will give You mean value of x-position """
 
     # test_geometric()
     GlobalTotal = create_geometric()
