@@ -110,4 +110,4 @@ def test_lens(photons, capillaries):
     test.set_capillaries(capillaries)
     test.run_it()
 
-    return test.get_beam()
+    return test

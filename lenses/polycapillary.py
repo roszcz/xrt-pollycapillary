@@ -25,8 +25,10 @@ class Capillary(roe.OE):
 
         # We also need entrance coordinates
         # in the polar perspective
+        # FIXME some seriuos foobar ove rhere
         self.phi_entrance =\
         np.arctan2(self.x_entrance, self.z_entrance) - np.pi/2
+        print self.x_entrance, self.z_entrance, self.phi_entrance
         self.r_entrance = np.sqrt(self.x_entrance**2 + self.z_entrance**2)
 
         # In xrt phi_entrance is equal to the roll
@@ -96,11 +98,6 @@ class Capillary(roe.OE):
     def entrance_z(self):
         """ Basic getter """
         return self.z_entrance
-
-    # OBSOLETE FIXME
-    def entrance_point(self):
-        """ Returns cartesian coordinates of element's position """
-        return self.x_in * np.sin(self.phi), self.x_in * np.cos(self.phi)
 
     def entrance_y(self):
         """ Returns y-distance from the origin to the beginning """
@@ -193,6 +190,10 @@ class BentCapillary(Capillary):
         # Save cartesian coordinates of capillary entrance
         # (used for directed source)
         phi = - kwargs['roll']
+        self.x_entrance = r_in * np.cos(phi)
+        self.z_entrance = r_in * np.sin(phi)
+        kwargs.update({'x_entrance' : self.x_entrance})
+        kwargs.update({'z_entrance' : self.z_entrance})
 
         # Prepare variable radius
         r_settings = kwargs.pop('radius')
@@ -203,12 +204,11 @@ class BentCapillary(Capillary):
 
         # Those should've been appended to the kwargs probably TODO
         self.R_in = r_settings['rIn']
-        self.x_entrance = r_in * np.cos(phi)
-        self.z_entrance = r_in * np.sin(phi)
         self.y_entrance = y['y1']
         self.y_outrance = y['y2']
 
 class PolyCapillaryLens(object):
+    """ Multiple capillaries creator class """
     def __init__(self, **kwargs):
         """ Constructor """
         # Elements' positions in y direction
@@ -234,14 +234,12 @@ class PolyCapillaryLens(object):
         kwargs = {'roll' : roll, 'r_in' : r_in}
 
         # Physical limit in y direction
-        # limPhysY = [self.y['y1'], self.y['y2'] ]
-        # kwargs.update({'limPhysY' : limPhysY})
         y_entrance = self.y['y1']
         y_outrance = self.y['y2']
         kwargs.update({'y_entrance' : y_entrance})
         kwargs.update({'y_outrance' : y_outrance})
 
-        # Radius settings
+        # Capillary radius settings
         rIn = self.structure.capillary_radius()
         rOut = rIn * self.D['Dout'] / self.D['Din']
         rMax = rIn * self.D['Dmax'] / self.D['Din']
@@ -285,3 +283,4 @@ class PolyCapillaryLens(object):
                 toPlot.append(len(capillaries))
 
         return capillaries
+
