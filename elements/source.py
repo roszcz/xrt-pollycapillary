@@ -2,7 +2,7 @@
 mpl.use('Agg') should be uncommented when You want
 to save results without displaying any plots """
 # SETME
-_processes = 1
+_processes = 2
 import matplotlib as mpl
 # mpl.use('Agg')
 
@@ -109,33 +109,33 @@ class GeometricSourceTest(object):
         self.make_run_process()
         self.make_plots()
 
+    def local_process(self, beamLine, shineOnly1stSource=False):
+        """ Set raytraycing paths here """
+        beamSource = beamLine.sources[0].shine()
+
+        # Hold photons for export
+        if self.beamTotal is None:
+            self.beamTotal = beamSource
+        else:
+            self.beamTotal.concatenate(beamSource)
+
+        # Use those screens for testing parameters
+        exitScreen = beamLine.exitScreen.expose(beamSource)
+        farScreen = beamLine.farScreen.expose(beamSource)
+
+        # This screen is shown when creating new beam file
+        totalScreen = beamLine.totalScreen.expose(beamSource)
+
+        # Show beamlines after exposition
+        outDict = {'ExitScreen' : exitScreen}
+        outDict['FarScreen'] = farScreen
+        outDict['TotalScreen'] = totalScreen
+
+        return outDict
+
     def make_run_process(self):
         """ Overloads xrt method for photon generation """
-        def local_process(beamLine, shineOnly1stSource=False):
-            beamSource = beamLine.sources[0].shine()
-
-            # Hold photons for export
-            if self.beamTotal is None:
-                self.beamTotal = beamSource
-            else:
-                self.beamTotal.concatenate(beamSource)
-
-            # Use those screens for testing parameters
-            exitScreen = beamLine.exitScreen.expose(beamSource)
-            farScreen = beamLine.farScreen.expose(beamSource)
-
-            # This screen is shown when creating new beam file
-            totalScreen = beamLine.totalScreen.expose(beamSource)
-
-            # Show beamlines after exposition
-            outDict = {'ExitScreen' : exitScreen}
-            outDict['FarScreen'] = farScreen
-
-            outDict['TotalScreen'] = totalScreen
-
-            return outDict
-
-        rr.run_process = local_process
+        rr.run_process = self.local_process
 
     def make_plots(self):
         """ tania przestrzen reklamowa """
@@ -196,8 +196,7 @@ class GeometricSourceTest(object):
             self.plots = plot_tests
         # Invisible
         else:
-            plot_creation = []
-            self.plots = plot_creation
+            self.plots = []
 
     def make_screens(self):
         """ One screen at the exit and one somewhere far """
@@ -285,4 +284,4 @@ if __name__ == '__main__':
     will give You mean value of x-position """
 
     # test_geometric()
-    GlobalTotal = create_geometric()
+    GlobalTotal = create_geometric(1e4)

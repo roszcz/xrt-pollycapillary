@@ -14,7 +14,6 @@ def get_beam_part(beam, hitpoint, radius):
 
     return out
 
-
 def move_beam_to(beam, where):
     """ Propagates the beam in vacuum to *where* position """
     beam.path += where

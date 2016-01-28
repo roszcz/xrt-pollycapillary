@@ -25,7 +25,7 @@ def load_source():
 if __name__ == '__main__':
     """ python main.py """
     # Create 10000 photons
-    beam = es.create_geometric(1e6)
+    beam = es.create_geometric(1e4)
 
     # Lens parameters needed for capillary shape calculations
     y_settings = {'y0': 0.0, 'y1': 40.0,\
