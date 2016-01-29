@@ -93,7 +93,6 @@ class GeometricSourceTest(object):
 
     def run_it(self):
         """ Runs the whole operation """
-
         self.make_it()
 
         # 
@@ -109,33 +108,33 @@ class GeometricSourceTest(object):
         self.make_run_process()
         self.make_plots()
 
-    def local_process(self, beamLine, shineOnly1stSource=False):
-        """ Set raytraycing paths here """
-        beamSource = beamLine.sources[0].shine()
-
-        # Hold photons for export
-        if self.beamTotal is None:
-            self.beamTotal = beamSource
-        else:
-            self.beamTotal.concatenate(beamSource)
-
-        # Use those screens for testing parameters
-        exitScreen = beamLine.exitScreen.expose(beamSource)
-        farScreen = beamLine.farScreen.expose(beamSource)
-
-        # This screen is shown when creating new beam file
-        totalScreen = beamLine.totalScreen.expose(beamSource)
-
-        # Show beamlines after exposition
-        outDict = {'ExitScreen' : exitScreen}
-        outDict['FarScreen'] = farScreen
-        outDict['TotalScreen'] = totalScreen
-
-        return outDict
-
     def make_run_process(self):
         """ Overloads xrt method for photon generation """
-        rr.run_process = self.local_process
+        def local_process(self, beamLine, shineOnly1stSource=False):
+            """ Set raytraycing paths here """
+            beamSource = beamLine.sources[0].shine()
+
+            # Hold photons for export
+            if self.beamTotal is None:
+                self.beamTotal = beamSource
+            else:
+                self.beamTotal.concatenate(beamSource)
+
+            # Use those screens for testing parameters
+            exitScreen = beamLine.exitScreen.expose(beamSource)
+            farScreen = beamLine.farScreen.expose(beamSource)
+
+            # This screen is shown when creating new beam file
+            totalScreen = beamLine.totalScreen.expose(beamSource)
+
+            # Show beamlines after exposition
+            outDict = {'ExitScreen' : exitScreen}
+            outDict['FarScreen'] = farScreen
+            outDict['TotalScreen'] = totalScreen
+
+            return outDict
+
+        rr.run_process = local_process
 
     def make_plots(self):
         """ tania przestrzen reklamowa """
