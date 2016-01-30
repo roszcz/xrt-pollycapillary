@@ -2,7 +2,7 @@
 mpl.use('Agg') should be uncommented when You want
 to save results without displaying any plots """
 # SETME
-_processes = 2
+_processes = 1
 import matplotlib as mpl
 # mpl.use('Agg')
 
@@ -110,7 +110,7 @@ class GeometricSourceTest(object):
 
     def make_run_process(self):
         """ Overloads xrt method for photon generation """
-        def local_process(self, beamLine, shineOnly1stSource=False):
+        def local_process(beamLine, shineOnly1stSource=False):
             """ Set raytraycing paths here """
             beamSource = beamLine.sources[0].shine()
 
