@@ -6,6 +6,7 @@ import xrt.backends.raycing.run as rr
 import xrt.backends.raycing as raycing
 
 class BeamPlotter(object):
+    """ Simple class for showing the beam with the xrt style plot """
     def __init__(self, beam, pos):
         """ Init """
         self.beam = beam
@@ -17,6 +18,7 @@ class BeamPlotter(object):
                                           (0, pos, 0))
         self.make_run_process()
         self.make_plot()
+        self.run_it()
 
     def make_run_process(self):
         """ ___ """

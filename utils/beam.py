@@ -38,6 +38,10 @@ def show_beam(beam):
     plt.scatter(xx, zz)
     plt.show()
 
+def plot_beam(beam, pos):
+    """ Prepares xrt-style histogram generated on Screen at *pos* """
+    pass
+
 def copy_by_index(beam, indarr):
     """ Copies a part of beam """
     outbeam = rs.Beam()
@@ -82,7 +86,7 @@ def save_beam(beam, filename = 'global_total.beam'):
     pickle.dump(beam, file)
     file.close()
 
-def save_beam_compressed(beam, filename = 'global_total.beam'):
+def save_beam_compressed(beam, filename = 'global_total.beamc'):
     """ Add letter c at the end of filename to indicate compression """
     file = gzip.open(filename, 'wb')
     pickle.dump(beam, file)

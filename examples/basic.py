@@ -1,6 +1,6 @@
 
 # TODO this should be in some kind of settings.py
-_processes = 2
+_processes = 1
 
 import numpy as np
 import itertools
