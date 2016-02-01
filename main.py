@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from elements import capillary as ec
 from elements import structures as st
 from lenses import polycapillary as lp
+from utils import plotter as up
 from utils import beam as ub
 from examples import basic as eb
 from examples import source as es
@@ -24,9 +25,6 @@ if __name__ == '__main__':
     # Create 10000 photons
     # beam = es.create_geometric(1e4)
 
-    # Or something from the harddrive
-    beam = load_source()
-
     # Lens parameters needed for capillary shape calculations
     y_settings = {'y0': 0.0, 'y1': 40.0,\
                   'y2': 140.0, 'yf': 155.0,\
@@ -43,13 +41,22 @@ if __name__ == '__main__':
 
     # ... and use it to generate capillaries
     caps = lens.get_capillaries()
-    ub.move_beam_to(beam, 39.99)
 
-    # FIXME nRefl somehow doesn't work!
-    test = eb.test_lens(beam, caps)
+    # Investigate bugs on just a few
+    daps = caps[1:3]
+
+    # Preparation
+    test = eb.MultipleCapillariesFittedSource()
+    test.set_capillaries(daps)
+    test.run_it()
     ceam = test.get_beam()
 
-    # Show the beam right after the capillaries
+    # Remove dead photons
     ceam.filter_good()
-    ub.show_beam(ceam)
 
+    # Show results
+    # ub.show_beam(ceam)
+    bp = up.BeamPlotter(ceam)
+    bp.show(140)
+    bp.show(141)
+    bp.show(155)

@@ -73,19 +73,19 @@ class FitGeometricSource(rs.GeometricSource):
 def test_it():
     """ Check if compiles """
     # Source parameters
-    nrays       = 1000
+    nrays       = 10000
     distE       = 'normal'
     energies    = (9000, 100)
     # x-direction
     distx       = 'flat'
     dx          = 1
     distxprime  = 'flat'
-    dxprime     = 1
+    dxprime     = 0.1
     # z-direction
     distz       = 'flat'
     dz          = 1
     distzprime  = 'flat'
-    dzprime     = 1
+    dzprime     = 0.1
 
     beamLine = raycing.BeamLine()
     src = FitGeometricSource(
@@ -95,4 +95,7 @@ def test_it():
             distE=distE, energies=energies,
             polarization=None)
 
-    return src
+    yo = src.shine((1, 40, -1))
+    yo.concatenate(src.shine((-1, 40, 1)))
+
+    return yo

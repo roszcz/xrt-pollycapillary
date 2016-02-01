@@ -7,18 +7,12 @@ import xrt.backends.raycing as raycing
 
 class BeamPlotter(object):
     """ Simple class for showing the beam with the xrt style plot """
-    def __init__(self, beam, pos):
+    def __init__(self, beam):
         """ Init """
         self.beam = beam
-        self.position = pos
+        self.position = 1000
         self.plots = []
         self.beamLine = raycing.BeamLine()
-        self.beamLine.screen = rsc.Screen(self.beamLine,
-                                          'TheScreen',
-                                          (0, pos, 0))
-        self.make_run_process()
-        self.make_plot()
-        self.run_it()
 
     def make_run_process(self):
         """ ___ """
@@ -31,8 +25,19 @@ class BeamPlotter(object):
 
         rr.run_process = local_process
 
+    def show(self, position):
+        """ Shows beam in xrt style at the y = position """
+        self.position = position
+        self.beamLine.screen = rsc.Screen(self.beamLine,
+                                          'TheScreen',
+                                          (0, self.position, 0))
+        self.make_run_process()
+        self.make_plot()
+        self.run_it()
+
     def make_plot(self):
         """ Prepare the only plot """
+        self.plots = []
         bins = 256
         plot = xrtp.XYCPlot(
             # Using named parameters might be good here TODO

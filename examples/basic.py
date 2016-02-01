@@ -1,4 +1,3 @@
-
 # TODO this should be in some kind of settings.py
 _processes = 1
 
@@ -12,10 +11,11 @@ import xrt.backends.raycing.run as rr
 import xrt.backends.raycing.materials as rm
 import xrt.backends.raycing as raycing
 
+from elements import sources as es
 from utils import beam as ub
 
 class MultipleCapillariesTest(object):
-    """ Push photons through a set of capillaries """
+    """ Use photons loaded from the hard drive """
     def __init__(self):
         """ ,.-`''`-., """
         # Obligatory beamline to use xrt functionality
@@ -98,6 +98,116 @@ class MultipleCapillariesTest(object):
 
     def get_beam(self):
         """ Results """
+        return self.beamTotal
+
+class MultipleCapillariesFittedSource(object):
+    """ Generate photons on the run """
+    def __init__(self):
+        """ Constructor """
+        # Obligatory beamline to use xrt functionality
+        self.beamLine = raycing.BeamLine()
+
+        self.capillaries = []
+
+        self.plots = []
+
+        # Photon container
+        self.beamTotal = None
+
+        # TODO We might want setters for all of these
+        # Source dimensions
+        self.x_size = 1
+        self.z_size = 1
+
+        # Source divergence
+        self.x_divergence = 0.1
+        self.z_divergence = 0.1
+
+        # Source energy parameters
+        self.distE = 'normal'
+        self.energies = (9000, 100)
+
+        # Number of photons in one iteration of one thread
+        self.nrays = 500
+
+    def set_capillaries(self, caps):
+        """ do it """
+        self.capillaries = caps
+        radius = caps[0].entrance_radius()
+        self.x_size = self.z_size = radius/2.0
+
+    def make_source(self):
+        """ Prepare source parameter """
+
+        # Source parameters
+        nrays       = self.nrays
+        distE       = self.distE
+        energies    = self.energies
+        # x-direction
+        distx       = 'flat'
+        dx          = self.x_size
+        distxprime  = 'flat'
+        dxprime     = self.x_divergence
+        # z-direction
+        distz       = 'flat'
+        dz          = self.z_size
+        distzprime  = 'flat'
+        dzprime     = self.z_divergence
+
+        self.polarization = None
+
+        self.source = es.FitGeometricSource(\
+            self.beamLine,'Fitted',(0,39.99,0), nrays=nrays,
+            distx=distx, dx=dx, distxprime=distxprime, dxprime=dxprime,
+            distz=distz, dz=dz, distzprime=distzprime, dzprime=dzprime,
+            distE=distE, energies=energies,
+            polarization=self.polarization)
+
+    def make_run_process(self):
+        """ """
+        def local_process(beamLine, shineOnly1stSource=False):
+            # Iterate over the capillaries
+            # and shine() into each of them
+            for cap in self.capillaries:
+                # FIXME no hardcoded position please
+                hitpoint = [cap.entrance_x(), 40, cap.entrance_z()]
+                print "it's me: ", hitpoint
+                beam = self.source.shine(hitpoint)
+                print "generated photons ", beam.y.mean()
+
+                # Push through
+                beamLocal, _ = cap.multiple_reflect(beam,\
+                                        maxReflections=50)
+                print "pushed through: ", (beamLocal.state==1).sum()
+
+                # Hold photons for export
+                if self.beamTotal is None:
+                    self.beamTotal = beamLocal
+                else:
+                    self.beamTotal.concatenate(beamLocal)
+
+            out = {}
+            return out
+
+        # XRT internals
+        rr.run_process = local_process
+
+    def run_it(self):
+        """ do it """
+        self.make_source()
+        self.make_run_process()
+        self.beamTotal = None
+
+        # TODO get rid of this
+        _repeats = 10
+
+        xrtr.run_ray_tracing(self.plots,
+                            repeats=_repeats,\
+                            beamLine=self.beamLine,\
+                            processes=_processes)
+
+    def get_beam(self):
+        """ get it """
         return self.beamTotal
 
 def test_lens(photons, capillaries):
