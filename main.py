@@ -25,13 +25,12 @@ def create_lens():
     # This is used to control capillaries' curvature
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
-    structure = st.HexStructure(rIn = 0.05,\
-                                nx_capillary = 13,\
-                                ny_bundle = 13)
+    structure = st.HexStructure(rIn = 0.11,\
+                                nx_capillary = 5,\
+                                ny_bundle = 5)
     lens.set_structure(structure)
 
     return lens
-
 
 if __name__ == '__main__':
     """ python main.py """
@@ -43,7 +42,7 @@ if __name__ == '__main__':
     caps = lens.get_capillaries()
 
     # Investigate bugs on just a few capillaries
-    daps = caps[0:5]
+    daps = caps
 
     # Preparation
     setup = eb.MultipleCapillariesFittedSource()

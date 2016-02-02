@@ -107,21 +107,22 @@ class MultipleCapillariesFittedSource(object):
         # Obligatory beamline to use xrt functionality
         self.beamLine = raycing.BeamLine()
 
+        # Set of OE objects capable of multiple_reflections
         self.capillaries = []
 
+        # Container for xrt::plots
         self.plots = []
 
         # Photon container
         self.beamTotal = None
 
-        # TODO We might want setters for all of these
         # Source dimensions
         self.x_size = 1
         self.z_size = 1
 
         # Source divergence
-        self.x_divergence = 0.1
-        self.z_divergence = 0.1
+        self.x_divergence = 0.05
+        self.z_divergence = 0.05
 
         # Source energy parameters
         self.distE = 'normal'
@@ -157,7 +158,8 @@ class MultipleCapillariesFittedSource(object):
         self.polarization = None
 
         self.source = es.FitGeometricSource(\
-            self.beamLine,'Fitted',(0,39.9,0), nrays=nrays,
+            # FIXME something wrong with y-distributions
+            self.beamLine,'Fitted',(0,39.99,0), nrays=nrays,
             distx=distx, dx=dx, distxprime=distxprime, dxprime=dxprime,
             distz=distz, dz=dz, distzprime=distzprime, dzprime=dzprime,
             distE=distE, energies=energies,
@@ -169,13 +171,17 @@ class MultipleCapillariesFittedSource(object):
             # Iterate over the capillaries
             # and shine() into each of them
             for cap in self.capillaries:
-                # FIXME no hardcoded position please
-                hitpoint = [cap.entrance_x(), 40, cap.entrance_z()]
-                beam = self.source.shine(hitpoint)
+                hitpoint = [cap.entrance_x(),
+                            cap.entrance_y(),
+                            cap.entrance_z()]
+
+                light = self.source.shine(hitpoint)
 
                 # Push through
-                beamLocal, _ = cap.multiple_reflect(beam,\
-                                        maxReflections=50)
+                beamLocal, _ = cap.multiple_reflect(light,\
+                                        maxReflections=550)
+
+                # TODO filter_good() here might be worth trying
 
                 # Hold photons for export
                 if self.beamTotal is None:
@@ -196,7 +202,7 @@ class MultipleCapillariesFittedSource(object):
         self.beamTotal = None
 
         # TODO get rid of this
-        _repeats = 10
+        _repeats = 2
 
         xrtr.run_ray_tracing(self.plots,
                             repeats=_repeats,\

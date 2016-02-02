@@ -12,6 +12,7 @@ class BeamPlotter(object):
         self.beam = beam
         self.position = 1000
         self.x_limit = self.z_limit = None
+        self.save_name = None
 
     def make_run_process(self):
         """ ___ """
@@ -42,6 +43,10 @@ class BeamPlotter(object):
         self.x_limit = xl
         self.z_limit = zl
 
+    def set_save_name(self, name):
+        """ Set to save on disk """
+        self.save_name = name
+
     def make_plot(self):
         """ Prepare the only plot """
         self.plots = []
@@ -69,7 +74,8 @@ class BeamPlotter(object):
                                ppb=2,
                                limits=None)
             ) # plot ends here
-        plot.title = "Plot"
+        plot.title = "Screen at: {}".format(self.position)
+        plot.saveName = self.save_name
 
         self.plots.append(plot)
 
