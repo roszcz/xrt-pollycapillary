@@ -128,7 +128,7 @@ class MultipleCapillariesFittedSource(object):
         self.energies = (9000, 100)
 
         # Number of photons in one iteration of one thread
-        self.nrays = 500
+        self.nrays = 100
 
     def set_capillaries(self, caps):
         """ do it """
@@ -157,7 +157,7 @@ class MultipleCapillariesFittedSource(object):
         self.polarization = None
 
         self.source = es.FitGeometricSource(\
-            self.beamLine,'Fitted',(0,39.99,0), nrays=nrays,
+            self.beamLine,'Fitted',(0,39.9,0), nrays=nrays,
             distx=distx, dx=dx, distxprime=distxprime, dxprime=dxprime,
             distz=distz, dz=dz, distzprime=distzprime, dzprime=dzprime,
             distE=distE, energies=energies,
@@ -171,14 +171,11 @@ class MultipleCapillariesFittedSource(object):
             for cap in self.capillaries:
                 # FIXME no hardcoded position please
                 hitpoint = [cap.entrance_x(), 40, cap.entrance_z()]
-                print "it's me: ", hitpoint
                 beam = self.source.shine(hitpoint)
-                print "generated photons ", beam.y.mean()
 
                 # Push through
                 beamLocal, _ = cap.multiple_reflect(beam,\
                                         maxReflections=50)
-                print "pushed through: ", (beamLocal.state==1).sum()
 
                 # Hold photons for export
                 if self.beamTotal is None:
@@ -205,6 +202,10 @@ class MultipleCapillariesFittedSource(object):
                             repeats=_repeats,\
                             beamLine=self.beamLine,\
                             processes=_processes)
+
+    def get_source(self):
+        """ it's free """
+        return self.source
 
     def get_beam(self):
         """ get it """

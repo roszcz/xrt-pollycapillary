@@ -14,49 +14,56 @@ def create_source():
     beamGlobalTotal = es.create_geometric(1e5)
     ub.save_beam_compressed(beamGlobalTotal, 'basic_source.beamc')
 
-def load_source():
-    """ Load beam from file saved with the above function """
-    loaded_beam = ub.load_beam_compressed('flat_1e5.beamc')
-
-    return loaded_beam
-
-if __name__ == '__main__':
-    """ python main.py """
-    # Create 10000 photons
-    # beam = es.create_geometric(1e4)
-
+def create_lens():
+    """ Wrapped lens creation """
     # Lens parameters needed for capillary shape calculations
     y_settings = {'y0': 0.0, 'y1': 40.0,\
                   'y2': 140.0, 'yf': 155.0,\
                   'ym': 88.0}
     D_settings = {'Din': 4.5, 'Dmax': 8.0, 'Dout': 2.4}
 
-    # Prepare lens object ...
+    # This is used to control capillaries' curvature
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
-    structure = st.HexStructure(rIn = 1,\
-                                nx_capillary = 3,\
-                                ny_bundle = 1)
+    structure = st.HexStructure(rIn = 0.05,\
+                                nx_capillary = 13,\
+                                ny_bundle = 13)
     lens.set_structure(structure)
 
-    # ... and use it to generate capillaries
+    return lens
+
+
+if __name__ == '__main__':
+    """ python main.py """
+    # Create 10000 photons
+    # beam = es.create_geometric(1e4)
+
+    # Set stuff above
+    lens = create_lens()
     caps = lens.get_capillaries()
 
-    # Investigate bugs on just a few
-    daps = caps[1:3]
+    # Investigate bugs on just a few capillaries
+    daps = caps[0:5]
 
     # Preparation
-    test = eb.MultipleCapillariesFittedSource()
-    test.set_capillaries(daps)
-    test.run_it()
-    ceam = test.get_beam()
+    setup = eb.MultipleCapillariesFittedSource()
+    setup.set_capillaries(daps)
+    setup.run_it()
+
+    # You can use this in IPython with single capillaries
+    source = setup.get_source()
 
     # Remove dead photons
+    ceam = setup.get_beam()
     ceam.filter_good()
+
+    # Save for research
+    ub.save_beam_compressed(ceam, 'far_capillaries.beamc')
 
     # Show results
     # ub.show_beam(ceam)
     bp = up.BeamPlotter(ceam)
+    # bp.set_limits([-4,4])
     bp.show(140)
     bp.show(141)
     bp.show(155)

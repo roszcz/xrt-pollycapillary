@@ -11,8 +11,7 @@ class BeamPlotter(object):
         """ Init """
         self.beam = beam
         self.position = 1000
-        self.plots = []
-        self.beamLine = raycing.BeamLine()
+        self.x_limit = self.z_limit = None
 
     def make_run_process(self):
         """ ___ """
@@ -28,12 +27,20 @@ class BeamPlotter(object):
     def show(self, position):
         """ Shows beam in xrt style at the y = position """
         self.position = position
+        self.beamLine = raycing.BeamLine()
         self.beamLine.screen = rsc.Screen(self.beamLine,
                                           'TheScreen',
                                           (0, self.position, 0))
         self.make_run_process()
         self.make_plot()
         self.run_it()
+
+    def set_limits(self, xl, zl = None):
+        """ If one value is provided it's used for both directions """
+        if zl is None:
+            zl = xl
+        self.x_limit = xl
+        self.z_limit = zl
 
     def make_plot(self):
         """ Prepare the only plot """
@@ -47,16 +54,17 @@ class BeamPlotter(object):
             xaxis=xrtp.XYCAxis(r'$x$', 'mm',
                                bins=bins,
                                ppb=2,
-                               limits=None),
-            # As is this
+                               limits=self.x_limit),
+            # Actually it is z-axis!
             yaxis=xrtp.XYCAxis(r'$z$', 'mm',
                                bins=bins,
                                ppb=2,
-                               limits=None),
+                               limits=self.z_limit),
             # Colorbar and sidebar histogram
-            caxis=xrtp.XYCAxis('Energy',
-                               '[eV]',
-                               data=raycing.get_energy,
+            caxis=xrtp.XYCAxis('Reflections',
+                               'number',
+                               # TODO wrap this into a settable member!
+                               data=raycing.get_reflection_number,
                                bins=bins,
                                ppb=2,
                                limits=None)
