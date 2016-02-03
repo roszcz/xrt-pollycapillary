@@ -25,8 +25,8 @@ def create_lens():
     # This is used to control capillaries' curvature
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
-    structure = st.HexStructure(rIn = 0.11,\
-                                nx_capillary = 5,\
+    structure = st.HexStructure(rIn = 0.01,\
+                                nx_capillary = 7,\
                                 ny_bundle = 5)
     lens.set_structure(structure)
 

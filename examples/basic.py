@@ -121,19 +121,20 @@ class MultipleCapillariesFittedSource(object):
         self.z_size = 1
 
         # Source divergence
-        self.x_divergence = 0.05
-        self.z_divergence = 0.05
+        self.x_divergence = 0.01
+        self.z_divergence = 0.01
 
         # Source energy parameters
         self.distE = 'normal'
         self.energies = (9000, 100)
 
         # Number of photons in one iteration of one thread
-        self.nrays = 100
+        self.nrays = 10
 
     def set_capillaries(self, caps):
         """ do it """
         self.capillaries = caps
+        print 'Number of capillaries: ', len(caps)
         radius = caps[0].entrance_radius()
         self.x_size = self.z_size = radius/2.0
 
