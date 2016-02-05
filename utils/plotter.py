@@ -12,6 +12,8 @@ class BeamPlotter(object):
         self.beam = beam
         self.position = 1000
         self.x_limit = self.z_limit = None
+        # This default makes sense for number of reflections
+        self.c_limit = [0, 50]
         self.save_name = None
 
     def make_run_process(self):
@@ -43,6 +45,10 @@ class BeamPlotter(object):
         self.x_limit = xl
         self.z_limit = zl
 
+    def set_climit(self, cl):
+        """ limits for the special axes, e.g. number of reflections """
+        self.c_limit = cl
+
     def set_save_name(self, name):
         """ Set to save on disk """
         self.save_name = name
@@ -72,7 +78,7 @@ class BeamPlotter(object):
                                data=raycing.get_reflection_number,
                                bins=bins,
                                ppb=2,
-                               limits=None)
+                               limits=self.c_limit)
             ) # plot ends here
         plot.title = "Screen at: {}".format(self.position)
         plot.saveName = self.save_name

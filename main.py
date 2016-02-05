@@ -26,8 +26,8 @@ def create_lens():
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
     structure = st.HexStructure(rIn = 0.05,\
-                                nx_capillary = 5,\
-                                ny_bundle = 3)
+                                nx_capillary = 15,\
+                                ny_bundle = 15)
     lens.set_structure(structure)
 
     return lens
@@ -47,7 +47,7 @@ if __name__ == '__main__':
     # Preparation
     setup = eb.MultipleCapillariesFittedSource()
     setup.set_capillaries(daps)
-    # Number of photos per run per capillary
+    # Number of photons per run per capillary
     setup.set_nrays(100)
     # Number of runs
     setup.set_repeats(16)

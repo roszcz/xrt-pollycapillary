@@ -110,7 +110,7 @@ class Capillary(roe.OE):
         """ Returns y-distance from the origin to the finish """
         return self.y_outrance
 
-    def plot(self):
+    def plot(self, show = True):
         """ Rather simplistic single capillary plotter """
         # Get positions
         y0 = self.entrance_y()
@@ -128,12 +128,14 @@ class Capillary(roe.OE):
         plt.plot(y, x0+r0, 'r-', lw = 1)
         plt.plot(y, x0-r0, 'r-', lw = 1)
 
-        # Y / X confusion is at height here
-        y_min = x0.min() - 1.3 * r0.max()
-        y_max = x0.max() + 1.3 * r0.max()
-        plt.ylim(y_min, y_max)
-        plt.xlim(0, 1.1 * y1)
-        plt.show()
+        # Set show to False when plotting mltiple capillaries
+        if show:
+            # Y / X confusion is at height here
+            y_min = x0.min() - 1.3 * r0.max()
+            y_max = x0.max() + 1.3 * r0.max()
+            plt.ylim(y_min, y_max)
+            plt.xlim(0, 1.1 * y1)
+            plt.show()
 
 class StraightCapillary(Capillary):
     """ Implements straight capillary parallel to the beam """
@@ -222,6 +224,7 @@ class PolyCapillaryLens(object):
     def set_structure(self, structure):
         """ Structure setter """
         self.structure = structure
+        self.make_capillaries()
 
     def capillary_parameters(self, r_in, roll):
         """ Prepares arguments for shape defining functions """
@@ -254,11 +257,10 @@ class PolyCapillaryLens(object):
 
         return args, kwargs
 
-    def get_capillaries(self):
-        """ Create a list of xrt::OE objects """
+    def make_capillaries(self):
+        """ Creates a list of OE objects """
         # Prepare containers
-        capillaries = []
-        toPlot = []
+        self.capillaries = []
 
         # Generate capillaries with positions given
         # by the lens structure
@@ -269,17 +271,23 @@ class PolyCapillaryLens(object):
             # Capillary should care only about r_in and phi variable
             args, kwargs = self.capillary_parameters(r_in, roll)
             capillary = BentCapillary(*args, **kwargs)
-            capillaries.append(capillary)
+            self.capillaries.append(capillary)
 
-            # Save capillaries shown on z=0 coss-section ? 
-            # Z = 0 is no longer special
-            # and as it is clear neither is phi = pi/3,
-            # so some other idea for crosssection plot
-            # is needed TODO
-            # DEBUG quick polar to cartesian re-transformation
-            x_cap = r * np.cos(phi)
-            if abs(x_cap) < 0.005:
-                toPlot.append(len(capillaries))
+    def get_capillaries(self):
+        """ get them """
+        return self.capillaries
 
-        return capillaries
+    def plot(self):
+        """ Visualize some of the capillaries """
+        # Select capillaries on the x = 0 line
+        caps = []
+        EPSILON = 0.0009
+        for cap in self.capillaries:
+            if abs(cap.entrance_x()) < EPSILON:
+                caps.append(cap)
 
+        # Plot them onto one pyplot figure
+        for cap in caps:
+            cap.plot(show=False)
+        plt.show()
+        pass
