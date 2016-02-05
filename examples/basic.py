@@ -1,5 +1,6 @@
 # TODO this should be in some kind of settings.py
 _processes = 1
+_threads = 4
 
 import numpy as np
 import itertools
@@ -129,7 +130,10 @@ class MultipleCapillariesFittedSource(object):
         self.energies = (9000, 100)
 
         # Number of photons in one iteration of one thread
-        self.nrays = 10
+        self.nrays = 100
+
+        # Number of iterations
+        self.repeats = 4
 
     def set_capillaries(self, caps):
         """ do it """
@@ -137,6 +141,14 @@ class MultipleCapillariesFittedSource(object):
         print 'Number of capillaries: ', len(caps)
         radius = caps[0].entrance_radius()
         self.x_size = self.z_size = radius/2.0
+
+    def set_nrays(self, rays):
+        """ rays per shot into the capillary """
+        self.nrays = rays
+
+    def set_repeats(self, peats):
+        """ adjust with the number of cores available """
+        self.repeats = peats
 
     def make_source(self):
         """ Prepare source parameter """
@@ -203,12 +215,13 @@ class MultipleCapillariesFittedSource(object):
         self.beamTotal = None
 
         # TODO get rid of this
-        _repeats = 2
+        _repeats = self.repeats
 
         xrtr.run_ray_tracing(self.plots,
                             repeats=_repeats,\
                             beamLine=self.beamLine,\
-                            processes=_processes)
+                            processes=_processes,\
+                            threads=_threads)
 
     def get_source(self):
         """ it's free """

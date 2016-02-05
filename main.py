@@ -25,9 +25,9 @@ def create_lens():
     # This is used to control capillaries' curvature
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
-    structure = st.HexStructure(rIn = 0.01,\
-                                nx_capillary = 7,\
-                                ny_bundle = 5)
+    structure = st.HexStructure(rIn = 0.05,\
+                                nx_capillary = 5,\
+                                ny_bundle = 3)
     lens.set_structure(structure)
 
     return lens
@@ -47,6 +47,11 @@ if __name__ == '__main__':
     # Preparation
     setup = eb.MultipleCapillariesFittedSource()
     setup.set_capillaries(daps)
+    # Number of photos per run per capillary
+    setup.set_nrays(100)
+    # Number of runs
+    setup.set_repeats(16)
+
     setup.run_it()
 
     # You can use this in IPython with single capillaries
