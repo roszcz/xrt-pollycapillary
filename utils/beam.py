@@ -1,5 +1,6 @@
 import pickle
 import gzip
+import pandas as pd
 import matplotlib.pyplot as plt
 import xrt.backends.raycing.sources as rs
 
@@ -20,6 +21,28 @@ def move_beam_to(beam, where):
     beam.y    += where
     beam.x[:] += beam.a * beam.path
     beam.z[:] += beam.c * beam.path
+
+def make_dataframe(beam):
+    """ Conver beam to a pd.DataFrame object """
+    # Create a dictionary with {column : series}
+    data = {'x' : pd.Series(beam.x),
+            'y' : pd.Series(beam.y),
+            'z' : pd.Series(beam.z),
+            'a' : pd.Series(beam.a),
+            'b' : pd.Series(beam.b),
+            'c' : pd.Series(beam.c),
+            'path' : pd.Series(beam.path),
+            'E' : pd.Series(beam.E),
+            'Jss' : pd.Series(beam.Jss),
+            'Jpp' : pd.Series(beam.Jpp),
+            'Jsp' : pd.Series(beam.Jsp)
+            }
+    # Update with columns that nod necessary exiest in a beam
+    if hasattr(beam, 'nRefl'):
+        data.update({'nRefl' : beam.nRefl})
+
+    frame = pd.DataFrame(data)
+    return frame
 
 def show_beam_part(beam, idarr):
     """ Shows photons within an array of ids """

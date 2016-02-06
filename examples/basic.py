@@ -1,6 +1,6 @@
 # TODO this should be in some kind of settings.py
 _processes = 1
-_threads = 8
+_threads = 4
 
 import numpy as np
 import itertools
@@ -183,14 +183,10 @@ class MultipleCapillariesFittedSource(object):
         def local_process(beamLine, shineOnly1stSource=False):
             # Iterate over the capillaries
             # and shine() into each of them
-	    yo = 0
             for cap in self.capillaries:
                 hitpoint = [cap.entrance_x(),
                             cap.entrance_y(),
                             cap.entrance_z()]
-
-		print yo
-		yo += 1
 
                 light = self.source.shine(hitpoint)
 

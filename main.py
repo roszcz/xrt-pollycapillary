@@ -25,9 +25,9 @@ def create_lens():
     # This is used to control capillaries' curvature
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
-    structure = st.HexStructure(rIn = 0.02,\
-                                nx_capillary = 9,\
-                                ny_bundle = 7)
+    structure = st.HexStructure(rIn = 0.2,\
+                                nx_capillary = 1,\
+                                ny_bundle = 3)
     lens.set_structure(structure)
 
     return lens
@@ -50,7 +50,7 @@ if __name__ == '__main__':
     # Number of photons per run per capillary
     setup.set_nrays(100)
     # Number of runs
-    setup.set_repeats(8)
+    setup.set_repeats(2)
 
     setup.run_it()
 
