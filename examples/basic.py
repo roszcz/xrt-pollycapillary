@@ -110,6 +110,13 @@ class MultipleCapillariesFittedSource(object):
         # Obligatory beamline to use xrt functionality
         self.beamLine = raycing.BeamLine()
 
+        # Self-referencing via the beamline allows
+        # the usage of class specific methods within the run_process
+        self.beamLine.self = self
+
+        # TODO Make this adjustable
+        self.savefolder = 'data'
+
         # Set of OE objects capable of multiple_reflections
         self.capillaries = []
 
@@ -210,6 +217,12 @@ class MultipleCapillariesFittedSource(object):
         # XRT internals
         rr.run_process = local_process
 
+    def local_filepath(self, process_id):
+        """ Generate unique files for keeping photons
+            generated in separate processes """
+        filepath = self.savefolder + '/process{}.csv'.format(process_id)
+        return filepath
+
     @staticmethod
     def local_process(beamLine, shineOnly1stSource=False):
         """ another shot """
@@ -228,19 +241,16 @@ class MultipleCapillariesFittedSource(object):
             beamLocal, _ = cap.multiple_reflect(light,\
                                     maxReflections=550)
 
+            # We wan't to keep only alive photons
+            beamLocal.filter_good()
+
             # After each capillary write to csv file
             frame = ub.make_dataframe(beamLocal)
-            filepath = 'data/file_from_{}.csv'.format(process_id)
+            filepath = beamLine.self.local_filepath(process_id)
 
             # Add header only when creating the file
             header_needed = not os.path.isfile(filepath)
             frame.to_csv(filepath, mode='a', header=header_needed)
-
-            # Hold photons for export
-            # if self.beamTotal is None:
-            #     self.beamTotal = beamLocal
-            # else:
-            #     self.beamTotal.concatenate(beamLocal)
 
         out = {}
         return out
@@ -257,13 +267,17 @@ class MultipleCapillariesFittedSource(object):
                             processes=_processes,\
                             threads=_threads)
 
+    def say_hello(self):
+        """ """
+        print 'hello'
+
     def get_source(self):
         """ it's free """
         return self.source
 
     def get_beam(self):
         """ get it """
-        return self.beamTotal
+        return ub.beam_from_csvs(self.savefolder)
 
 def test_lens(photons, capillaries):
     """ Perform ray traycing """

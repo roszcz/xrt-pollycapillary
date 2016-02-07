@@ -28,17 +28,13 @@ def create_lens():
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
     structure = st.HexStructure(rIn = 0.2,\
-                                nx_capillary = 5,\
-                                ny_bundle = 5)
+                                nx_capillary = 3,\
+                                ny_bundle = 3)
     lens.set_structure(structure)
 
     return lens
 
-def my_process(bl, something=False):
-    """ hi """
-    print "HELLO"
-
-# This is not pretty
+# This is not pretty, yet obligatory
 rr.run_process = eb.MultipleCapillariesFittedSource.local_process
 
 if __name__ == '__main__':
@@ -50,12 +46,9 @@ if __name__ == '__main__':
     lens = create_lens()
     caps = lens.get_capillaries()
 
-    # Investigate bugs on just a few capillaries
-    daps = caps
-
     # Preparation
     setup = eb.MultipleCapillariesFittedSource()
-    setup.set_capillaries(daps)
+    setup.set_capillaries(caps)
     # Number of photons per run per capillary
     setup.set_nrays(50)
     # Number of runs
@@ -64,14 +57,13 @@ if __name__ == '__main__':
     setup.run_it()
 
     # You can use this in IPython with single capillaries
-    source = setup.get_source()
+    # source = setup.get_source()
 
     # Remove dead photons
     ceam = setup.get_beam()
-    ceam.filter_good()
 
     # Save for research
-    ub.save_beam_compressed(ceam, 'far_capillaries.beamc')
+    # ub.save_beam_compressed(ceam, 'far_capillaries.beamc')
 
     # Show results
     # ub.show_beam(ceam)

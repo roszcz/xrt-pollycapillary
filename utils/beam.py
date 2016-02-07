@@ -1,5 +1,6 @@
 import pickle
 import gzip
+from glob import glob
 import pandas as pd
 import matplotlib.pyplot as plt
 import xrt.backends.raycing.sources as rs
@@ -21,6 +22,37 @@ def move_beam_to(beam, where):
     beam.y    += where
     beam.x[:] += beam.a * beam.path
     beam.z[:] += beam.c * beam.path
+
+def frame_to_beam(frame):
+    """ pd.DataFrame to xrt.Beam converter """
+    beam = rs.Beam()
+    # Convert
+    beam.state = frame.state.values
+    beam.x = frame.x.values
+    beam.y = frame.y.values
+    beam.z = frame.z.values
+    beam.a = frame.a.values
+    beam.b = frame.b.values
+    beam.c = frame.c.values
+    beam.path = frame.path.values
+    beam.E = frame.E.values
+    beam.Jss = frame.Jss.values
+    beam.Jpp = frame.Jpp.values
+    beam.Jsp = frame.Jsp.values
+
+    if 'nRefl' in frame:
+        beam.nRefl = frame.nRefl.values
+
+    return beam
+
+def beam_from_csvs(folder):
+    """ Create beam from multiple csv files inside one folder """
+    files = glob(folder + '/*csv')
+    frames = []
+    for file in files:
+        frames.append(pd.DataFrame.from_csv(file))
+
+    return frame_to_beam(pd.concat(frames))
 
 def make_dataframe(beam):
     """ Conver beam to a pd.DataFrame object """
