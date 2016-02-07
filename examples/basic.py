@@ -1,8 +1,10 @@
 # TODO this should be in some kind of settings.py
-_processes = 1
-_threads = 4
+_processes = 2
+_threads = 1
 
 import numpy as np
+import multiprocessing as mp
+import os
 import itertools
 
 import xrt.runner as xrtr
@@ -138,6 +140,7 @@ class MultipleCapillariesFittedSource(object):
     def set_capillaries(self, caps):
         """ do it """
         self.capillaries = caps
+        self.beamLine.capillaries = caps
         print 'Number of capillaries: ', len(caps)
         radius = caps[0].entrance_radius()
         self.x_size = self.z_size = radius/2.0
@@ -152,7 +155,6 @@ class MultipleCapillariesFittedSource(object):
 
     def make_source(self):
         """ Prepare source parameter """
-
         # Source parameters
         nrays       = self.nrays
         distE       = self.distE
@@ -208,17 +210,49 @@ class MultipleCapillariesFittedSource(object):
         # XRT internals
         rr.run_process = local_process
 
+    @staticmethod
+    def local_process(beamLine, shineOnly1stSource=False):
+        """ another shot """
+        # Iterate over the capillaries
+        # and shine() into each of them
+        process_id = mp.current_process()._identity[0]
+        print "pid: ", process_id
+        for it, cap in enumerate(beamLine.capillaries):
+            hitpoint = [cap.entrance_x(),
+                        cap.entrance_y(),
+                        cap.entrance_z()]
+
+            light = beamLine.sources[0].shine(hitpoint)
+
+            # Push through
+            beamLocal, _ = cap.multiple_reflect(light,\
+                                    maxReflections=550)
+
+            # After each capillary write to csv file
+            frame = ub.make_dataframe(beamLocal)
+            filepath = 'data/file_from_{}.csv'.format(process_id)
+
+            # Add header only when creating the file
+            header_needed = not os.path.isfile(filepath)
+            frame.to_csv(filepath, mode='a', header=header_needed)
+
+            # Hold photons for export
+            # if self.beamTotal is None:
+            #     self.beamTotal = beamLocal
+            # else:
+            #     self.beamTotal.concatenate(beamLocal)
+
+        out = {}
+        return out
+
     def run_it(self):
         """ do it """
         self.make_source()
         self.make_run_process()
         self.beamTotal = None
 
-        # TODO get rid of this
-        _repeats = self.repeats
-
         xrtr.run_ray_tracing(self.plots,
-                            repeats=_repeats,\
+                            repeats=self.repeats,\
                             beamLine=self.beamLine,\
                             processes=_processes,\
                             threads=_threads)

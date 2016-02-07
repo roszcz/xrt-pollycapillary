@@ -1,3 +1,7 @@
 *.beamc
 
+*.dat
+
+*.csv
+
 tags

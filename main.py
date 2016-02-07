@@ -7,6 +7,8 @@ from utils import beam as ub
 from examples import basic as eb
 from examples import source as es
 
+import xrt.backends.raycing.run as rr
+
 def create_source():
     """ Generate photons with xrt and save resulting beam """
     # Every source detail is set and tested within it's module
@@ -26,11 +28,18 @@ def create_lens():
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
     structure = st.HexStructure(rIn = 0.2,\
-                                nx_capillary = 1,\
-                                ny_bundle = 3)
+                                nx_capillary = 5,\
+                                ny_bundle = 5)
     lens.set_structure(structure)
 
     return lens
+
+def my_process(bl, something=False):
+    """ hi """
+    print "HELLO"
+
+# This is not pretty
+rr.run_process = eb.MultipleCapillariesFittedSource.local_process
 
 if __name__ == '__main__':
     """ python main.py """
@@ -48,9 +57,9 @@ if __name__ == '__main__':
     setup = eb.MultipleCapillariesFittedSource()
     setup.set_capillaries(daps)
     # Number of photons per run per capillary
-    setup.set_nrays(100)
+    setup.set_nrays(50)
     # Number of runs
-    setup.set_repeats(2)
+    setup.set_repeats(4)
 
     setup.run_it()
 

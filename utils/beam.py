@@ -25,17 +25,18 @@ def move_beam_to(beam, where):
 def make_dataframe(beam):
     """ Conver beam to a pd.DataFrame object """
     # Create a dictionary with {column : series}
-    data = {'x' : pd.Series(beam.x),
-            'y' : pd.Series(beam.y),
-            'z' : pd.Series(beam.z),
-            'a' : pd.Series(beam.a),
-            'b' : pd.Series(beam.b),
-            'c' : pd.Series(beam.c),
-            'path' : pd.Series(beam.path),
-            'E' : pd.Series(beam.E),
-            'Jss' : pd.Series(beam.Jss),
-            'Jpp' : pd.Series(beam.Jpp),
-            'Jsp' : pd.Series(beam.Jsp)
+    data = {'state'     : pd.Series(beam.state),
+            'x'         : pd.Series(beam.x),
+            'y'         : pd.Series(beam.y),
+            'z'         : pd.Series(beam.z),
+            'a'         : pd.Series(beam.a),
+            'b'         : pd.Series(beam.b),
+            'c'         : pd.Series(beam.c),
+            'path'      : pd.Series(beam.path),
+            'E'         : pd.Series(beam.E),
+            'Jss'       : pd.Series(beam.Jss),
+            'Jpp'       : pd.Series(beam.Jpp),
+            'Jsp'       : pd.Series(beam.Jsp)
             }
     # Update with columns that nod necessary exiest in a beam
     if hasattr(beam, 'nRefl'):
