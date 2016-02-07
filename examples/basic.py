@@ -225,7 +225,7 @@ class MultipleCapillariesFittedSource(object):
 
     @staticmethod
     def local_process(beamLine, shineOnly1stSource=False):
-        """ another shot """
+        """ raycing.run_process must be overriden globally """
         # Iterate over the capillaries
         # and shine() into each of them
         process_id = mp.current_process()._identity[0]
@@ -266,10 +266,6 @@ class MultipleCapillariesFittedSource(object):
                             beamLine=self.beamLine,\
                             processes=_processes,\
                             threads=_threads)
-
-    def say_hello(self):
-        """ """
-        print 'hello'
 
     def get_source(self):
         """ it's free """
