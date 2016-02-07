@@ -1,5 +1,5 @@
 # TODO this should be in some kind of settings.py
-_processes = 2
+_processes = 8
 _threads = 1
 
 import numpy as np
@@ -258,7 +258,7 @@ class MultipleCapillariesFittedSource(object):
     def run_it(self):
         """ do it """
         self.make_source()
-        self.make_run_process()
+        # self.make_run_process()
         self.beamTotal = None
 
         xrtr.run_ray_tracing(self.plots,
