@@ -5,6 +5,7 @@ _threads = 1
 import numpy as np
 import multiprocessing as mp
 import os
+from datetime import datetime as dt
 import itertools
 
 import xrt.runner as xrtr
@@ -114,8 +115,8 @@ class MultipleCapillariesFittedSource(object):
         # the usage of class specific methods within the run_process
         self.beamLine.self = self
 
-        # TODO Make this adjustable
-        self.savefolder = 'data'
+        # TODO Make this auto-adjustable
+        self.savefolder = 'data_b'
 
         # Set of OE objects capable of multiple_reflections
         self.capillaries = []
@@ -226,10 +227,11 @@ class MultipleCapillariesFittedSource(object):
     @staticmethod
     def local_process(beamLine, shineOnly1stSource=False):
         """ raycing.run_process must be overriden globally """
-        # Iterate over the capillaries
-        # and shine() into each of them
+	# Debug info
         process_id = mp.current_process()._identity[0]
-        print "pid: ", process_id
+	debug_start = 'Prcoess {} started at: {}.'
+        print debug_start.format(process_id , dt.now())
+
         for it, cap in enumerate(beamLine.capillaries):
             hitpoint = [cap.entrance_x(),
                         cap.entrance_y(),
@@ -251,6 +253,14 @@ class MultipleCapillariesFittedSource(object):
             # Add header only when creating the file
             header_needed = not os.path.isfile(filepath)
             frame.to_csv(filepath, mode='a', header=header_needed)
+
+	    if it%1000 is 0:
+		debug_inside = 'Capillary {} done at process {} in time {}'
+		print debug_inside.format(it, process_id, dt.now())
+
+	# More debug
+	debug_finish = 'Prcoess {} finished at: {}.'
+        print debug_finish.format(process_id, dt.now())
 
         out = {}
         return out
