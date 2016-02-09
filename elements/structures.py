@@ -3,6 +3,7 @@ import matplotlib.pyplot as plt
 from random import random as rand
 
 class HexStructure(object):
+    """ Most realistic pollycapilary structure """
     def __init__(self,\
                  rIn = 0.005,\
                  wall= 0.005,\
@@ -147,6 +148,25 @@ class HexStructure(object):
         if save:
             plt.savefig('entrance_stucture_pointplot.png')
         plt.show()
+
+class CakePiece(HexStructure):
+    """ Cuts a angle defined piece from the hexagonal structure """
+    def __init__(self):
+	""" hwat """
+	HexStructure.__init__(self)
+	# Cut unwanted positions away from the structure
+	new_xi = []
+	new_yi = []
+	for x, y in zip(self.xci, self.yci):
+	    phi = np.arctan2(y, x)
+	    # TODO refactor the angle out
+	    if phi < np.pi/4.0:
+		new_xi.append(x)
+		new_yi.append(y)
+
+	# Switch
+	self.xci = new_xi
+	self.yci = new_yi
 
 if __name__ == '__main__':
     """ python elements/structures.py """

@@ -15,6 +15,8 @@ class BeamPlotter(object):
         # This default makes sense for number of reflections
         self.c_limit = [0, 50]
         self.save_name = None
+	# Resolution related parameter
+	self.bins = 512
 
     def make_run_process(self):
         """ ___ """
@@ -49,6 +51,10 @@ class BeamPlotter(object):
         """ limits for the special axes, e.g. number of reflections """
         self.c_limit = cl
 
+    def set_resolution(self, bins):
+	""" Pixels """
+	self.bins = bins
+
     def set_save_name(self, name):
         """ Set to save on disk """
         self.save_name = name
@@ -56,19 +62,18 @@ class BeamPlotter(object):
     def make_plot(self):
         """ Prepare the only plot """
         self.plots = []
-        bins = 256
         plot = xrtp.XYCPlot(
             # Using named parameters might be good here TODO
             'Screen', (1, 3,),
             beamState='Screen',
             # This is still inside plot
             xaxis=xrtp.XYCAxis(r'$x$', 'mm',
-                               bins=bins,
+                               bins=self.bins,
                                ppb=2,
                                limits=self.x_limit),
             # Actually it is z-axis!
             yaxis=xrtp.XYCAxis(r'$z$', 'mm',
-                               bins=bins,
+                               bins=self.bins,
                                ppb=2,
                                limits=self.z_limit),
             # Colorbar and sidebar histogram
@@ -76,7 +81,7 @@ class BeamPlotter(object):
                                'number',
                                # TODO wrap this into a settable member!
                                data=raycing.get_reflection_number,
-                               bins=bins,
+                               bins=self.bins,
                                ppb=2,
                                limits=self.c_limit)
             ) # plot ends here
