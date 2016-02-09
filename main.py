@@ -1,3 +1,4 @@
+import os
 import matplotlib.pyplot as plt
 from elements import capillary as ec
 from elements import structures as st
@@ -27,21 +28,15 @@ def create_lens():
     # This is used to control capillaries' curvature
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
-    structure = st.HexStructure(rIn = 0.01,\
-                                nx_capillary = 19,\
-                                ny_bundle = 19)
+    structure = st.CakePiece(rIn = 0.1,\
+                                nx_capillary = 7,\
+                                ny_bundle = 9)
     lens.set_structure(structure)
 
     return lens
 
-# This is not pretty, yet obligatory
-rr.run_process = eb.MultipleCapillariesFittedSource.local_process
-
-if __name__ == '__main__':
-    """ python main.py """
-    # Create 10000 photons
-    # beam = es.create_geometric(1e4)
-
+def create_beam(dirname):
+    """ Generates csv files filled with photons inside the dirname directory """
     # Set stuff above
     lens = create_lens()
     caps = lens.get_capillaries()
@@ -50,25 +45,44 @@ if __name__ == '__main__':
     setup = eb.MultipleCapillariesFittedSource()
     setup.set_capillaries(caps)
     # Number of photons per run per capillary
-    setup.set_nrays(20)
+    setup.set_nrays(30)
     # Number of runs
     setup.set_repeats(48)
+    # Photon storage directory
+    setup.set_folder(dirname)
 
     setup.run_it()
 
-    # You can use this in IPython with single capillaries
-    # source = setup.get_source()
+    return True
+
+
+# This is not pretty, yet obligatory
+rr.run_process = eb.MultipleCapillariesFittedSource.local_process
+
+if __name__ == '__main__':
+    """ python main.py """
 
     # Remove dead photons
-    ceam = setup.get_beam()
+    # ceam = setup.get_beam()
 
-    # Save for research
-    # ub.save_beam_compressed(ceam, 'far_capillaries.beamc')
+    # Choose path for storage
+    directory = 'my_new_lens'
+
+    # Create if necessary
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+        # Run ray traycing (LONG) only if no such directory exist
+        create_beam(directory)
+    else :
+        print "Directory exists, photon storage not possible in pre-existing directories"
+
+    # FIXME this name is bleh
+    beam = ub.beam_from_csvs(directory)
 
     # Show results
-    # ub.show_beam(ceam)
-    bp = up.BeamPlotter(ceam)
-    # bp.set_limits([-4,4])
+    bp = up.BeamPlotter(beam)
+    bp.set_limits([-5,5])
     bp.set_save_name('png/example_140.png')
     bp.show(140)
     bp.set_save_name('png/example_155.png')

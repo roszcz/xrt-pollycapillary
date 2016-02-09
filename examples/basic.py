@@ -161,6 +161,10 @@ class MultipleCapillariesFittedSource(object):
         """ adjust with the number of cores available """
         self.repeats = peats
 
+    def set_folder(self, dirname):
+	""" progress over protocol """
+	self.savefolder = dirname
+
     def make_source(self):
         """ Prepare source parameter """
         # Source parameters

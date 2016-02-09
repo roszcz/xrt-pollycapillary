@@ -151,16 +151,16 @@ class HexStructure(object):
 
 class CakePiece(HexStructure):
     """ Cuts a angle defined piece from the hexagonal structure """
-    def __init__(self):
+    def __init__(self, angle=np.pi/12.0, **kwargs):
 	""" hwat """
-	HexStructure.__init__(self)
+	HexStructure.__init__(self, **kwargs)
 	# Cut unwanted positions away from the structure
 	new_xi = []
 	new_yi = []
 	for x, y in zip(self.xci, self.yci):
 	    phi = np.arctan2(y, x)
 	    # TODO refactor the angle out
-	    if phi < np.pi/4.0:
+	    if np.pi/2 > phi > angle:
 		new_xi.append(x)
 		new_yi.append(y)
 

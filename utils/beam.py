@@ -52,7 +52,16 @@ def beam_from_csvs(folder):
     for file in files:
         frames.append(pd.DataFrame.from_csv(file))
 
-    return frame_to_beam(pd.concat(frames))
+    # Create beam from multiple pd.DataFrames
+    beam = frame_to_beam(pd.concat(frames))
+
+    # FIXME remove photons with too many reflections
+    # since they are obviously ill, investigate why is so pls
+    ids = beam.nRefl < beam.nRefl.max()
+
+    # Keep only good photons
+    ceam = copy_by_index(beam, ids)
+    return ceam
 
 def make_dataframe(beam):
     """ Conver beam to a pd.DataFrame object """
