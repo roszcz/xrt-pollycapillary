@@ -28,9 +28,9 @@ def create_lens():
     # This is used to control capillaries' curvature
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
-    structure = st.CakePiece(rIn = 0.1,\
-                                nx_capillary = 7,\
-                                ny_bundle = 9)
+    structure = st.CakePiece(rIn = 0.005,\
+                                nx_capillary = 27,\
+                                ny_bundle = 29)
     lens.set_structure(structure)
 
     return lens
