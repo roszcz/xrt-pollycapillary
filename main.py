@@ -28,9 +28,9 @@ def create_lens():
     # This is used to control capillaries' curvature
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
-    structure = st.CakePiece(rIn = 0.1,\
-                                nx_capillary = 7,\
-                                ny_bundle = 9)
+    structure = st.CakePiece(rIn = 0.01,\
+                                nx_capillary = 27,\
+                                ny_bundle = 15)
     lens.set_structure(structure)
 
     return lens
@@ -45,9 +45,9 @@ def create_beam(dirname):
     setup = eb.MultipleCapillariesFittedSource()
     setup.set_capillaries(caps)
     # Number of photons per run per capillary
-    setup.set_nrays(30)
+    setup.set_nrays(50)
     # Number of runs
-    setup.set_repeats(48)
+    setup.set_repeats(16)
     # Photon storage directory
     setup.set_folder(dirname)
 
