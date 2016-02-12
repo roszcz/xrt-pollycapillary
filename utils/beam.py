@@ -16,12 +16,13 @@ def get_beam_part(beam, hitpoint, radius):
 
     return out
 
+# FIXME this name is highly misleading
 def move_beam_to(beam, where):
     """ Propagates the beam in vacuum to *where* position """
     beam.path += where
     beam.y    += where
-    beam.x[:] += beam.a * beam.path
-    beam.z[:] += beam.c * beam.path
+    beam.x[:] += beam.a * where
+    beam.z[:] += beam.c * where
 
 def frame_to_beam(frame):
     """ pd.DataFrame to xrt.Beam converter """
