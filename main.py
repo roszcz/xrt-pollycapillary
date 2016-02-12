@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import matplotlib.pyplot as plt
 from elements import capillary as ec
 from elements import structures as st
@@ -28,9 +29,10 @@ def create_lens():
     # This is used to control capillaries' curvature
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
-    structure = st.CakePiece(rIn = 0.01,\
+    structure = st.CakePiece(rIn = 0.02,\
                                 nx_capillary = 27,\
-                                ny_bundle = 15)
+                                ny_bundle = 15,\
+                                angle = np.pi/24.0)
     lens.set_structure(structure)
 
     return lens
@@ -66,7 +68,7 @@ if __name__ == '__main__':
     # ceam = setup.get_beam()
 
     # Choose path for storage
-    directory = 'my_new_lens'
+    directory = 'huge_bend'
 
     # Create if necessary
     if not os.path.exists(directory):
