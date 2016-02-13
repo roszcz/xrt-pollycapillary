@@ -2,6 +2,7 @@ import pickle
 import gzip
 from glob import glob
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 import xrt.backends.raycing.sources as rs
 
@@ -17,12 +18,31 @@ def get_beam_part(beam, hitpoint, radius):
     return out
 
 # FIXME this name is highly misleading
-def move_beam_to(beam, where):
-    """ Propagates the beam in vacuum to *where* position """
-    beam.path += where
-    beam.y    += where
-    beam.x[:] += beam.a * where
-    beam.z[:] += beam.c * where
+def move_beam_to(beam, where_to):
+    """ Propagates the beam in vacuum """
+    beam.y[:] = beam.y[:] - where_to
+
+    xx = 1., 0., 0.
+    zz = 0., 0., 1.
+    yy = np.cross(zz, xx)
+
+    xyz = beam.x, beam.y, beam.z
+    beam.x[:], beam.y[:], beam.z[:] = \
+	    sum(c*b for c, b in zip(xx, xyz)),\
+	    sum(c*b for c, b in zip(yy, xyz)),\
+	    sum(c*b for c, b in zip(zz, xyz))
+    abc = beam.a, beam.b, beam.c
+    beam.a[:], beam.b[:], beam.c[:] = \
+	    sum(c*b for c, b in zip(xx, abc)),\
+	    sum(c*b for c, b in zip(yy, abc)),\
+	    sum(c*b for c, b in zip(zz, abc))
+
+    path = -beam.y / beam.b
+    beam.path += path
+
+    beam.x[:] += beam.a * path
+    beam.z[:] += beam.c * path
+    beam.y[:] = where_to
 
 def frame_to_beam(frame):
     """ pd.DataFrame to xrt.Beam converter """
