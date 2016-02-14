@@ -17,7 +17,6 @@ def get_beam_part(beam, hitpoint, radius):
 
     return out
 
-# FIXME this name is highly misleading
 def move_beam_to(beam, where_to):
     """ Propagates the beam in vacuum """
     beam.y[:] = beam.y[:] - where_to
@@ -66,7 +65,7 @@ def frame_to_beam(frame):
 
     return beam
 
-def beam_from_csvs(folder):
+def load_beam(folder):
     """ Create beam from multiple csv files inside one folder """
     files = glob(folder + '/*csv')
     frames = []
@@ -178,18 +177,3 @@ def save_beam_compressed(beam, filename = 'global_total.beamc'):
     pickle.dump(beam, file)
     file.close()
 
-def load_beam(filename):
-    """ Load simply pickled beam """
-    file = open(filename, 'rb')
-    beam = pickle.load(file)
-    file.close()
-
-    return beam
-
-def load_beam_compressed(filename):
-    """ Load compressed beam """
-    file = gzip.open(filename, 'rb')
-    beam = pickle.load(file)
-    file.close()
-
-    return beam

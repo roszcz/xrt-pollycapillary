@@ -6,8 +6,9 @@ from elements import structures as st
 from lenses import polycapillary as lp
 from utils import plotter as up
 from utils import beam as ub
-from examples import basic as eb
 from examples import source as es
+
+from setups import firstlens as fl
 
 import xrt.backends.raycing.run as rr
 
@@ -29,10 +30,9 @@ def create_lens():
     # This is used to control capillaries' curvature
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
-    structure = st.CakePiece(rIn = 0.02,\
-                                nx_capillary = 27,\
-                                ny_bundle = 15,\
-                                angle = np.pi/24.0)
+    structure = st.HexStructure(rIn = 0.02,\
+                                nx_capillary = 2,\
+                                ny_bundle = 1)
     lens.set_structure(structure)
 
     return lens
@@ -44,10 +44,12 @@ def create_beam(dirname):
     caps = lens.get_capillaries()
 
     # Preparation
-    setup = eb.MultipleCapillariesFittedSource()
+    setup = fl.MultipleCapillariesFittedSource()
     setup.set_capillaries(caps)
     # Number of photons per run per capillary
     setup.set_nrays(50)
+    # Number of avaiable cores
+    setup.set_processes(2)
     # Number of runs
     setup.set_repeats(16)
     # Photon storage directory
@@ -59,16 +61,13 @@ def create_beam(dirname):
 
 
 # This is not pretty, yet obligatory
-rr.run_process = eb.MultipleCapillariesFittedSource.local_process
+rr.run_process = fl.MultipleCapillariesFittedSource.local_process
 
 if __name__ == '__main__':
     """ python main.py """
 
-    # Remove dead photons
-    # ceam = setup.get_beam()
-
     # Choose path for storage
-    directory = 'huge_bend'
+    directory = 'my_new_lens'
 
     # Create if necessary
     if not os.path.exists(directory):
@@ -78,13 +77,13 @@ if __name__ == '__main__':
         create_beam(directory)
     else :
         print "Directory exists, photon storage not possible in pre-existing directories"
+        print "Trying to load from that directory"
 
-    # FIXME this name is bleh
-    beam = ub.beam_from_csvs(directory)
+    beam = ub.load_beam(directory)
 
     # Show results
     bp = up.BeamPlotter(beam)
-    bp.set_limits([-5,5])
+    bp.set_limits(None)
     bp.set_save_name('png/example_140.png')
     bp.show(140)
     bp.set_save_name('png/example_155.png')
