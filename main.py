@@ -1,3 +1,7 @@
+# FIXME still not effective
+import matplotlib as mpl
+mpl.use('Agg')
+
 import os
 import numpy as np
 import matplotlib.pyplot as plt
@@ -90,15 +94,21 @@ if __name__ == '__main__':
 
     # Choose path for storage
     directory = 'data'
-
-    # Get beam at the focal spot
     beam = ub.load_beam(directory)
-    ub.move_beam_to(beam, 155)
 
-    ceam = uc.make_wires(beam)
-    cp = up.BeamPlotter(ceam)
-    cp.set_limits([-0.6, 0.6])
-    cp.show(155)
+    # Positions to create the wires at
+    positions = [154 + 0.1 * it for it in range(21)]
 
-    cp.set_limits([-3, 3])
-    cp.show(170)
+    for position in positions:
+        print "Trying to simulate a bunch of wires at:", position
+        # Propagate light
+        ub.move_beam_to(beam, position)
+
+        # Cut the wires out
+        ceam = uc.make_wires(beam)
+
+        # Save as png, only at the detector
+        cp = up.BeamPlotter(ceam)
+        cp.set_save_name('png/wire_at_{}.png'.format(position))
+        cp.set_limits([-3, 3])
+        cp.show(170)
