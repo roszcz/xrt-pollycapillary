@@ -1,6 +1,3 @@
-# TODO this should be in some kind of settings.py
-_threads = 1
-
 import numpy as np
 import multiprocessing as mp
 import os

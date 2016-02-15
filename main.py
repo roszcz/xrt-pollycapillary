@@ -6,18 +6,12 @@ from elements import structures as st
 from lenses import polycapillary as lp
 from utils import plotter as up
 from utils import beam as ub
+from utils import cutter as uc
 from examples import source as es
 
 from setups import firstlens as fl
 
 import xrt.backends.raycing.run as rr
-
-def create_source():
-    """ Generate photons with xrt and save resulting beam """
-    # Every source detail is set and tested within it's module
-    # so here we can just create the beam at the desired moment
-    beamGlobalTotal = es.create_geometric(1e5)
-    ub.save_beam_compressed(beamGlobalTotal, 'basic_source.beamc')
 
 def create_lens():
     """ Wrapped lens creation """
@@ -59,27 +53,9 @@ def create_beam(dirname):
 
     return True
 
-
-# This is not pretty, yet obligatory
-rr.run_process = fl.MultipleCapillariesFittedSource.local_process
-
-if __name__ == '__main__':
-    """ python main.py """
-
-    # Choose path for storage
-    directory = 'my_new_lens'
-
-    # Create if necessary
-    if not os.path.exists(directory):
-        os.makedirs(directory)
-
-        # Run ray traycing (LONG) only if no such directory exist
-        create_beam(directory)
-    else :
-        print "Directory exists, photon storage not possible in pre-existing directories"
-        print "Trying to load from that directory"
-
-    beam = ub.load_beam(directory)
+def show_beam(folder):
+    """ Show beam from folder """
+    beam = ub.load_beam(folder)
 
     # Show results
     bp = up.BeamPlotter(beam)
@@ -90,3 +66,39 @@ if __name__ == '__main__':
     bp.show(155)
     bp.set_save_name('png/example_170.png')
     bp.show(170)
+
+def show_or_create(directory):
+    """ Example usage """
+    # Create if necessary
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+        # Run ray traycing (LONG) only if no such directory exist
+        create_beam(directory)
+        print "Beam created, goodbye"
+    else :
+        print "Directory exists, photon storage not possible in pre-existing directories"
+        print "Trying to load from that directory"
+        show_beam(directory)
+
+
+# This is not pretty, yet obligatory
+rr.run_process = fl.MultipleCapillariesFittedSource.local_process
+
+if __name__ == '__main__':
+    """ python main.py """
+
+    # Choose path for storage
+    directory = 'data'
+
+    # Get beam at the focal spot
+    beam = ub.load_beam(directory)
+    ub.move_beam_to(beam, 155)
+
+    ceam = uc.make_wires(beam)
+    cp = up.BeamPlotter(ceam)
+    cp.set_limits([-0.6, 0.6])
+    cp.show(155)
+
+    cp.set_limits([-3, 3])
+    cp.show(170)
