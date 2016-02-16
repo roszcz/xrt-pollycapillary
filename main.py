@@ -97,7 +97,7 @@ if __name__ == '__main__':
     beam = ub.load_beam(directory)
 
     # Positions to create the wires at
-    positions = [154 + 0.1 * it for it in range(21)]
+    positions = [159 + 0.2 * it for it in range(1,21)]
 
     for position in positions:
         print "Trying to simulate a bunch of wires at:", position
@@ -109,6 +109,6 @@ if __name__ == '__main__':
 
         # Save as png, only at the detector
         cp = up.BeamPlotter(ceam)
-        cp.set_save_name('png/wire_at_{}.png'.format(position))
+        cp.set_save_name('gif/tmp/wire_at_{}.png'.format(position))
         cp.set_limits([-3, 3])
         cp.show(170)
