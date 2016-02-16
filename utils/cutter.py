@@ -32,7 +32,7 @@ def make_wires(beam):
 
 def cut_triangle(beam):
     """ Or any other irregular shape using matplotlib.path """
-    triangle = mp.Path([(0,0), (0.08, 0.02), (-0.03, 0.02)])
+    triangle = mp.Path([(-0.04, -0.02), (0.08, 0.02), (-0.06, 0.02)])
 
     # Change 2 lists of coordinates into a list of paired coordinates
     points = zip(beam.x, beam.z)
