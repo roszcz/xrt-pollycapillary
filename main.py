@@ -94,21 +94,25 @@ if __name__ == '__main__':
 
     # Choose path for storage
     directory = 'data'
+    print 'Loading... wait'
     beam = ub.load_beam(directory)
 
     # Positions to create the wires at
-    positions = [159 + 0.2 * it for it in range(1,21)]
+    positions = [155]
 
     for position in positions:
-        print "Trying to simulate a bunch of wires at:", position
+        print "Trying to simulate anty triangle at:", position
         # Propagate light
         ub.move_beam_to(beam, position)
 
         # Cut the wires out
-        ceam = uc.make_wires(beam)
+        ceam = uc.cut_triangle(beam)
 
         # Save as png, only at the detector
         cp = up.BeamPlotter(ceam)
-        cp.set_save_name('gif/tmp/wire_at_{}.png'.format(position))
+        cp.set_save_name('png/triangle_at_focal_155.png'.format(position))
+        cp.set_limits([-0.5, 0.5])
+        cp.show(155)
+        cp.set_save_name('png/triangle_at_focal_170.png'.format(position))
         cp.set_limits([-3, 3])
         cp.show(170)

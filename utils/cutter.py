@@ -1,4 +1,5 @@
 import numpy as np
+from matplotlib import path as mp
 from utils import beam as ub
 from utils import plotter as up
 
@@ -24,6 +25,18 @@ def cut_wires(beam):
 def make_wires(beam):
     """ Usage example """
     ids = cut_wires(beam)
+
+    ceam = ub.copy_by_index(beam, ids)
+
+    return ceam
+
+def cut_triangle(beam):
+    """ Or any other irregular shape using matplotlib.path """
+    triangle = mp.Path([(0,0), (0.08, 0.02), (-0.03, 0.02)])
+
+    # Change 2 lists of coordinates into a list of paired coordinates
+    points = zip(beam.x, beam.z)
+    ids = triangle.contains_points(points)
 
     ceam = ub.copy_by_index(beam, ids)
 
