@@ -98,7 +98,7 @@ if __name__ == '__main__':
     beam = ub.load_beam(directory)
 
     # Positions to create the wires at
-    positions = [155]
+    positions = [154 + 0.1 * it for it in range(41)]
 
     for position in positions:
         print "Trying to simulate anty triangle at:", position
@@ -110,9 +110,9 @@ if __name__ == '__main__':
 
         # Save as png, only at the detector
         cp = up.BeamPlotter(ceam)
-        cp.set_save_name('png/triangle_at_focal_155.png'.format(position))
-        cp.set_limits([-0.5, 0.5])
-        cp.show(155)
-        cp.set_save_name('png/triangle_at_focal_170.png'.format(position))
+        # cp.set_save_name('png/triangle_at_focal_155.png'.format(position))
+        # cp.set_limits([-0.5, 0.5])
+        # cp.show(155)
+        cp.set_save_name('gif/tmp/triangle_at_{}_detector_at_170.png'.format(position))
         cp.set_limits([-3, 3])
         cp.show(170)
