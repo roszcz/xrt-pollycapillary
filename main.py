@@ -98,21 +98,22 @@ if __name__ == '__main__':
     beam = ub.load_beam(directory)
 
     # Positions to create the wires at
-    positions = [154 + 0.1 * it for it in range(41)]
+    positions = [155]
+    shifts = [-0.5 + it * 0.01 for it in range(101)]
 
-    for position in positions:
-        print "Trying to simulate anty triangle at:", position
+    for shift in shifts:
+        print "Creating wires at focal spot, shifted by", shift
         # Propagate light
         ub.move_beam_to(beam, position)
 
         # Cut the wires out
-        ceam = uc.cut_triangle(beam)
+        ceam = uc.make_wires(beam, shift)
 
         # Save as png, only at the detector
         cp = up.BeamPlotter(ceam)
         # cp.set_save_name('png/triangle_at_focal_155.png'.format(position))
         # cp.set_limits([-0.5, 0.5])
         # cp.show(155)
-        cp.set_save_name('gif/tmp/triangle_at_{}_detector_at_170.png'.format(position))
+        cp.set_save_name('gif/tmp/wires_shifted_{}__detector_at_170.png'.format(shift))
         cp.set_limits([-3, 3])
         cp.show(170)
