@@ -101,20 +101,19 @@ if __name__ == '__main__':
     ub.move_beam_to(beam, 155)
 
     # Positions to create the wires at
-    positions = [155]
-    shifts = [-0.5 + it * 0.01 for it in range(101)]
+    positions = [154 + 0.05 * it for it in range(20)]
 
-    for shift in shifts:
+    for position in positions:
         print "Creating wires at focal spot, shifted by", shift
 
-        # Cut the wires out
-        ceam = uc.make_wires(beam, shift)
+        # Cut the circle out
+        ceam = uc.cut_circle(beam, 0.04)
 
         # Save as png, only at the detector
         cp = up.BeamPlotter(ceam)
         # cp.set_save_name('png/triangle_at_focal_155.png'.format(position))
         # cp.set_limits([-0.5, 0.5])
         # cp.show(155)
-        cp.set_save_name('gif/tmp/wires_shifted_{}__detector_at_170.png'.format(shift))
+        cp.set_save_name('gif/tmp/pinhole_at_{}.png'.format(position))
         cp.set_limits([-3, 3])
         cp.show(170)

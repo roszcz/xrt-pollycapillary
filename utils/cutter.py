@@ -49,3 +49,17 @@ def cut_left_half(beam):
     ceam = ub.copy_by_index(beam, ids)
 
     return ceam
+
+def cut_circle(beam, radius):
+    """ matplotlib 1.5 required (get on pypi)"""
+    N_ = 100
+    s = [radius * np.sin(2*np.pi*th/N_) for th in range(N_)]
+    c = [radius * np.cos(2*np.pi*th/N_) for th in range(N_)]
+
+    circ = mp.Path(zip(s,c))
+
+    ids = circ.contains_points(zip(beam.x, beam.z))
+    
+    ceam = ub.copy_by_index(beam, ids)
+
+    return ceam
