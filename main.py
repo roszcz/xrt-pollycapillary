@@ -97,14 +97,15 @@ if __name__ == '__main__':
     print 'Loading... wait'
     beam = ub.load_beam(directory)
 
+    # Propagate light
+    ub.move_beam_to(beam, 155)
+
     # Positions to create the wires at
     positions = [155]
     shifts = [-0.5 + it * 0.01 for it in range(101)]
 
     for shift in shifts:
         print "Creating wires at focal spot, shifted by", shift
-        # Propagate light
-        ub.move_beam_to(beam, position)
 
         # Cut the wires out
         ceam = uc.make_wires(beam, shift)
