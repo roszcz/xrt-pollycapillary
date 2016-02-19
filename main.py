@@ -97,14 +97,14 @@ if __name__ == '__main__':
     print 'Loading... wait'
     beam = ub.load_beam(directory)
 
-    # Propagate light
-    ub.move_beam_to(beam, 155)
-
     # Positions to create the wires at
-    positions = [154 + 0.05 * it for it in range(20)]
+    positions = [154 + 0.05 * it for it in range(41)]
 
     for position in positions:
-        print "Creating wires at focal spot, shifted by", shift
+        print "Creating wires at focal spot, shifted by", position 
+
+        # Propagate light
+        ub.move_beam_to(beam, position)
 
         # Cut the circle out
         ceam = uc.cut_circle(beam, 0.04)
@@ -114,6 +114,6 @@ if __name__ == '__main__':
         # cp.set_save_name('png/triangle_at_focal_155.png'.format(position))
         # cp.set_limits([-0.5, 0.5])
         # cp.show(155)
-        cp.set_save_name('gif/tmp/pinhole_at_{}.png'.format(position))
+        cp.set_save_name('gif/tmp/pinhole_at_{}.png'.format(position * 1000))
         cp.set_limits([-3, 3])
         cp.show(170)
