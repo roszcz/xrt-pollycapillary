@@ -1,6 +1,6 @@
 # FIXME still not effective
 import matplotlib as mpl
-mpl.use('Agg')
+# mpl.use('Agg')
 
 import os
 import numpy as np
@@ -28,7 +28,7 @@ def create_lens():
     # This is used to control capillaries' curvature
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
-    structure = st.HexStructure(rIn = 0.02,\
+    structure = st.HexStructure(rIn = 0.2,\
                                 nx_capillary = 2,\
                                 ny_bundle = 1)
     lens.set_structure(structure)

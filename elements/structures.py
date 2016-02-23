@@ -2,7 +2,44 @@ import numpy as np
 import matplotlib.pyplot as plt
 from random import random as rand
 
-class HexStructure(object):
+class LensStructure(object):
+    """ Generic class for capillary distributions at the lens entrance"""
+    # FIXME radius should be a part of lens, not structure!
+    def __init__(self, xci = 0, yci = 0, rIn = 0.05):
+        """ xci and zci can be lists """
+        self.rIn = rIn
+
+        # We need lists, but sometimes need points
+        if not isinstance(xci, list):
+            xci = [xci]
+        if not isinstance(yci, list):
+            yci = [yci]
+
+        self.xci = xci
+        self.yci = yci
+
+    def capillary_radius(self):
+        """ Get it """
+        return self.rIn
+
+    def polar_coordinates(self):
+        """ Generator to iterate over the whole structure """
+        for x, y in zip(self.xci, self.yci):
+            r = np.sqrt(x**2 + y**2)
+            phi = np.arctan2(y,x)
+            yield r, phi
+
+    def plot(self, save = False):
+        """ Check the structure as separated from the capillaries """
+        print 'Number of entrance channels:', len(self.xci)
+        plt.plot(self.xci, self.yci,'ko')
+        #plt.xlim(-.1,.1)
+        #plt.ylim(-.1,.1)
+        if save:
+            plt.savefig('entrance_stucture_pointplot.png')
+        plt.show()
+
+class HexStructure(LensStructure):
     """ Most realistic pollycapilary structure """
     def __init__(self,\
                  rIn = 0.005,\
@@ -10,8 +47,9 @@ class HexStructure(object):
                  nx_capillary = 5,\
                  ny_bundle = 3):
         """ Class encapsulating hexagonal structure of capillaries """
+        # Init parent
+        LensStructure.__init__(self, rIn = rIn)
         # Outer diameter (touching)
-        self.rIn = rIn
         self.wall= wall
         self.capillary_diameter = 2*(self.rIn+self.wall)
 
@@ -46,7 +84,7 @@ class HexStructure(object):
 
         atemp = self.capillary_diameter * nxpol_capillary
 
-        # Prepare returned lists
+        # Prepare/Clear returned lists
         xci = []
         yci = []
         for ix in range(-2*nxpol_capillary, 2*nxpol_capillary +1):
@@ -126,28 +164,6 @@ class HexStructure(object):
         war3 = abs(np.sqrt(3)/2* x - 1/2. * y) <= tol * d * np.sqrt(3)/2
 
         return war1 and war2 and war3
-
-    def polar_coordinates(self):
-        """ Generator to iterate over the whole structure
-        >>> for r, phi in structure.polar_cooridnates():"""
-        for x, y in zip(self.xci, self.yci):
-            r = np.sqrt(x**2 + y**2)
-            phi = np.arctan2(y,x)
-            yield r, phi
-
-    def capillary_radius(self):
-        """ Entrance radius getter """
-        return self.rIn
-
-    def plot(self, save = False):
-        """ Check the structure as separated from the capillaries """
-        print 'Number of entrance channels:', len(self.xci)
-        plt.plot(self.xci, self.yci,'ko')
-        #plt.xlim(-.1,.1)
-        #plt.ylim(-.1,.1)
-        if save:
-            plt.savefig('entrance_stucture_pointplot.png')
-        plt.show()
 
 class CakePiece(HexStructure):
     """ Cuts a angle defined piece from the hexagonal structure """
