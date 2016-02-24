@@ -1,6 +1,6 @@
 # FIXME still not effective
 import matplotlib as mpl
-# mpl.use('Agg')
+mpl.use('Agg')
 
 import os
 import numpy as np
@@ -97,23 +97,20 @@ if __name__ == '__main__':
     print 'Loading... wait'
     beam = ub.load_beam(directory)
 
-    # Positions to create the wires at
-    positions = [154 + 0.05 * it for it in range(41)]
+    # Create defects
+    uc.create_defects(beam, 7)
 
-    for position in positions:
-        print "Creating wires at focal spot, shifted by", position 
+    # Propagate light
+    ub.move_beam_to(beam, 155)
 
-        # Propagate light
-        ub.move_beam_to(beam, position)
+    # Object interaction
+    ceam = uc.make_wires(beam, 0.077)
 
-        # Cut the circle out
-        ceam = uc.cut_circle(beam, 0.04)
-
-        # Save as png, only at the detector
-        cp = up.BeamPlotter(ceam)
-        # cp.set_save_name('png/triangle_at_focal_155.png'.format(position))
-        # cp.set_limits([-0.5, 0.5])
-        # cp.show(155)
-        cp.set_save_name('gif/tmp/pinhole_at_{}.png'.format(position * 1000))
-        cp.set_limits([-3, 3])
-        cp.show(170)
+    # Save as png, only at the detector
+    cp = up.BeamPlotter(ceam)
+    # cp.set_save_name('png/triangle_at_focal_155.png'.format(position))
+    # cp.set_limits([-0.5, 0.5])
+    # cp.show(155)
+    cp.set_save_name('png/defects.png')
+    cp.set_limits([-3, 3])
+    cp.show(170)

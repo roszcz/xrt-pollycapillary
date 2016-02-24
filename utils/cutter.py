@@ -50,16 +50,50 @@ def cut_left_half(beam):
 
     return ceam
 
-def cut_circle(beam, radius):
-    """ matplotlib 1.5 required (get on pypi)"""
+def outside_circle(beam, position = [0, 0], radius = 0.05):
+    """ Get indexes of rays not hitting this circle """
     N_ = 100
-    s = [radius * np.sin(2*np.pi*th/N_) for th in range(N_)]
-    c = [radius * np.cos(2*np.pi*th/N_) for th in range(N_)]
+    s = [position[0] + radius * np.sin(2*np.pi*th/N_) for th in range(N_)]
+    c = [position[1] + radius * np.cos(2*np.pi*th/N_) for th in range(N_)]
 
     circ = mp.Path(zip(s,c))
 
     ids = circ.contains_points(zip(beam.x, beam.z))
-    
+
+    return ids
+
+def cut_circle(beam, position = [0, 0], radius = 0.05):
+    """ Pinholes are circular! """
+    N_ = 100
+    s = [position[0] + radius * np.sin(2*np.pi*th/N_) for th in range(N_)]
+    c = [position[1] + radius * np.cos(2*np.pi*th/N_) for th in range(N_)]
+
+    circ = mp.Path(zip(s,c))
+
+    ids = circ.contains_points(zip(beam.x, beam.z))
+
     ceam = ub.copy_by_index(beam, ids)
+
+    return ceam
+
+def create_defects(beam, howmany):
+    """ Try to simulate defect related imaging """
+    # Container for single-defect ids
+    dids = []
+    for it in range(howmany):
+	# Generate random positions
+	rx = np.random.random() * 2.5
+	ry = np.random.random() * 2.5
+	pos = [rx, ry]
+
+	dids.append(outside_circle(beam, pos, 0.15))
+
+    # Get final set of good rays
+    fids = np.ones_like(dids[0])
+    fids = fids > 1
+    for ids in dids:
+	fids |= ids
+
+    ceam = ub.copy_by_index(beam, fids)
 
     return ceam
