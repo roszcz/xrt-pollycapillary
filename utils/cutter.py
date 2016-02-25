@@ -60,9 +60,15 @@ def outside_circle(beam, position = [0, 0], radius = 0.05):
 
     ids = circ.contains_points(zip(beam.x, beam.z))
 
+    print 'Inside:', ids.sum()
+    # Go outside
+    ids = ids == False
+
+    print 'Out:', ids.sum()
+
     return ids
 
-def cut_circle(beam, position = [0, 0], radius = 0.05):
+def cut_circle(beam, position = [0, 0], radius = 0.01):
     """ Pinholes are circular! """
     N_ = 100
     s = [position[0] + radius * np.sin(2*np.pi*th/N_) for th in range(N_)]
@@ -80,19 +86,27 @@ def create_defects(beam, howmany):
     """ Try to simulate defect related imaging """
     # Container for single-defect ids
     dids = []
+
+    # Define defect radius
+    d_rad = 0.01
+
     for it in range(howmany):
-	# Generate random positions
-	rx = np.random.random() * 2.5
-	ry = np.random.random() * 2.5
+	# Generate random positions from [-2 :: 2]
+	rx = (-0.5 + np.random.random()) * 4.0
+	ry = (-0.5 + np.random.random()) * 4.0
 	pos = [rx, ry]
 
-	dids.append(outside_circle(beam, pos, 0.15))
+	print 'Creating defect at:', pos, 'With radius:', d_rad
+
+	dids.append(outside_circle(beam, pos, d_rad))
 
     # Get final set of good rays
     fids = np.ones_like(dids[0])
-    fids = fids > 1
+    # Array of truth
+    fids = fids < 2
+
     for ids in dids:
-	fids |= ids
+	fids &= ids
 
     ceam = ub.copy_by_index(beam, fids)
 

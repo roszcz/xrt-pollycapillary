@@ -85,8 +85,8 @@ def show_or_create(directory):
         print "Trying to load from that directory"
         show_beam(directory)
 
-
-# This is not pretty, yet obligatory
+# FIXME
+# This is not pretty, yet obligatory (only for beam creation)
 rr.run_process = fl.MultipleCapillariesFittedSource.local_process
 
 if __name__ == '__main__':
@@ -98,7 +98,12 @@ if __name__ == '__main__':
     beam = ub.load_beam(directory)
 
     # Create defects
-    uc.create_defects(beam, 7)
+    uc.create_defects(beam, 21)
+    cp = up.BeamPlotter(beam)
+    cp.set_save_name('png/defects_140.png')
+    cp.set_limits([-3, 3])
+    cp.show(140)
+    print 'Defects done'
 
     # Propagate light
     ub.move_beam_to(beam, 155)
@@ -111,6 +116,6 @@ if __name__ == '__main__':
     # cp.set_save_name('png/triangle_at_focal_155.png'.format(position))
     # cp.set_limits([-0.5, 0.5])
     # cp.show(155)
-    cp.set_save_name('png/defects.png')
+    cp.set_save_name('png/defects_170.png')
     cp.set_limits([-3, 3])
     cp.show(170)
