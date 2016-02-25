@@ -88,7 +88,7 @@ def create_defects(beam, howmany):
     dids = []
 
     # Define defect radius
-    d_rad = 0.01
+    d_rad = 0.065
 
     for it in range(howmany):
 	# Generate random positions from [-2 :: 2]

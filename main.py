@@ -98,7 +98,7 @@ if __name__ == '__main__':
     beam = ub.load_beam(directory)
 
     # Create defects
-    uc.create_defects(beam, 21)
+    beam = uc.create_defects(beam, 21)
     cp = up.BeamPlotter(beam)
     cp.set_save_name('png/defects_140.png')
     cp.set_limits([-3, 3])
@@ -109,10 +109,10 @@ if __name__ == '__main__':
     ub.move_beam_to(beam, 155)
 
     # Object interaction
-    ceam = uc.make_wires(beam, 0.077)
+    deam = uc.make_wires(beam, 0.077)
 
     # Save as png, only at the detector
-    cp = up.BeamPlotter(ceam)
+    dp = up.BeamPlotter(deam)
     # cp.set_save_name('png/triangle_at_focal_155.png'.format(position))
     # cp.set_limits([-0.5, 0.5])
     # cp.show(155)
