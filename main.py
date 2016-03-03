@@ -28,9 +28,11 @@ def create_lens():
     # This is used to control capillaries' curvature
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings)
-    structure = st.HexStructure(rIn = 0.2,\
-                                nx_capillary = 2,\
-                                ny_bundle = 1)
+    structure = st.PartialHexStructure(rIn = 0.01,\
+                                nx_capillary = 21,\
+                                ny_bundle = 21)
+    # Save structure
+    structure.plot('plots/structure')
     lens.set_structure(structure)
 
     return lens
@@ -85,15 +87,8 @@ def show_or_create(directory):
         print "Trying to load from that directory"
         show_beam(directory)
 
-# FIXME
-# This is not pretty, yet obligatory (only for beam creation)
-rr.run_process = fl.MultipleCapillariesFittedSource.local_process
-
-if __name__ == '__main__':
-    """ python main.py """
-
-    # Choose path for storage
-    directory = 'data'
+def create_defects(directory):
+    """ Example run with lens-defects """
     print 'Loading... wait'
     beam = ub.load_beam(directory)
 
@@ -119,3 +114,14 @@ if __name__ == '__main__':
     cp.set_save_name('png/defects_170.png')
     cp.set_limits([-3, 3])
     cp.show(170)
+
+# FIXME
+# This is not pretty, yet obligatory (only for beam creation)
+rr.run_process = fl.MultipleCapillariesFittedSource.local_process
+
+if __name__ == '__main__':
+    """ python main.py """
+
+    # Choose path for storage
+    directory = 'part_lens'
+    show_or_create(directory)

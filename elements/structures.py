@@ -29,14 +29,14 @@ class LensStructure(object):
             phi = np.arctan2(y,x)
             yield r, phi
 
-    def plot(self, save = False):
+    def plot(self, savePath = None):
         """ Check the structure as separated from the capillaries """
         print 'Number of entrance channels:', len(self.xci)
         plt.plot(self.xci, self.yci,'ko')
         #plt.xlim(-.1,.1)
         #plt.ylim(-.1,.1)
-        if save:
-            plt.savefig('entrance_stucture_pointplot.png')
+        if savePath:
+            plt.savefig(savePath)
         plt.show()
 
 class HexStructure(LensStructure):
@@ -76,6 +76,7 @@ class HexStructure(LensStructure):
                                 self.capillary_diameter *\
                                 np.sqrt(3)/2 + self.capillary_diameter
 
+        # Create the structure
         self.capillary_lens_xy()
 
     def capillary_bundle_xy(self, xbundle, ybundle, sigma):
@@ -164,6 +165,98 @@ class HexStructure(LensStructure):
         war3 = abs(np.sqrt(3)/2* x - 1/2. * y) <= tol * d * np.sqrt(3)/2
 
         return war1 and war2 and war3
+
+class PartialHexStructure(HexStructure):
+    """ Create only some of the ny-bundles """
+    def __init__(self, rIn = 0.1, nx_capillary = 3, ny_bundle = 7):
+        """ Constructor """
+        # Define bundles you want to keep
+        self.keep_us = range(1005,1010) + range(1045, 1050) + range(965,970)
+        # Init parent
+        wall = 0.005
+        HexStructure.__init__(self, rIn, wall, nx_capillary, ny_bundle)
+
+    def capillary_lens_xy(self, sigma_position = 0.1):
+        """ This creates only selected bundles """
+        # This has to be an integer, do not add dots
+        nypol_bundle = (self.ny_bundle - 1)/2
+
+        # Prepare return containers
+        xci = []
+        yci = []
+        xi = []
+        yi = []
+
+        bundle_iterator = 0
+
+        # Add + 1 because range is 0 based...
+        for ix in range(-2*nypol_bundle, 2*nypol_bundle +1):
+            #print str(ix)
+            for iy in range(-2*nypol_bundle, 2*nypol_bundle +1):
+                # Skip unwanted bundles (0-based iterator)
+                bundle_iterator += 1
+                if bundle_iterator not in self.keep_us:
+                    continue
+
+                x0 = np.sqrt(3)/2.0 * self.bundlespacing * iy +\
+                        0 * sigma_position * (rand()-0.5) *\
+                        (self.capillary_diameter - self.channel_diameter)
+
+                y0 = ix * self.bundlespacing + \
+                        iy * self.bundlespacing / 2.0 + \
+                        0 * sigma_position * (rand()-0.5) *\
+                        (self.capillary_diameter - self.channel_diameter)
+
+                # NOTE - look out for order of arguments (x and y)
+                in_lens = self.in_hexagon(y0, x0,\
+                          self.bundlespacing * nypol_bundle)
+
+                if in_lens:
+                    print bundle_iterator
+                    #print x0, y0
+                    xci0, yci0 = self.capillary_bundle_xy(x0, y0,\
+                                    sigma_position)
+                    # Appending single values simply extends the list
+                    xi.append(x0)
+                    yi.append(y0)
+                    # Appending lists creates a list of lists, we want
+                    # just a 1D vectors of capillaries' positions (?)
+                    # Joining lists is simply adding them
+                    xci = xci + xci0
+                    yci = yci + yci0
+
+        self.xi = xi
+        self.yi = yi
+        self.xci = xci
+        self.yci = yci
+
+class BunchOfBundles(LensStructure):
+    """ Set of capillary hexagons with arbitrary positions """
+    def __init__(self, rIn = 0.1, nx_capillary = 5):
+        """ Constructor """
+        # Init parent
+        LensStructure.__init__(self, rIn = rIn)
+
+        # Create hexagon structure with 1 bundle ...
+        hx = HexStructure(rIn = rIn,
+                          nx_capillary = nx_capillary,
+                          ny_bundle = 1);
+
+        # .. and use it to create bundles centered at wherever
+        xbundles = [0.4, -0.2, 0.0]
+        ybundles = [-0.1, 0.4, 0.3]
+
+        # Structure containers
+        xci = yci = []
+
+        for x, y in zip(xbundles, ybundles):
+            new_x, new_y = hx.capillary_bundle_xy(x, y, 0)
+            xci = xci + new_x
+            yci = yci + new_y
+
+        # This might become: self.set_structure(xci, yci)
+        self.xci = xci
+        self.yci = yci
 
 class CakePiece(HexStructure):
     """ Cuts a angle defined piece from the hexagonal structure """
