@@ -8,7 +8,6 @@ import xrt.runner as xrtr
 import xrt.backends.raycing.screens as rsc
 import xrt.plotter as xrtp
 import xrt.backends.raycing.run as rr
-import xrt.backends.raycing.materials as rm
 import xrt.backends.raycing as raycing
 
 from elements import sources as es

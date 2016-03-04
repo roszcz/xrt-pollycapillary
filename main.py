@@ -15,6 +15,7 @@ from examples import source as es
 
 from setups import firstlens as fl
 
+import xrt.backends.raycing.materials as rm
 import xrt.backends.raycing.run as rr
 
 def create_lens():
@@ -26,8 +27,11 @@ def create_lens():
     D_settings = {'Din': 4.5, 'Dmax': 8.0, 'Dout': 2.4}
 
     # This is used to control capillaries' curvature
+    mGlass  = rm.Material(('Si', 'O'), quantities=(1, 2), rho=2.2)
+    mGold   = rm.Material('Au', rho=19.3)
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
-                                D_settings=D_settings)
+                                D_settings=D_settings,\
+                                material=mGold)
     structure = st.PartialHexStructure(rIn = 0.01,\
                                 nx_capillary = 21,\
                                 ny_bundle = 21)
@@ -49,7 +53,7 @@ def create_beam(dirname):
     # Number of photons per run per capillary
     setup.set_nrays(50)
     # Number of avaiable cores
-    setup.set_processes(2)
+    setup.set_processes(8)
     # Number of runs
     setup.set_repeats(16)
     # Photon storage directory
@@ -123,5 +127,5 @@ if __name__ == '__main__':
     """ python main.py """
 
     # Choose path for storage
-    directory = 'part_lens'
+    directory = 'part_lens_glass'
     show_or_create(directory)
