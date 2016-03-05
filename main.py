@@ -51,12 +51,12 @@ def create_beam(dirname):
     setup = fl.MultipleCapillariesFittedSource()
     setup.set_capillaries(caps)
     # Number of photons per run per capillary
-    setup.set_nrays(50)
+    setup.set_nrays(150)
     # Number of avaiable cores
     setup.set_processes(8)
     # Number of runs
-    setup.set_repeats(16)
-    # Photon storage directory
+    setup.set_repeats(32)
+    # Photon storage dirctory
     setup.set_folder(dirname)
 
     setup.run_it()
@@ -127,5 +127,5 @@ if __name__ == '__main__':
     """ python main.py """
 
     # Choose path for storage
-    directory = 'part_lens_glass'
+    directory = 'part_lens_gold'
     show_or_create(directory)

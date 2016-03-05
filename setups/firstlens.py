@@ -266,7 +266,7 @@ class MultipleCapillariesFittedSource(object):
             header_needed = not os.path.isfile(filepath)
             frame.to_csv(filepath, mode='a', header=header_needed)
 
-	    if it%1000 is 0:
+	    if it%100 is 0:
 		debug_inside = 'Capillary {} done at process {} in time {}'
 		print debug_inside.format(it, process_id, dt.now())
 

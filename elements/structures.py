@@ -171,7 +171,7 @@ class PartialHexStructure(HexStructure):
     def __init__(self, rIn = 0.1, nx_capillary = 3, ny_bundle = 7):
         """ Constructor """
         # Define bundles you want to keep
-        self.keep_us = range(1005,1010) + range(1045, 1050) + range(965,970)
+        self.keep_us = range(1005,1006) + range(1045, 1046)
         # Init parent
         wall = 0.005
         HexStructure.__init__(self, rIn, wall, nx_capillary, ny_bundle)
