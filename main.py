@@ -55,7 +55,7 @@ def create_beam(dirname):
     # Number of avaiable cores
     setup.set_processes(8)
     # Number of runs
-    setup.set_repeats(32)
+    setup.set_repeats(64)
     # Photon storage dirctory
     setup.set_folder(dirname)
 
@@ -128,4 +128,4 @@ if __name__ == '__main__':
 
     # Choose path for storage
     directory = 'part_lens_gold'
-    show_or_create(directory)
+    create_beam(directory)
