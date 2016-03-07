@@ -32,7 +32,7 @@ def create_lens():
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings,\
                                 material=mGold)
-    structure = st.PartialHexStructure(rIn = 0.01,\
+    structure = st.PartialHexStructure(rIn = 0.002,\
                                 nx_capillary = 21,\
                                 ny_bundle = 21)
     # Save structure
@@ -51,7 +51,7 @@ def create_beam(dirname):
     setup = fl.MultipleCapillariesFittedSource()
     setup.set_capillaries(caps)
     # Number of photons per run per capillary
-    setup.set_nrays(150)
+    setup.set_nrays(500)
     # Number of avaiable cores
     setup.set_processes(8)
     # Number of runs
@@ -127,5 +127,5 @@ if __name__ == '__main__':
     """ python main.py """
 
     # Choose path for storage
-    directory = 'part_lens_gold'
-    create_beam(directory)
+    directory = 'part_lens_gold_thinner'
+    show_or_create(directory)
