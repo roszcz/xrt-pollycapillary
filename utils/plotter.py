@@ -56,7 +56,7 @@ class BeamPlotter(object):
 	self.bins = bins
 
     def set_save_name(self, name):
-        """ Set to save on disk """
+        """ Set to save on disk (with .png please)"""
         self.save_name = name
 
     def make_plot(self):

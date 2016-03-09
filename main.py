@@ -51,7 +51,7 @@ def create_beam(dirname):
     setup = fl.MultipleCapillariesFittedSource()
     setup.set_capillaries(caps)
     # Number of photons per run per capillary
-    setup.set_nrays(500)
+    setup.set_nrays(1000)
     # Number of avaiable cores
     setup.set_processes(8)
     # Number of runs
@@ -128,4 +128,28 @@ if __name__ == '__main__':
 
     # Choose path for storage
     directory = 'part_lens_gold_thinner'
-    show_or_create(directory)
+    # create_beam(directory)
+
+    # Load beam
+    print 'Loading beam, please wait'
+    beam = ub.load_beam(directory)
+
+    # Move to the focal spot
+    ub.move_beam_to(beam, 155)
+
+    # Create after-pinhole pictures for several radiuses
+    radii = [0.001 + 0.001 * it for it in range(11)]
+
+    for r in radii:
+        print 'Current pinhole radius: {}'.format(r)
+        ceam = uc.cut_circle(beam, radius = r)
+        cp = up.BeamPlotter(ceam)
+
+        # This has to be set by hand because some erroneus photons can get
+        # far outisde the part of screen we want to see (~0.1% of photons)
+        cp.set_limits([-0.1, 0.21], [0.45, 0.74])
+
+        savename = "plots/pinhole_radius/radius_{}.png".format(r)
+        cp.set_save_name(savename)
+        cp.show(170)
+
