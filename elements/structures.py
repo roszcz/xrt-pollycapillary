@@ -39,6 +39,17 @@ class LensStructure(object):
             plt.savefig(savePath)
         plt.show()
 
+class Singular(LensStructure):
+    """ Single capillary shape as within a lens structure """
+    def __init__(self, rin, xin, zin):
+	""" Cnstruct """
+	# Init parent
+	LensStructure.__init__(self, rIn = rin)
+
+	self.xci = [xin]
+	self.yci = [zin]
+
+
 class HexStructure(LensStructure):
     """ Most realistic pollycapilary structure """
     def __init__(self,\
@@ -171,7 +182,7 @@ class PartialHexStructure(HexStructure):
     def __init__(self, rIn = 0.1, nx_capillary = 3, ny_bundle = 7):
         """ Constructor """
         # Define bundles you want to keep
-        self.keep_us = range(1005,1006) + range(1045, 1046)
+        self.keep_us = range(1005,1006)
         # Init parent
         wall = 0.005
         HexStructure.__init__(self, rIn, wall, nx_capillary, ny_bundle)

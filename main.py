@@ -32,9 +32,8 @@ def create_lens():
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings,\
                                 material=mGold)
-    structure = st.PartialHexStructure(rIn = 0.002,\
-                                nx_capillary = 21,\
-                                ny_bundle = 21)
+    structure = st.Singular(0.002, 0.5, 0.5)
+
     # Save structure
     structure.plot('plots/structure')
     lens.set_structure(structure)
@@ -51,11 +50,11 @@ def create_beam(dirname):
     setup = fl.MultipleCapillariesFittedSource()
     setup.set_capillaries(caps)
     # Number of photons per run per capillary
-    setup.set_nrays(1000)
+    setup.set_nrays(10000)
     # Number of avaiable cores
     setup.set_processes(8)
     # Number of runs
-    setup.set_repeats(64)
+    setup.set_repeats(16*128)
     # Photon storage dirctory
     setup.set_folder(dirname)
 
@@ -127,29 +126,5 @@ if __name__ == '__main__':
     """ python main.py """
 
     # Choose path for storage
-    directory = 'part_lens_gold_thinner'
-    # create_beam(directory)
-
-    # Load beam
-    print 'Loading beam, please wait'
-    beam = ub.load_beam(directory)
-
-    # Move to the focal spot
-    ub.move_beam_to(beam, 155)
-
-    # Create after-pinhole pictures for several radiuses
-    radii = [0.001 + 0.001 * it for it in range(11)]
-
-    for r in radii:
-        print 'Current pinhole radius: {}'.format(r)
-        ceam = uc.cut_circle(beam, radius = r)
-        cp = up.BeamPlotter(ceam)
-
-        # This has to be set by hand because some erroneus photons can get
-        # far outisde the part of screen we want to see (~0.1% of photons)
-        cp.set_limits([-0.1, 0.21], [0.45, 0.74])
-
-        savename = "plots/pinhole_radius/radius_{}.png".format(r)
-        cp.set_save_name(savename)
-        cp.show(170)
-
+    directory = 'single_cap_lens'
+    create_beam(directory)
