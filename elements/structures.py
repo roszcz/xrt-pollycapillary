@@ -49,7 +49,6 @@ class Singular(LensStructure):
 	self.xci = [xin]
 	self.yci = [zin]
 
-
 class HexStructure(LensStructure):
     """ Most realistic pollycapilary structure """
     def __init__(self,\
