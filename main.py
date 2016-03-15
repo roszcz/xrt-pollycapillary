@@ -140,4 +140,26 @@ if __name__ == '__main__':
 
     # Choose path for storage
     directory = 'remove_me_tests'
-    create_beam(directory)
+    # create_beam(directory)
+
+    # Load beam
+    print 'Loading ...'
+    beam = ub.load_beam(directory)
+    print 'Loaded'
+    # Find photons not propagated properly
+    ids = beam.y < 100
+    ceam = ub.copy_by_index(beam, ids)
+
+    # Prepare the plotter
+    cp = up.BeamPlotter(ceam)
+    xlim = [-0.3, 0.3]
+    zlim = [-0.62, 0.0]
+    cp.set_limits(xlim, zlim)
+
+    # Create series of plots showing light propagation inside the capillary
+    for it in range(81):
+        pos = 100.00001 + it * 0.5
+        savename = 'png/single_capillary/inside_y_{}.png'.format(pos)
+        print savename
+        cp.set_save_name(savename)
+        cp.show(pos)
