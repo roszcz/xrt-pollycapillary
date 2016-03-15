@@ -147,7 +147,7 @@ if __name__ == '__main__':
     beam = ub.load_beam(directory)
     print 'Loaded'
     # Find photons not propagated properly
-    ids = beam.y < 100
+    ids = (beam.y < 120) & (100 < beam.y)
     ceam = ub.copy_by_index(beam, ids)
 
     # Prepare the plotter
@@ -157,8 +157,8 @@ if __name__ == '__main__':
     cp.set_limits(xlim, zlim)
 
     # Create series of plots showing light propagation inside the capillary
-    for it in range(81):
-        pos = 100.00001 + it * 0.5
+    for it in range(41):
+        pos = 120.00001 + it * 0.5
         savename = 'png/single_capillary/inside_y_{}.png'.format(pos)
         print savename
         cp.set_save_name(savename)
