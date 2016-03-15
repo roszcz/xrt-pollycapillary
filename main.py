@@ -21,16 +21,16 @@ import xrt.backends.raycing.run as rr
 def create_lens():
     """ Wrapped lens creation """
     # Lens parameters needed for capillary shape calculations
-    # y_settings = {'y0': 0.0, 'y1': 40.0,\
-    #               'y2': 140.0, 'yf': 155.0,\
-    #               'ym': 88.0}
-    # D_settings = {'Din': 4.5, 'Dmax': 8.0, 'Dout': 2.4}
+    y_settings = {'y0': 0.0, 'y1': 40.0,\
+                  'y2': 140.0, 'yf': 155.0,\
+                  'ym': 88.0}
+    D_settings = {'Din': 4.5, 'Dmax': 8.0, 'Dout': 2.4}
 
     # Second lens
-    y_settings = {'y0': 0.0, 'y1': 25.0,\
-                  'y2': 91.5, 'yf': 94.0,\
-                  'ym': 55.0}
-    D_settings = {'Din': 2.75, 'Dmax': 4.4, 'Dout': 1.1}
+    # y_settings = {'y0': 0.0, 'y1': 25.0,\
+    #               'y2': 91.5, 'yf': 94.0,\
+    #               'ym': 55.0}
+    # D_settings = {'Din': 2.75, 'Dmax': 4.4, 'Dout': 1.1}
 
     # This is used to control capillaries' curvature
     mGlass  = rm.Material(('Si', 'O'), quantities=(1, 2), rho=2.2)
@@ -38,8 +38,10 @@ def create_lens():
     lens = lp.PolyCapillaryLens(y_settings=y_settings,\
                                 D_settings=D_settings,\
                                 material=mGold)
-    # structure = st.Singular(0.002, 0.5, 0.5)
-    structure = st.HexStructure(rIn = 0.05)
+
+    # Distribution of capillaries in the XZ plain
+    structure = st.Singular(0.2, 0.0, 0.2)
+    # structure = st.HexStructure(rIn = 0.05)
 
     # Save structure
     structure.plot('plots/structure')
@@ -49,7 +51,11 @@ def create_lens():
 
 def create_beam(dirname):
     """ Generates csv files filled with photons inside the dirname directory """
-    # Set stuff above
+    # Create folder if necessary
+    if not os.path.exists(dirname):
+        os.makedirs(dirname)
+
+    # Prepare lens and capillaries within
     lens = create_lens()
     caps = lens.get_capillaries()
 
@@ -57,11 +63,11 @@ def create_beam(dirname):
     setup = fl.MultipleCapillariesFittedSource()
     setup.set_capillaries(caps)
     # Number of photons per run per capillary
-    setup.set_nrays(1000)
+    setup.set_nrays(100000)
     # Number of avaiable cores
-    setup.set_processes(2)
+    setup.set_processes(8)
     # Number of runs
-    setup.set_repeats(16)
+    setup.set_repeats(256)
     # Photon storage dirctory
     setup.set_folder(dirname)
 
@@ -133,5 +139,5 @@ if __name__ == '__main__':
     """ python main.py """
 
     # Choose path for storage
-    directory = 'lens_2_tests'
-    show_or_create(directory)
+    directory = 'remove_me_tests'
+    create_beam(directory)
