@@ -40,7 +40,7 @@ def create_lens():
                                 material=mGold)
 
     # Distribution of capillaries in the XZ plain
-    structure = st.Singular(0.2, 0.0, 0.2)
+    structure = st.Singular(0.2, 0.0, 0.4)
     # structure = st.HexStructure(rIn = 0.05)
 
     # Save structure
@@ -63,7 +63,7 @@ def create_beam(dirname):
     setup = fl.MultipleCapillariesFittedSource()
     setup.set_capillaries(caps)
     # Number of photons per run per capillary
-    setup.set_nrays(100000)
+    setup.set_nrays(50000)
     # Number of avaiable cores
     setup.set_processes(8)
     # Number of runs
@@ -140,26 +140,29 @@ if __name__ == '__main__':
 
     # Choose path for storage
     directory = 'remove_me_tests'
-    # create_beam(directory)
+    print 'Shining ..'
+    create_beam(directory)
 
-    # Load beam
-    print 'Loading ...'
-    beam = ub.load_beam(directory)
-    print 'Loaded'
-    # Find photons not propagated properly
-    ids = (beam.y < 120) & (100 < beam.y)
-    ceam = ub.copy_by_index(beam, ids)
 
-    # Prepare the plotter
-    cp = up.BeamPlotter(ceam)
-    xlim = [-0.3, 0.3]
-    zlim = [-0.62, 0.0]
-    cp.set_limits(xlim, zlim)
+    if False:
+        # Load beam
+        print 'Loading ...'
+        beam = ub.load_beam(directory)
+        print 'Loaded'
+        # Find photons not propagated properly
+        ids = (beam.y < 120) & (100 < beam.y)
+        ceam = ub.copy_by_index(beam, ids)
 
-    # Create series of plots showing light propagation inside the capillary
-    for it in range(41):
-        pos = 120.00001 + it * 0.5
-        savename = 'png/single_capillary/inside_y_{}.png'.format(pos)
-        print savename
-        cp.set_save_name(savename)
-        cp.show(pos)
+        # Prepare the plotter
+        cp = up.BeamPlotter(ceam)
+        xlim = [-0.3, 0.3]
+        zlim = [-0.62, 0.0]
+        cp.set_limits(xlim, zlim)
+
+        # Create series of plots showing light propagation inside the capillary
+        for it in range(41):
+            pos = 120.00001 + it * 0.5
+            savename = 'png/single_capillary/inside_y_{}.png'.format(pos)
+            print savename
+            cp.set_save_name(savename)
+            cp.show(pos)
