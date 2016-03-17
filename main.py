@@ -18,7 +18,7 @@ from setups import firstlens as fl
 import xrt.backends.raycing.materials as rm
 import xrt.backends.raycing.run as rr
 
-def create_lens():
+def create_lens(entrance_z):
     """ Wrapped lens creation """
     # Lens parameters needed for capillary shape calculations
     y_settings = {'y0': 0.0, 'y1': 40.0,\
@@ -40,23 +40,23 @@ def create_lens():
                                 material=mGold)
 
     # Distribution of capillaries in the XZ plain
-    structure = st.Singular(0.2, 0.0, 0.4)
+    structure = st.Singular(rin = 0.2, xin = 0.0, zin = entrance_z)
     # structure = st.HexStructure(rIn = 0.05)
 
     # Save structure
-    structure.plot('plots/structure')
+    structure.plot('plots/structure{}.png'.format(entrance_z))
     lens.set_structure(structure)
 
     return lens
 
-def create_beam(dirname):
+def create_beam(dirname, entrance_z):
     """ Generates csv files filled with photons inside the dirname directory """
     # Create folder if necessary
     if not os.path.exists(dirname):
         os.makedirs(dirname)
 
     # Prepare lens and capillaries within
-    lens = create_lens()
+    lens = create_lens(entrance_z)
     caps = lens.get_capillaries()
 
     # Preparation
@@ -139,12 +139,19 @@ if __name__ == '__main__':
     """ python main.py """
 
     # Choose path for storage
-    directory = 'remove_me_tests'
+    parent_dir = 'singulars/'
+
+    # Create a bunch of beams for different bends (defined by the entrance_z parameter
+    entrances = [0.1 + 0.05 * it for it in range(10)]
+    for entrance_z in entrances:
+        dirname = parent_dir + str(1000 * entrance_z)
+        print 'creating beam in:', dirname
+        create_beam(dirname, entrance_z)
     # print 'Shining ..'
     # create_beam(directory)
 
 
-    if True:
+    if False:
         # Load beam
         print 'Loading ...'
         beam = ub.load_beam(directory)
