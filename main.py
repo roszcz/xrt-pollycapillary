@@ -142,34 +142,15 @@ if __name__ == '__main__':
     parent_dir = 'singulars/'
 
     # Create a bunch of beams for different bends (defined by the entrance_z parameter
-    entrances = [0.1 + 0.05 * it for it in range(10)]
+    entrances = [0.1 + 0.005 * it for it in range(50)]
     for entrance_z in entrances:
         dirname = parent_dir + str(1000 * entrance_z)
         print 'creating beam in:', dirname
         create_beam(dirname, entrance_z)
+
+        # beam = ub.load_beam(dirname)
+        # bp = up.BeamPlotter(beam)
+        # bp.set_save_name(parent_dir + '{}.png'.format(1000 * entrance_z))
+        # bp.show(140)
     # print 'Shining ..'
     # create_beam(directory)
-
-
-    if False:
-        # Load beam
-        print 'Loading ...'
-        beam = ub.load_beam(directory)
-        print 'Loaded'
-        # Find photons not propagated properly
-        ids = (beam.y < 120)
-        ceam = ub.copy_by_index(beam, ids)
-
-        # Prepare the plotter
-        cp = up.BeamPlotter(ceam)
-        xlim = [-0.3, 0.3]
-        zlim = [-0.76, -0.1]
-        cp.set_limits(xlim, zlim)
-
-        # Create series of plots showing light propagation inside the capillary
-        for it in range(81):
-            pos = 120.00001 + it * 0.25
-            savename = 'png/single_capillary/inside_y_{}.png'.format(pos)
-            print savename
-            cp.set_save_name(savename)
-            cp.show(pos)
