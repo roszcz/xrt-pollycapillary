@@ -40,7 +40,7 @@ def create_lens(entrance_z):
                                 material=mGold)
 
     # Distribution of capillaries in the XZ plain
-    structure = st.Singular(rin = 0.2, xin = 0.0, zin = entrance_z)
+    structure = st.Singular(rin = 0.04, xin = 0.0, zin = entrance_z)
     # structure = st.HexStructure(rIn = 0.05)
 
     # Save structure
@@ -63,11 +63,11 @@ def create_beam(dirname, entrance_z):
     setup = fl.MultipleCapillariesFittedSource()
     setup.set_capillaries(caps)
     # Number of photons per run per capillary
-    setup.set_nrays(50000)
+    setup.set_nrays(5000)
     # Number of avaiable cores
     setup.set_processes(8)
     # Number of runs
-    setup.set_repeats(256)
+    setup.set_repeats(96)
     # Photon storage dirctory
     setup.set_folder(dirname)
 
