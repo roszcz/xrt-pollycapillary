@@ -40,7 +40,7 @@ def create_lens(entrance_z):
                                 material=mGold)
 
     # Distribution of capillaries in the XZ plain
-    structure = st.Singular(rin = 0.01, xin = 0.0, zin = entrance_z)
+    structure = st.Singular(rin = 0.002, xin = 0.0, zin = entrance_z)
     # structure = st.HexStructure(rIn = 0.05)
 
     # Save structure
@@ -67,7 +67,7 @@ def create_beam(dirname, entrance_z):
     # Number of avaiable cores
     setup.set_processes(8)
     # Number of runs
-    setup.set_repeats(80)
+    setup.set_repeats(40)
     # Photon storage dirctory
     setup.set_folder(dirname)
 
@@ -142,7 +142,7 @@ if __name__ == '__main__':
     parent_dir = 'singulars/'
 
     # Create a bunch of beams for different bends (defined by the entrance_z parameter
-    entrances = [0.2 + 0.005 * it for it in range(50)]
+    entrances = [0.3 + 0.0005 * it for it in range(50)]
     for entrance_z in entrances:
         dirname = parent_dir + str(1000 * entrance_z)
         print 'creating beam in:', dirname
