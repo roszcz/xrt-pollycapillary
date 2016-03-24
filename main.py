@@ -63,11 +63,11 @@ def create_beam(dirname, entrance_z):
     setup = fl.MultipleCapillariesFittedSource()
     setup.set_capillaries(caps)
     # Number of photons per run per capillary
-    setup.set_nrays(5000)
+    setup.set_nrays(8000)
     # Number of avaiable cores
     setup.set_processes(8)
     # Number of runs
-    setup.set_repeats(128)
+    setup.set_repeats(156)
     # Photon storage dirctory
     setup.set_folder(dirname)
 
@@ -142,7 +142,7 @@ if __name__ == '__main__':
     parent_dir = 'singulars/'
 
     # Create a bunch of beams for different bends (defined by the entrance_z parameter
-    entrances = [1.3 + 0.0005 * it for it in range(10)]
+    entrances = [2.3 + 0.0002 * it for it in range(30)]
     for entrance_z in entrances:
         dirname = parent_dir + str(1000 * entrance_z)
         print 'creating beam in:', dirname
