@@ -9,7 +9,7 @@ class LensStructure(object):
         """ xci and zci can be lists """
         self.rIn = rIn
 
-        # We need lists, but sometimes need points
+        # We need lists, but sometimes get points
         if not isinstance(xci, list):
             xci = [xci]
         if not isinstance(yci, list):
@@ -24,6 +24,8 @@ class LensStructure(object):
 
     def polar_coordinates(self):
         """ Generator to iterate over the whole structure """
+        # XRT places elements on the XZ plane using
+        # polar coordinates (yci is actually Z coordinate!)
         for x, y in zip(self.xci, self.yci):
             r = np.sqrt(x**2 + y**2)
             phi = np.arctan2(y,x)
@@ -37,7 +39,8 @@ class LensStructure(object):
         #plt.ylim(-.1,.1)
         if savePath:
             plt.savefig(savePath)
-        plt.show()
+        else:
+            plt.show()
 
 class Singular(LensStructure):
     """ Single capillary shape as within a lens structure """
@@ -286,6 +289,22 @@ class CakePiece(HexStructure):
 	# Switch
 	self.xci = new_xi
 	self.yci = new_yi
+
+class FromFile(LensStructure):
+    """ Reads capillary positions from a file """
+    def __init__(self, filepath):
+        """ structure = FromFile(filepath), comma separated please """
+        # Prepare containers
+        xci = []
+        yci = []
+
+        with open(filepath) as f:
+            for line in f:
+                x, y = [float(val) for val in line.split(',')]
+                xci.append(x)
+                yci.append(y)
+
+        LensStructure.__init__(self, xci, yci)
 
 if __name__ == '__main__':
     """ python elements/structures.py """

@@ -228,13 +228,13 @@ class PolyCapillaryLens(object):
 
     def capillary_parameters(self, r_in, roll):
         """ Prepares arguments for shape defining functions """
-        # Default 'positional' parameters
+        # Default parameters, [xrt.BeamLine, name, position]
         args = [self.beamLine, 'bent', [0,0,0]]
 
-        # Named parameters (dict of them)
         # Position of capillary in polar coordinates
         kwargs = {'roll' : roll, 'r_in' : r_in}
 
+        # Decode lens describing parameters:
         # Physical limit in y direction
         y_entrance = self.y['y1']
         y_outrance = self.y['y2']

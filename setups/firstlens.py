@@ -153,7 +153,10 @@ class MultipleCapillariesFittedSource(object):
         """ do it """
         self.capillaries = caps
         self.beamLine.capillaries = caps
+
         print 'Number of capillaries: ', len(caps)
+
+        # Used for source fitting
         radius = caps[0].entrance_radius()
         self.x_size = self.z_size = radius/2.0
 

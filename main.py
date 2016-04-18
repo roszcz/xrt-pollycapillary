@@ -20,6 +20,7 @@ import xrt.backends.raycing.run as rr
 
 def create_lens(entrance_z):
     """ Wrapped lens creation """
+    # TODO Lenses should be totally separate objects
     # Lens parameters needed for capillary shape calculations
     y_settings = {'y0': 0.0, 'y1': 40.0,\
                   'y2': 140.0, 'yf': 155.0,\
@@ -62,12 +63,16 @@ def create_beam(dirname, entrance_z):
     # Preparation
     setup = fl.MultipleCapillariesFittedSource()
     setup.set_capillaries(caps)
+
+    # TODO this might work as
+    # setup.set_total_number_of_photons(8000*8*156)
     # Number of photons per run per capillary
-    setup.set_nrays(8000)
+    setup.set_nrays(800)
     # Number of avaiable cores
-    setup.set_processes(8)
+    setup.set_processes(2)
     # Number of runs
-    setup.set_repeats(156)
+    setup.set_repeats(6)
+
     # Photon storage dirctory
     setup.set_folder(dirname)
 
@@ -142,7 +147,7 @@ if __name__ == '__main__':
     parent_dir = 'singulars/'
 
     # Create a bunch of beams for different bends (defined by the entrance_z parameter
-    entrances = [2.3 + 0.0002 * it for it in range(30)]
+    entrances = [2.3 + 0.0002 * it for it in range(3)]
     for entrance_z in entrances:
         dirname = parent_dir + str(1000 * entrance_z)
         print 'creating beam in:', dirname
