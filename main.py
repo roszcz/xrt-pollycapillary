@@ -18,46 +18,14 @@ from setups import firstlens as fl
 import xrt.backends.raycing.materials as rm
 import xrt.backends.raycing.run as rr
 
-def create_lens(entrance_z):
-    """ Wrapped lens creation """
-    # TODO Lenses should be totally separate objects
-    # Lens parameters needed for capillary shape calculations
-    y_settings = {'y0': 0.0, 'y1': 40.0,\
-                  'y2': 140.0, 'yf': 155.0,\
-                  'ym': 88.0}
-    D_settings = {'Din': 4.5, 'Dmax': 8.0, 'Dout': 2.4}
-
-    # Second lens
-    # y_settings = {'y0': 0.0, 'y1': 25.0,\
-    #               'y2': 91.5, 'yf': 94.0,\
-    #               'ym': 55.0}
-    # D_settings = {'Din': 2.75, 'Dmax': 4.4, 'Dout': 1.1}
-
-    # This is used to control capillaries' curvature
-    mGlass  = rm.Material(('Si', 'O'), quantities=(1, 2), rho=2.2)
-    mGold   = rm.Material('Au', rho=19.3)
-    lens = lp.PolyCapillaryLens(y_settings=y_settings,\
-                                D_settings=D_settings,\
-                                material=mGold)
-
-    # Distribution of capillaries in the XZ plain
-    structure = st.Singular(rin = 0.002, xin = 0.0, zin = entrance_z)
-    # structure = st.HexStructure(rIn = 0.05)
-
-    # Save structure
-    structure.plot('plots/structure{}.png'.format(entrance_z))
-    lens.set_structure(structure)
-
-    return lens
-
-def create_beam(dirname, entrance_z):
+def create_beam(dirname):
     """ Generates csv files filled with photons inside the dirname directory """
     # Create folder if necessary
     if not os.path.exists(dirname):
         os.makedirs(dirname)
 
     # Prepare lens and capillaries within
-    lens = create_lens(entrance_z)
+    lens = lp.PolyCurveLens('A')
     caps = lens.get_capillaries()
 
     # Preparation
@@ -143,19 +111,5 @@ rr.run_process = fl.MultipleCapillariesFittedSource.local_process
 if __name__ == '__main__':
     """ python main.py """
 
-    # Choose path for storage
-    parent_dir = 'singulars/'
-
-    # Create a bunch of beams for different bends (defined by the entrance_z parameter
-    entrances = [2.3 + 0.0002 * it for it in range(3)]
-    for entrance_z in entrances:
-        dirname = parent_dir + str(1000 * entrance_z)
-        print 'creating beam in:', dirname
-        create_beam(dirname, entrance_z)
-
-        # beam = ub.load_beam(dirname)
-        # bp = up.BeamPlotter(beam)
-        # bp.set_save_name(parent_dir + '{}.png'.format(1000 * entrance_z))
-        # bp.show(140)
-    # print 'Shining ..'
-    # create_beam(directory)
+    # Creating example beam from default lens-A object
+    create_beam('example_lens')

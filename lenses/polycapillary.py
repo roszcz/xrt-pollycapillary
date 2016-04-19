@@ -1,8 +1,10 @@
 import xrt.backends.raycing.oes as roe
 import xrt.backends.raycing as raycing
+import xrt.backends.raycing.materials as rm
 import numpy as np
 import matplotlib.pyplot as plt
 import bendshapes as bs
+from elements import structures as st
 
 class Capillary(roe.OE):
     """ Single light transmitting pipe """
@@ -291,3 +293,64 @@ class PolyCapillaryLens(object):
             cap.plot(show=False)
         plt.show()
         pass
+
+class PolyCurveLens(object):
+    """ Concrete implementation of the real-world lenses """
+    def __init__(self, version = 'A'):
+        """ You can choose *A* or *B*, see the wiki for explanation """
+        # Curvature defining parameters
+        self.set_version(version)
+
+        # those are defaults
+        mGlass  = rm.Material(('Si', 'O'), quantities=(1, 2), rho=2.2)
+        mGold   = rm.Material('Au', rho=19.3)
+        self.material = mGold
+        self.structure = st.HexStructure(rIn = 0.05)
+
+    def set_version(self, version):
+        """ Only A or B are currently avaiable """
+        if version.lower() == 'a':
+            a_y_settings = {'y0': 0.0, 'y1': 40.0,\
+                            'y2': 140.0, 'yf': 155.0,\
+                            'ym': 88.0}
+            a_D_settings = {'Din': 4.5, 'Dmax': 8.0, 'Dout': 2.4}
+            self.y_settings = a_y_settings
+            self.D_settings = a_D_settings
+            print 'version set to A'
+            return
+        if version.lower() == 'b':
+            b_y_settings = {'y0': 0.0, 'y1': 25.0,\
+                            'y2': 91.5, 'yf': 94.0,\
+                            'ym': 55.0}
+            b_D_settings = {'Din': 2.75, 'Dmax': 4.4, 'Dout': 1.1}
+            self.y_settings = b_y_settings
+            self.D_settings = b_D_settings
+            print 'version set to B'
+            return
+
+        # Bad input case:
+        print 'Please set lens version to \'A\' or \'B\' only'
+
+    def y_entrance(self):
+        """ Beginning of the lens in y-direction """
+        return self.y_settings['y1']
+
+    def set_structure(self, structure):
+        """ See elements.structures.LensStructure for type description """
+        self.structure = structure
+
+    def set_material(self, material):
+        """ This must be a xrt.material object """
+        self.material = material
+
+    def get_capillaries(self):
+        """ This returns the final product """
+        # Create lens
+        lens = PolyCapillaryLens(y_settings=self.y_settings,\
+                                 D_settings=self.D_settings,\
+                                 material=self.material)
+        # Add structure
+        lens.set_structure(self.structure)
+
+        return lens.get_capillaries()
+
