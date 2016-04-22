@@ -109,7 +109,6 @@ def create_defects(directory):
 rr.run_process = fl.MultipleCapillariesFittedSource.local_process
 
 if __name__ == '__main__':
-    """ python main.py """
-
+    """ console$: python main.py """
     # Creating example beam from default lens-A object
     create_beam('example_lens')

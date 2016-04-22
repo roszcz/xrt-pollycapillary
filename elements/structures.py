@@ -44,10 +44,10 @@ class LensStructure(object):
 
 class Singular(LensStructure):
     """ Single capillary shape as within a lens structure """
-    def __init__(self, rin, xin, zin):
+    def __init__(self, xin = 0, zin = 0, rIn = 0.05):
 	""" Cnstruct """
 	# Init parent
-	LensStructure.__init__(self, rIn = rin)
+	LensStructure.__init__(self, rIn = rIn)
 
 	self.xci = [xin]
 	self.yci = [zin]
@@ -292,7 +292,7 @@ class CakePiece(HexStructure):
 
 class FromFile(LensStructure):
     """ Reads capillary positions from a file """
-    def __init__(self, filepath):
+    def __init__(self, filepath, rIn = 0.05):
         """ structure = FromFile(filepath), comma separated please """
         # Prepare containers
         xci = []
@@ -304,7 +304,7 @@ class FromFile(LensStructure):
                 xci.append(x)
                 yci.append(y)
 
-        LensStructure.__init__(self, xci, yci)
+        LensStructure.__init__(self, xci, yci, rIn)
 
 if __name__ == '__main__':
     """ python elements/structures.py """

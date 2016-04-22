@@ -178,8 +178,12 @@ class MultipleCapillariesFittedSource(object):
 
     def make_source(self):
         """ Prepare source parameter """
+        self.source_position = [0, 39.99, 0]
         # Source parameters
+        position    = self.source_position
+        # Number of photons per run
         nrays       = self.nrays
+        # Energy distribution
         distE       = self.distE
         energies    = self.energies
         # x-direction
@@ -197,7 +201,7 @@ class MultipleCapillariesFittedSource(object):
 
         self.source = es.FitGeometricSource(\
             # FIXME something wrong with y-distributions
-            self.beamLine,'Fitted',(0,39.99,0), nrays=nrays,
+            self.beamLine, 'Fitted', position, nrays=nrays,
             distx=distx, dx=dx, distxprime=distxprime, dxprime=dxprime,
             distz=distz, dz=dz, distzprime=distzprime, dzprime=dzprime,
             distE=distE, energies=energies,
@@ -247,14 +251,16 @@ class MultipleCapillariesFittedSource(object):
 	debug_start = 'Prcoess {} started at: {}.'
         print debug_start.format(process_id , dt.now())
 
+        # For every capillary
         for it, cap in enumerate(beamLine.capillaries):
             hitpoint = [cap.entrance_x(),
                         cap.entrance_y(),
                         cap.entrance_z()]
 
+            # shine directly into its center
             light = beamLine.sources[0].shine(hitpoint)
 
-            # Push through
+            # and perform reflections
             beamLocal, _ = cap.multiple_reflect(light,\
                                     maxReflections=550)
 
@@ -269,14 +275,16 @@ class MultipleCapillariesFittedSource(object):
             header_needed = not os.path.isfile(filepath)
             frame.to_csv(filepath, mode='a', header=header_needed)
 
+            # Every 100 capillaries inform user about progress
 	    if it%100 is 0:
 		debug_inside = 'Capillary {} done at process {} in time {}'
 		print debug_inside.format(it, process_id, dt.now())
 
-	# More debug
+	# Inform user that this run is over
 	debug_finish = 'Prcoess {} finished at: {}.'
         print debug_finish.format(process_id, dt.now())
 
+        # Return empty dict for xrt compability
         out = {}
         return out
 

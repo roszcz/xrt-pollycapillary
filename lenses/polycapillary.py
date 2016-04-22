@@ -295,7 +295,10 @@ class PolyCapillaryLens(object):
         pass
 
 class PolyCurveLens(object):
-    """ Concrete implementation of the real-world lenses """
+    """
+    Concrete implementation of the real-world lenses
+    with per-capillary-polynomial approach
+    """
     def __init__(self, version = 'A'):
         """ You can choose *A* or *B*, see the wiki for explanation """
         # Curvature defining parameters
