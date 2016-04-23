@@ -30,8 +30,8 @@ def create_beam(dirname):
     lens = lp.PolyCurveLens('A')
 
     # Prepare a single capillary at x=1, y=1 [mm] position
-    # with entrance radius 0.3
-    single = es.Singular(1, 1, 0.3)
+    # with entrance radius 0.1
+    single = es.Singular(1, 1, 0.1)
 
     # Prepare ray-traycing
     lens.set_structure(single)
@@ -44,7 +44,7 @@ def create_beam(dirname):
     # Number of avaiable cores
     setup.set_processes(8)
     # Number of runs
-    setup.set_repeats(8)
+    setup.set_repeats(128)
 
     # Photon storage dirctory
     setup.set_folder(dirname)
