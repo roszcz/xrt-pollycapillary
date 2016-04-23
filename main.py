@@ -29,22 +29,21 @@ def create_beam(dirname):
     # Prepare lens curvature
     lens = lp.PolyCurveLens('A')
 
-    # Prepare a single capillary at x=1, y=1 [mm] position
-    # with entrance radius 0.1
-    single = es.Singular(1, 1, 0.1)
+    # Prepare a realistic hexagonal structure
+    hxs = es.HexStructure(rIn=0.01, nx_capillary=11, ny_bundle=7)
 
     # Prepare ray-traycing
-    lens.set_structure(single)
+    lens.set_structure(hxs)
     caps = lens.get_capillaries()
     setup = fl.MultipleCapillariesFittedSource()
     setup.set_capillaries(caps)
 
     # Number of photons per run per capillary
-    setup.set_nrays(8000)
+    setup.set_nrays(100)
     # Number of avaiable cores
     setup.set_processes(8)
     # Number of runs
-    setup.set_repeats(128)
+    setup.set_repeats(32)
 
     # Photon storage dirctory
     setup.set_folder(dirname)
