@@ -23,6 +23,7 @@ class FitGeometricSource(rs.GeometricSource):
 
         self._apply_distribution(bo.y, self.disty, self.dy)
 
+        # TODO Add normal distribution!
         # We want to shine a flat distribution
         # around the capillary entrance point
         xMin, xMax = hitpoint[0] - self.dx, hitpoint[0] + self.dx
@@ -99,7 +100,9 @@ def test_it():
             distE=distE, energies=energies,
             polarization=None)
 
+    # Shine from one point
     yo = src.shine((1, 40, -1))
+    # and from some other
     yo.concatenate(src.shine((-1, 40, 1)))
 
     return yo

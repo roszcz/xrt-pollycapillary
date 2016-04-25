@@ -128,6 +128,9 @@ class MultipleCapillariesFittedSource(object):
         # Container for xrt::plots
         self.plots = []
 
+        # Source 3D position
+        self.source_position = [0, 0, 0]
+
         # Photon container
         self.beamTotal = None
 
@@ -160,6 +163,11 @@ class MultipleCapillariesFittedSource(object):
         radius = caps[0].entrance_radius()
         self.x_size = self.z_size = radius/2.0
 
+        # Position the source at the lens entrance
+        # (-0.01 is for numerical safety FIXME)
+        source_ent = caps[0].entrance_y() - 0.01
+        self.source_position = [0, caps[0].entrance_y(), 0]
+
     def set_nrays(self, rays):
         """ rays per shot into the capillary """
         self.nrays = rays
@@ -178,7 +186,6 @@ class MultipleCapillariesFittedSource(object):
 
     def make_source(self):
         """ Prepare source parameter """
-        self.source_position = [0, 39.99, 0]
         # Source parameters
         position    = self.source_position
         # Number of photons per run
