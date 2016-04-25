@@ -17,7 +17,8 @@ class FitGeometricSource(rs.GeometricSource):
         accuBeam = None
 
         # Prepare beam to be returned
-        bo = rs.Beam(self.nrays, withAmplitudes=withAmplitudes)
+        bo = rs.Beam(self.nrays,
+                     withAmplitudes=withAmplitudes)
         bo.state[:] = 1
 
         self._apply_distribution(bo.y, self.disty, self.dy)
@@ -60,6 +61,9 @@ class FitGeometricSource(rs.GeometricSource):
         # This assumes that distE is not None
         bo.E[:] = rs.make_energy(self.distE, self.energies,\
                                  self.nrays, self.filamentBeam)
+
+        # Add a container for number of reflections for each ray
+        bo.nRefl = np.zeros_like(bo.state)
 
         # So far we neglect polarization, but it's needed
         # for xrt compatibility
