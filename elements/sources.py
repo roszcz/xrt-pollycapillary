@@ -83,7 +83,7 @@ class FitGeometricTest(object):
         """ Constructore """
         # Set defaults
         # Source parameters
-        self.nrays       = 10000
+        self.nrays       = 100000
         self.distE       = 'normal'
         self.energies    = (9000, 100)
         # x-direction
@@ -144,6 +144,7 @@ class FitGeometricTest(object):
 
     def shine(self, direction = [0, 1, 0]):
         """ Generate photons """
+	self.make_source()
         return self.source.shine(direction)
 
     def run_test(self):
