@@ -184,6 +184,14 @@ class MultipleCapillariesFittedSource(object):
 	""" progress over protocol """
 	self.savefolder = dirname
 
+    def set_dxprime(self, value):
+        """ x-direction divergence """
+        self.x_divergence = value
+
+    def set_dzprime(self, value):
+        """ z-direction divergence """
+        self.z_divergence = value
+
     def make_source(self):
         """ Prepare source parameter """
         # Source parameters
