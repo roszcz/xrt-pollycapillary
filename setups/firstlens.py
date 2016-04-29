@@ -272,6 +272,7 @@ class MultipleCapillariesFittedSource(object):
                                     maxReflections=550)
 
             # We wan't to keep only alive photons
+            # TODO but we need to know how many were generated!
             beamLocal.filter_good()
 
             # After each capillary write to csv file
@@ -301,6 +302,10 @@ class MultipleCapillariesFittedSource(object):
         # self.make_run_process()
         self.beamTotal = None
 
+        # FIXME this actually is obsolete
+        # and process managing should be done in some
+        # simpler way than xrt is handling it atm
+        # 
         xrtr.run_ray_tracing(self.plots,
                             repeats=self.repeats,\
                             beamLine=self.beamLine,\

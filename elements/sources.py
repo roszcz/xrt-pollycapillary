@@ -2,6 +2,8 @@ import xrt.backends.raycing.sources as rs
 import xrt.backends.raycing as raycing
 import numpy as np
 
+from utils import plotter as up
+
 class FitGeometricSource(rs.GeometricSource):
     """ Special source generating photons exactly at the
     capillary entrance """
@@ -74,6 +76,85 @@ class FitGeometricSource(rs.GeometricSource):
         raycing.virgin_local_to_global(self.bl, bo, self.center)
 
         return bo
+
+class FitGeometricTest(object):
+    """ Testing class for the specific source type """
+    def __init__(self):
+        """ Constructore """
+        # Set defaults
+        # Source parameters
+        self.nrays       = 10000
+        self.distE       = 'normal'
+        self.energies    = (9000, 100)
+        # x-direction
+        self.distx       = 'flat'
+        self.dx          = 1
+        self.distxprime  = 'flat'
+        self.dxprime     = 0.1
+        # z-direction
+        self.distz       = 'flat'
+        self.dz          = 1
+        self.distzprime  = 'flat'
+        self.dzprime     = 0.1
+
+        # Create default source
+        self.make_source()
+
+    def set_dx(self, val):
+        """ dx setter """
+        self.dx = val
+
+    def set_dz(self, val):
+        """ dz setter """
+        self.dz = val
+
+    def set_dxprime(self, val):
+        """ dxprime setter """
+        self.dxprime = val
+
+    def set_dzprime(self, val):
+        """ dzprime setter """
+        self.dzprime = val
+
+    def set_energy_distribution(self, dist):
+        """ Type of energy distribution normal/lines """
+        self.distE = dist
+
+    def set_energies(self, energies):
+        """ Set energy distribution parameters """
+        self.energies = energies
+
+    def make_source(self):
+        """ Creates source with current settings """
+        beamLine = raycing.BeamLine()
+        self.source = FitGeometricSource(
+                beamLine,'source',(0,0,0),
+                nrays=self.nrays,
+                distx=self.distx,
+                dx=self.dx,
+                distxprime=self.distxprime,
+                dxprime=self.dxprime,
+                distz=self.distz,
+                dz=self.dz,
+                distzprime=self.distzprime,
+                dzprime=self.dzprime,
+                distE=self.distE,
+                energies=self.energies,
+                polarization=None)
+
+    def shine(self, direction = [0, 1, 0]):
+        """ Generate photons """
+        return self.source.shine(direction)
+
+    def run_test(self):
+        """ Show example results """
+        self.make_source()
+        beam = self.source.shine([1, 1, 1])
+        beam.concatenate(self.source.shine([1, 1, -1]))
+
+        bp = up.BeamPlotter(beam)
+        bp.show(1)
+        bp.show(10)
 
 def test_it():
     """ Check if compiles """

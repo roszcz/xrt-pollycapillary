@@ -6,6 +6,10 @@ import numpy as np
 import matplotlib.pyplot as plt
 import xrt.backends.raycing.sources as rs
 
+def empty_beam():
+    """ Quick way to get a empty rs.Beam insantation """
+    return rs.Beam()
+
 def get_beam_part(beam, hitpoint, radius):
     """ Copies a square part of beam hitting the point around radius """
     x, z = hitpoint
@@ -99,7 +103,7 @@ def make_dataframe(beam):
             'Jpp'       : pd.Series(beam.Jpp),
             'Jsp'       : pd.Series(beam.Jsp)
             }
-    # Update with columns that nod necessary exiest in a beam
+    # Update with columns that not necessary exiest in a beam
     if hasattr(beam, 'nRefl'):
         data.update({'nRefl' : beam.nRefl})
 

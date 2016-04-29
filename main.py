@@ -35,7 +35,10 @@ def create_beam(dirname):
     # Prepare ray-traycing
     lens.set_structure(hxs)
     caps = lens.get_capillaries()
+
     setup = fl.MultipleCapillariesFittedSource()
+
+    # Source is set up to fit the capillary
     setup.set_capillaries(caps)
 
     # Number of photons per run per capillary

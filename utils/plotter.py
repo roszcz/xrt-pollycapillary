@@ -4,12 +4,17 @@ import xrt.backends.raycing.screens as rsc
 import xrt.plotter as xrtp
 import xrt.backends.raycing.run as rr
 import xrt.backends.raycing as raycing
+import numpy as np
 
 class BeamPlotter(object):
     """ Simple class for showing the beam with the xrt style plot """
     def __init__(self, beam):
         """ Init """
         self.beam = beam
+
+        if not hasattr(beam, 'nRefl'):
+            self.beam.nRefl = np.zeros_like(self.beam.state)
+
         self.position = 1000
         self.x_limit = self.z_limit = None
         # This default makes sense for number of reflections
