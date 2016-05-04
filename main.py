@@ -37,6 +37,7 @@ def create_beam(dirname):
     caps = lens.get_capillaries()
 
     setup = fl.MultipleCapillariesFittedSource()
+    setup = fl.MultipleCapillariesNormalSource()
 
     # Source is set up to fit the capillary
     setup.set_capillaries(caps)

@@ -1,8 +1,8 @@
-import xrt.backends.raycing.sources as rs
-import xrt.backends.raycing as raycing
 import numpy as np
-
 from utils import plotter as up
+
+import xrt.backends.raycing as raycing
+import xrt.backends.raycing.sources as rs
 
 class FitGeometricSource(rs.GeometricSource):
     """ Special source generating photons exactly at the

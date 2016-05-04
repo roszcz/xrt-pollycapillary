@@ -1,17 +1,18 @@
+import os
+import itertools
 import numpy as np
 import multiprocessing as mp
-import os
 from datetime import datetime as dt
-import itertools
 
 import xrt.runner as xrtr
-import xrt.backends.raycing.screens as rsc
 import xrt.plotter as xrtp
 import xrt.backends.raycing.run as rr
 import xrt.backends.raycing as raycing
+import xrt.backends.raycing.sources as rs
+import xrt.backends.raycing.screens as rsc
 
-from elements import sources as es
 from utils import beam as ub
+from elements import sources as es
 
 class MultipleCapillaries(object):
     """ Abstract class for xrt setups with multiple capillaries """
@@ -142,6 +143,7 @@ class MultipleCapillaries(object):
         return ub.load_beam(self.savefolder)
 
 class MultipleCapillariesFittedSource(MultipleCapillaries):
+    """ Each capillary has its own light source just at the entrance """
     def make_source(self):
         """ Prepare source parameter """
         # Source parameters
@@ -218,3 +220,80 @@ class MultipleCapillariesFittedSource(MultipleCapillaries):
         out = {}
         return out
 
+class MultipleCapillariesNormalSource(MultipleCapillaries):
+    """ One source shining into all of the capillaries """
+    def make_source(self):
+        """ Prepare source parameter """
+        # Source parameters
+        position    = self.source_position
+        # Number of photons per run
+        nrays       = self.nrays
+        # Energy distribution
+        distE       = self.distE
+        energies    = self.energies
+        # x-direction
+        distx       = 'flat'
+        dx          = self.x_size
+        distxprime  = 'flat'
+        dxprime     = self.x_divergence
+        # z-direction
+        distz       = 'flat'
+        dz          = self.z_size
+        distzprime  = 'flat'
+        dzprime     = self.z_divergence
+
+        self.polarization = None
+
+        self.source = rs.GeometricSource(\
+            # FIXME something wrong with y-distributions
+            self.beamLine, 'Fitted', position, nrays=nrays,
+            distx=distx, dx=dx, distxprime=distxprime, dxprime=dxprime,
+            distz=distz, dz=dz, distzprime=distzprime, dzprime=dzprime,
+            distE=distE, energies=energies,
+            polarization=self.polarization)
+
+    @staticmethod
+    def local_process(beamLine, shineOnly1stSource=False):
+        """ raycing.run_process must be overriden globally """
+	# Debug info
+        process_id = mp.current_process()._identity[0]
+	debug_start = 'Prcoess {} started at: {}.'
+        print debug_start.format(process_id , dt.now())
+
+        # Shine once per run
+        light = beamLine.sources[0].shine()
+
+        # For every capillary
+        for it, cap in enumerate(beamLine.capillaries):
+            hitpoint = [cap.entrance_x(),
+                        cap.entrance_y(),
+                        cap.entrance_z()]
+
+            # Perform reflections
+            beamLocal, _ = cap.multiple_reflect(light,\
+                                    maxReflections=550)
+
+            # We wan't to keep only alive photons
+            # TODO but we need to know how many were generated!
+            beamLocal.filter_good()
+
+            # After each capillary write to csv file
+            frame = ub.make_dataframe(beamLocal)
+            filepath = beamLine.self.local_filepath(process_id)
+
+            # Add header only when creating the file
+            header_needed = not os.path.isfile(filepath)
+            frame.to_csv(filepath, mode='a', header=header_needed)
+
+            # Every 100 capillaries inform user about progress
+	    if it%100 is 0:
+		debug_inside = 'Capillary {} done at process {} in time {}'
+		print debug_inside.format(it, process_id, dt.now())
+
+	# Inform user that this run is over
+	debug_finish = 'Prcoess {} finished at: {}.'
+        print debug_finish.format(process_id, dt.now())
+
+        # Return empty dict for xrt compability
+        out = {}
+        return out
