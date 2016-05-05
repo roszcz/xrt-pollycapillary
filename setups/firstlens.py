@@ -297,3 +297,18 @@ class MultipleCapillariesNormalSource(MultipleCapillaries):
         # Return empty dict for xrt compability
         out = {}
         return out
+
+    def set_capillaries(self, caps):
+        """ do it """
+        self.capillaries = caps
+        self.beamLine.capillaries = caps
+
+        print 'Setup no contains {} capillaries'.format(len(caps))
+
+        # Used for source fitting
+        radius = caps[0].entrance_radius()
+        self.x_size = self.z_size = radius/2.0
+
+        # Position the source at the lens entrance
+        # (-0.01 is for numerical safety FIXME)
+        self.source_position = [0, 0, 0]

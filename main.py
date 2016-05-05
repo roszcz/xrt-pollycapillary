@@ -30,13 +30,13 @@ def create_beam(dirname):
     lens = lp.PolyCurveLens('A')
 
     # Prepare a realistic hexagonal structure
-    hxs = es.HexStructure(rIn=0.01, nx_capillary=11, ny_bundle=7)
+    hxs = es.HexStructure(rIn=1.01, nx_capillary=3, ny_bundle=3)
 
     # Prepare ray-traycing
     lens.set_structure(hxs)
     caps = lens.get_capillaries()
 
-    setup = fl.MultipleCapillariesFittedSource()
+    # setup = fl.MultipleCapillariesFittedSource()
     setup = fl.MultipleCapillariesNormalSource()
 
     # Source is set up to fit the capillary
@@ -44,10 +44,11 @@ def create_beam(dirname):
 
     # Set source divergence 
     # By default both x and z values are set to 0.01
-    setup.set_dzprime(0.001)
+    setup.set_dzprime(0.2)
+    setup.set_dxprime(0.2)
 
     # Number of photons per run per capillary
-    setup.set_nrays(100)
+    setup.set_nrays(5000)
     # Number of avaiable cores
     setup.set_processes(8)
     # Number of runs
@@ -62,7 +63,8 @@ def create_beam(dirname):
 
 # FIXME
 # This is not pretty, yet obligatory (only for beam creation)
-rr.run_process = fl.MultipleCapillariesFittedSource.local_process
+# rr.run_process = fl.MultipleCapillariesFittedSource.local_process
+rr.run_process = fl.MultipleCapillariesNormalSource.local_process
 
 if __name__ == '__main__':
     """ console$: python main.py """
