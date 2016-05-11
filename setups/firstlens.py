@@ -69,7 +69,7 @@ class MultipleCapillaries(object):
         self.capillaries = caps
         self.beamLine.capillaries = caps
 
-        print 'Setup no contains {} capillaries'.format(len(caps))
+        print 'Setup now contains {} capillaries'.format(len(caps))
 
         # Used for source fitting
         radius = caps[0].entrance_radius()
@@ -95,6 +95,15 @@ class MultipleCapillaries(object):
     def set_folder(self, dirname):
 	""" progress over protocol """
 	self.savefolder = dirname
+
+    def set_dx(self, val):
+	""" Source size in X-direction """
+	self.x_size = val
+
+
+    def set_dz(self, val):
+	""" Source size in X-direction """
+	self.z_size = val
 
     def set_dxprime(self, value):
         """ x-direction divergence """

@@ -30,7 +30,7 @@ def create_beam(dirname):
     lens = lp.PolyCurveLens('A')
 
     # Prepare a realistic hexagonal structure
-    hxs = es.HexStructure(rIn=1.01, nx_capillary=3, ny_bundle=3)
+    hxs = es.HexStructure(rIn = 0.5, nx_capillary = 3, ny_bundle = 3)
 
     # Prepare ray-traycing
     lens.set_structure(hxs)
@@ -47,8 +47,12 @@ def create_beam(dirname):
     setup.set_dzprime(0.2)
     setup.set_dxprime(0.2)
 
+    # Set source width and height
+    setup.set_dx(1)
+    setup.set_dz(1)
+
     # Number of photons per run per capillary
-    setup.set_nrays(5000)
+    setup.set_nrays(10000)
     # Number of avaiable cores
     setup.set_processes(8)
     # Number of runs
