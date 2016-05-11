@@ -86,6 +86,7 @@ class FitGeometricTest(object):
         self.nrays       = 100000
         self.distE       = 'normal'
         self.energies    = (9000, 100)
+	self.position	 = [0, 0, 0]
         # x-direction
         self.distx       = 'flat'
         self.dx          = 1
@@ -103,6 +104,10 @@ class FitGeometricTest(object):
     def set_dx(self, val):
         """ dx setter """
         self.dx = val
+
+    def set_source_position(self, where):
+	""" Position in XYZ space """
+	self.position = where
 
     def set_dz(self, val):
         """ dz setter """
@@ -128,18 +133,19 @@ class FitGeometricTest(object):
         """ Creates source with current settings """
         beamLine = raycing.BeamLine()
         self.source = FitGeometricSource(
-                beamLine,'source',(0,0,0),
-                nrays=self.nrays,
-                distx=self.distx,
-                dx=self.dx,
-                distxprime=self.distxprime,
-                dxprime=self.dxprime,
-                distz=self.distz,
-                dz=self.dz,
-                distzprime=self.distzprime,
-                dzprime=self.dzprime,
-                distE=self.distE,
-                energies=self.energies,
+                beamLine,'source',
+		self.position,
+                nrays	    = self.nrays,
+		distx	    = self.distx,
+                dx	    = self.dx,
+                distxprime  = self.distxprime,
+                dxprime	    = self.dxprime,
+                distz	    = self.distz,
+                dz	    = self.dz,
+                distzprime  = self.distzprime,
+                dzprime	    = self.dzprime,
+                distE	    = self.distE,
+                energies    = self.energies,
                 polarization=None)
 
     def shine(self, direction = [0, 1, 0]):
@@ -156,6 +162,83 @@ class FitGeometricTest(object):
         bp = up.BeamPlotter(beam)
         bp.show(1)
         bp.show(10)
+
+class GeometricSourceTest(object):
+    """ Class used for testing the original xrt-source object and its parameters """
+    def __init__(self):
+	""" Constructor """
+        # Set defaults
+        # Source parameters
+	self.position	 = [0, 0, 0]
+        self.nrays       = 100000
+        self.distE       = 'normal'
+        self.energies    = (9000, 100)
+        # x-direction
+        self.distx       = 'flat'
+        self.dx          = 1
+        self.distxprime  = 'flat'
+        self.dxprime     = 0.1
+        # z-direction
+        self.distz       = 'flat'
+        self.dz          = 1
+        self.distzprime  = 'flat'
+        self.dzprime     = 0.1
+
+        # Create default source
+        self.make_source()
+
+    def make_source(self):
+        """ Creates source with current settings """
+        beamLine = raycing.BeamLine()
+        self.source = rs.GeometricSource(
+                beamLine,'source',
+		self.position,
+                nrays	    = self.nrays,
+		distx	    = self.distx,
+                dx	    = self.dx,
+                distxprime  = self.distxprime,
+                dxprime	    = self.dxprime,
+                distz	    = self.distz,
+                dz	    = self.dz,
+                distzprime  = self.distzprime,
+                dzprime	    = self.dzprime,
+                distE	    = self.distE,
+                energies    = self.energies,
+                polarization=None)
+
+    def shine(self):
+        """ Generate photons """
+	self.make_source()
+        return self.source.shine()
+
+    def set_dx(self, val):
+        """ dx setter """
+        self.dx = val
+
+    def set_source_position(self, where):
+	""" Position in XYZ space """
+	self.position = where
+
+    def set_dz(self, val):
+        """ dz setter """
+        self.dz = val
+
+    def set_dxprime(self, val):
+        """ dxprime setter """
+        self.dxprime = val
+
+    def set_dzprime(self, val):
+        """ dzprime setter """
+        self.dzprime = val
+
+    def set_energy_distribution(self, dist):
+        """ Type of energy distribution normal/lines """
+        self.distE = dist
+
+    def set_energies(self, energies):
+        """ Set energy distribution parameters """
+        self.energies = energies
+
 
 def test_it():
     """ Check if compiles """
