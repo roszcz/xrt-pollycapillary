@@ -30,7 +30,7 @@ def create_beam(dirname):
     lens = lp.PolyCurveLens('A')
 
     # Prepare a realistic hexagonal structure
-    hxs = es.HexStructure(rIn = 0.2, nx_capillary = 3, ny_bundle = 3)
+    hxs = es.HexStructure(rIn = 0.02, nx_capillary = 7, ny_bundle = 7)
     lens.set_structure(hxs)
 
     # Functions describing bend of each capillary ...
@@ -47,19 +47,22 @@ def create_beam(dirname):
     # Source is set up to fit the capillary
     setup.set_capillaries(caps)
 
+    # If out tests of source parameters
+    if False:
+        # Set source width and height (do not set for fitted source type)
+        setup.set_dx(1)
+        setup.set_dz(1)
+
     # Set source divergence 
     # By default both x and z values are set to 0.01
-    setup.set_dzprime(0.2)
-    setup.set_dxprime(0.2)
+    setup.set_dzprime(0.0001)
+    setup.set_dxprime(0.04)
 
-    # Set source width and height
-    setup.set_dx(1)
-    setup.set_dz(1)
 
     # Number of photons per run per capillary
-    setup.set_nrays(1000)
+    setup.set_nrays(500)
     # Number of avaiable cores
-    setup.set_processes(2)
+    setup.set_processes(8)
     # Number of runs
     setup.set_repeats(4)
 
