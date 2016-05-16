@@ -31,13 +31,18 @@ def create_beam(dirname):
 
     # Prepare a realistic hexagonal structure
     hxs = es.HexStructure(rIn = 0.2, nx_capillary = 3, ny_bundle = 3)
-
-    # Prepare ray-traycing
     lens.set_structure(hxs)
+
+    # Functions describing bend of each capillary ...
+    # lens.set_bend_function(bend_function)
+
+    # ... and radius 
+    # lens.set_capillary_radius_function(radius_function)
+
     caps = lens.get_capillaries()
 
-    # setup = fl.MultipleCapillariesFittedSource()
-    setup = fl.MultipleCapillariesNormalSource()
+    setup = fl.MultipleCapillariesFittedSource()
+    # setup = fl.MultipleCapillariesNormalSource()
 
     # Source is set up to fit the capillary
     setup.set_capillaries(caps)
@@ -52,11 +57,11 @@ def create_beam(dirname):
     setup.set_dz(1)
 
     # Number of photons per run per capillary
-    setup.set_nrays(50000)
+    setup.set_nrays(1000)
     # Number of avaiable cores
-    setup.set_processes(8)
+    setup.set_processes(2)
     # Number of runs
-    setup.set_repeats(256)
+    setup.set_repeats(4)
 
     # Photon storage dirctory
     setup.set_folder(dirname)
@@ -67,8 +72,8 @@ def create_beam(dirname):
 
 # FIXME
 # This is not pretty, yet obligatory (only for beam creation)
-# rr.run_process = fl.MultipleCapillariesFittedSource.local_process
-rr.run_process = fl.MultipleCapillariesNormalSource.local_process
+rr.run_process = fl.MultipleCapillariesFittedSource.local_process
+# rr.run_process = fl.MultipleCapillariesNormalSource.local_process
 
 if __name__ == '__main__':
     """ console$: python main.py """

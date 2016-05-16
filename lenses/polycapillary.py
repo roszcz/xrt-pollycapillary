@@ -1,16 +1,15 @@
-import xrt.backends.raycing.oes as roe
-import xrt.backends.raycing as raycing
-import xrt.backends.raycing.materials as rm
 import numpy as np
-import matplotlib.pyplot as plt
 import bendshapes as bs
+import matplotlib.pyplot as plt
 from elements import structures as st
+import xrt.backends.raycing as raycing
+import xrt.backends.raycing.oes as roe
+import xrt.backends.raycing.materials as rm
 
 class Capillary(roe.OE):
     """ Single light transmitting pipe """
     def __init__(self, *args, **kwargs):
         """ Abstract init """
-
         # Get y-dimension limits - by default capillary 
         # stretches from 10 to 100 mm
         self.y_entrance = kwargs.pop('y_entrance', 10)
@@ -187,7 +186,10 @@ class BentCapillary(Capillary):
         D = kwargs.pop('D')
         # FIXME r_in is poorly named
         r_in = kwargs.pop('r_in')
-        self.p = bs.capillary_curvature(r_in, y, D)
+
+        # TODO We want to abstract this out
+        bend = kwargs.pop('bend')
+        self.p = bend(r_in, y, D)
 
         # FIXME - this is probably no longer necessary
         # Save cartesian coordinates of capillary entrance
@@ -200,7 +202,8 @@ class BentCapillary(Capillary):
 
         # Prepare variable radius
         r_settings = kwargs.pop('radius')
-        self.pr = bs.radius_curvature(y, r_settings)
+        radius_shape = kwargs.pop('radius_shape')
+        self.pr = radius_shape(y, r_settings)
 
         # Init parent capillary class
         Capillary.__init__(self, *args, **kwargs)
@@ -221,12 +224,24 @@ class PolyCapillaryLens(object):
         # Material of capillaries
         self.material   = kwargs.pop('material', None)
         # TODO not sure if beamline has any usage
-        self.beamLine = raycing.BeamLine()
+        self.beamLine   = raycing.BeamLine()
+
+        # Capillary bend describing function
+        self.bend       = bs.capillary_curvature
+        # And radius changing in the y-direction
+        self.radius_y   = bs.radius_curvature
 
     def set_structure(self, structure):
         """ Structure setter """
         self.structure = structure
-        self.make_capillaries()
+
+    def set_bend(self, bending_function):
+        """ Defines bendiness of each capillary """
+        self.bend = bending_function
+
+    def set_radius_shape(self, radius_shape_function):
+        """ Defines capillary width at any point in y-direction """
+        self.radius_y = radius_shape_function
 
     def capillary_parameters(self, r_in, roll):
         """ Prepares arguments for shape defining functions """
@@ -257,6 +272,10 @@ class PolyCapillaryLens(object):
         # Material of capillary
         kwargs.update({'material' : self.material})
 
+        # y-direction shape functions for each capillary
+        kwargs.update({'bend' : self.bend})
+        kwargs.update({'radius_shape' : self.radius_y})
+
         return args, kwargs
 
     def make_capillaries(self):
@@ -277,6 +296,7 @@ class PolyCapillaryLens(object):
 
     def get_capillaries(self):
         """ get them """
+        self.make_capillaries()
         return self.capillaries
 
     def plot(self):
@@ -309,6 +329,11 @@ class PolyCurveLens(object):
         mGold   = rm.Material('Au', rho=19.3)
         self.material = mGold
         self.structure = st.HexStructure(rIn = 0.05)
+
+        # Capillary bend describing function
+        self.bend       = bs.capillary_curvature
+        # And radius changing in the y-direction
+        self.radius_y   = bs.radius_curvature
 
     def set_version(self, version):
         """ Only A or B are currently avaiable """
@@ -354,6 +379,10 @@ class PolyCurveLens(object):
                                  material=self.material)
         # Add structure
         lens.set_structure(self.structure)
+
+        # And y-direction shape for each capillary
+        lens.set_bend(self.bend)
+        lens.set_radius_shape(self.radius_y)
 
         return lens.get_capillaries()
 

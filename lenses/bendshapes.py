@@ -8,7 +8,7 @@ provided parameters
 """
 
 # TODO Make a picture explaining those
-def capillary_curvature(x,y,D):
+def capillary_curvature(x, y, D):
     """ Calculates capillary curvature for distance x from
     the center and other lens properties described in y and D """
     y0 = y['y0']
@@ -86,18 +86,21 @@ if __name__ == '__main__':
     x_in = -1.1
 
     # Calculate 5th degree polynomial describing capillary shape
-    p = capillary_curvature(x_in,y,D)
+    p = capillary_curvature(x_in, y, D)
 
     # Show 
-    # FIXME just ugly
-    x = np.linspace(y['y1'],y['y2'],1000)
+    x = np.linspace(y['y1'], y['y2'], 1000)
     yfin = p[0] + p[1]*x + p[2]*x**2 + p[3]*x**3 + p[4]*x**4 + p[5]*x**5
-    fig1 = plt.figure(1,figsize=(10,4))
+    fig1 = plt.figure(1, figsize=(10,4))
+
     ax1 = plt.subplot(111, label='capillary')
-    ax1.set_xlim([y['y0'],y['yf']])
+
+    ax1.set_xlim([y['y0'], y['yf']])
     ax1.set_ylim([-4, 4])
-    ax1.plot(x,yfin,'r-', lw=2)
-    ax1.plot([y['y0'],y['y1']],[0,x_in],'k-',lw=0.5)
+
+    ax1.plot(x, yfin,'r-', lw=2)
+    ax1.plot([y['y0'], y['y1']], [0,x_in],'k-',lw=0.5)
+
     x2 = x_in * D['Dout'] / D['Din']
-    ax1.plot([y['y2'], y['yf']],[x2,0],'k-',lw=0.5)
+    ax1.plot([y['y2'], y['yf']], [x2, 0], 'k-', lw=0.5)
     plt.show()

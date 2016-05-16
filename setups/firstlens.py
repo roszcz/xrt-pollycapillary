@@ -217,7 +217,7 @@ class MultipleCapillariesFittedSource(MultipleCapillaries):
             frame.to_csv(filepath, mode='a', header=header_needed)
 
             # Every 100 capillaries inform user about progress
-	    if it%100 is 0:
+            if it%100 is 0:
 		debug_inside = 'Capillary {} done at process {} in time {}'
 		print debug_inside.format(it, process_id, dt.now())
 
