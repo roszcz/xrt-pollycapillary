@@ -134,6 +134,7 @@ class Capillary(roe.OE):
             # Y / X confusion is at height here
             y_min = x0.min() - 1.3 * r0.max()
             y_max = x0.max() + 1.3 * r0.max()
+            print type(y_min), type(y_max)
             plt.ylim(y_min, y_max)
             plt.xlim(0, 1.1 * y1)
             plt.show()
@@ -358,6 +359,10 @@ class PolyCurveLens(object):
 
         # Bad input case:
         print 'Please set lens version to \'A\' or \'B\' only'
+
+    def set_bend_function(self, bend_function):
+        """ Capillary curvature polynomial coefficients generator """
+        self.bend = bend_function
 
     def y_entrance(self):
         """ Beginning of the lens in y-direction """

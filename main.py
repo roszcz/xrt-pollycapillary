@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 from elements import capillary as ec
 from elements import structures as st
 from lenses import polycapillary as lp
+from lenses import bendshapes as bs
 from utils import plotter as up
 from utils import beam as ub
 from utils import cutter as uc
@@ -30,11 +31,12 @@ def create_beam(dirname):
     lens = lp.PolyCurveLens('A')
 
     # Prepare a realistic hexagonal structure
-    hxs = es.HexStructure(rIn = 0.02, nx_capillary = 7, ny_bundle = 7)
+    hxs = es.HexStructure(rIn = 0.02, nx_capillary = 3, ny_bundle = 3)
     lens.set_structure(hxs)
 
     # Functions describing bend of each capillary ...
-    # lens.set_bend_function(bend_function)
+    bend_function = bs.parabolic_curvature
+    lens.set_bend_function(bend_function)
 
     # ... and radius 
     # lens.set_capillary_radius_function(radius_function)
@@ -55,16 +57,20 @@ def create_beam(dirname):
 
     # Set source divergence 
     # By default both x and z values are set to 0.01
-    setup.set_dzprime(0.0001)
-    setup.set_dxprime(0.04)
+    setup.set_dzprime(0.02)
+    setup.set_dxprime(0.02)
 
+    if False:
+        # Set source width and height
+        setup.set_dx(1)
+        setup.set_dz(1)
 
     # Number of photons per run per capillary
-    setup.set_nrays(500)
+    setup.set_nrays(200)
     # Number of avaiable cores
     setup.set_processes(8)
     # Number of runs
-    setup.set_repeats(4)
+    setup.set_repeats(2)
 
     # Photon storage dirctory
     setup.set_folder(dirname)

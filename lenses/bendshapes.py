@@ -1,4 +1,6 @@
 import numpy as np
+from sympy import poly
+from sympy.abc import x as XX
 import matplotlib.pyplot as plt
 
 """
@@ -37,18 +39,62 @@ def capillary_curvature(x, y, D):
     b.append(hm)
     # y'(y1) == S1'(y1)
     # first find left slope
-    s1 = h1/(y1-y0)
+    s1 = h1 / (y1 - y0)
     a.append(diff_coeffs(y1))
     b.append(s1)
     # y'(y2) == S2'(x)
-    s2 = -h2/(yf-y2)
+    s2 = -h2 / (yf - y2)
     a.append(diff_coeffs(y2))
     b.append(s2)
     # y'(ym) == 0
     a.append(diff_coeffs(ym))
     b.append(0.)
-    p = np.linalg.solve(a,b)
+    p = np.linalg.solve(a, b)
     return p
+
+def parabolic_curvature(x, y, D):
+    """ Another model of capillarian bend is described here """
+    # Those are generic lens describing parameters
+    # and may be used to describe the curve
+    y0 = y['y0']
+    y1 = y['y1']
+    ym = y['ym']
+    y2 = y['y2']
+    yf = y['yf']
+    h1 = abs(x)
+    Din     = D['Din']
+    Dout    = D['Dout']
+    Dmax    = D['Dmax']
+    h2 = h1 * Dout/Din
+    hm = h1 * (0.5 * Dmax) / (0.5 * Din)
+
+    # TODO lambdas might look better?
+    # Define a specific parabola with y(40) = 1
+    def funn(pos):
+        return 1. - (pos/81.5 - 1.) **2
+
+    # Normalize to the type 'A' lens entrance
+    # and account for amplitude :: x/Din
+    def fuxx(pos):
+        return (1. * h1 / Din) * funn(pos) / funn(40)
+
+    # Make it sympy.poly(x)
+    if h1 <> 0:
+        parapoly = poly(fuxx(XX))
+        coeffs = parapoly.all_coeffs()
+    else:
+        coeffs = [0., 0., 0.]
+
+    # Reverse coefficients so they start with the lowest power
+    coeffs.reverse()
+    out = coeffs + [0., 0., 0.]
+
+    # Convert to floats
+    out = [float(val) for val in out]
+
+    print out
+
+    return out
 
 def shape_coeffs(x):
     """ This method is poorly named """
@@ -57,7 +103,7 @@ def shape_coeffs(x):
 
 def diff_coeffs(x):
     """ as is this """
-    coeff_array = [0., 1., 2*x, 3*x**2, 4*x**3, 5*x**4]
+    coeff_array = [0., 1., 2 * x, 3 * x**2, 4 * x**3, 5 * x**4]
     return coeff_array
 
 def radius_curvature(y, r):
