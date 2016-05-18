@@ -49,12 +49,6 @@ def create_beam(dirname):
     # Source is set up to fit the capillary
     setup.set_capillaries(caps)
 
-    # If out tests of source parameters
-    if False:
-        # Set source width and height (do not set for fitted source type)
-        setup.set_dx(1)
-        setup.set_dz(1)
-
     # Set source divergence 
     # By default both x and z values are set to 0.01
     setup.set_dzprime(0.02)
@@ -66,11 +60,11 @@ def create_beam(dirname):
         setup.set_dz(1)
 
     # Number of photons per run per capillary
-    setup.set_nrays(200)
+    setup.set_nrays(1000)
     # Number of avaiable cores
     setup.set_processes(8)
     # Number of runs
-    setup.set_repeats(2)
+    setup.set_repeats(48)
 
     # Photon storage dirctory
     setup.set_folder(dirname)

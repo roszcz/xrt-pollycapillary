@@ -71,7 +71,7 @@ def parabolic_curvature(x, y, D):
     # TODO lambdas might look better?
     # Define a specific parabola with y(40) = 1
     def funn(pos):
-        return 1. - (pos/81.5 - 1.) **2
+        return 1. - (pos/85.5 - 1.) **2
 
     # Normalize to the type 'A' lens entrance
     # and account for amplitude :: x/Din
@@ -91,8 +91,6 @@ def parabolic_curvature(x, y, D):
 
     # Convert to floats
     out = [float(val) for val in out]
-
-    print out
 
     return out
 
